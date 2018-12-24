@@ -392,36 +392,47 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUP-m0-kZZ">
-                                <rect key="frame" x="0.0" y="622" width="375" height="107"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UH9-Yk-tDb">
-                                        <rect key="frame" x="146.5" y="8" width="82" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="비밀번호 변경">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.87843728070000004" green="0.878420651" blue="0.87843197579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstItem="UH9-Yk-tDb" firstAttribute="centerX" secondItem="OUP-m0-kZZ" secondAttribute="centerX" id="POC-z1-YPd"/>
-                                    <constraint firstAttribute="height" constant="107" id="Wwg-LX-Vuc"/>
-                                    <constraint firstItem="UH9-Yk-tDb" firstAttribute="top" secondItem="OUP-m0-kZZ" secondAttribute="top" constant="8" id="rjK-fU-NcD"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호가 같지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weP-Pv-yCw">
                                 <rect key="frame" x="27" y="434" width="105" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="0.72943502660000004" green="0.43436375589999998" blue="0.28982985589999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bph-Zm-YDm">
+                                <rect key="frame" x="0.0" y="590" width="375" height="77"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUP-m0-kZZ">
+                                        <rect key="frame" x="0.0" y="31" width="375" height="107"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UH9-Yk-tDb">
+                                                <rect key="frame" x="146.5" y="8" width="82" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="비밀번호 변경">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.87843728070000004" green="0.878420651" blue="0.87843197579999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstItem="UH9-Yk-tDb" firstAttribute="centerX" secondItem="OUP-m0-kZZ" secondAttribute="centerX" id="H7v-f5-109"/>
+                                            <constraint firstAttribute="height" constant="107" id="Wjf-jY-n6t"/>
+                                            <constraint firstItem="UH9-Yk-tDb" firstAttribute="top" secondItem="OUP-m0-kZZ" secondAttribute="top" constant="8" id="pB8-Ck-Ijh"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="OUP-m0-kZZ" secondAttribute="trailing" id="0Qo-1I-eBQ"/>
+                                    <constraint firstItem="OUP-m0-kZZ" firstAttribute="leading" secondItem="bph-Zm-YDm" secondAttribute="leading" id="H3o-iC-MoA"/>
+                                    <constraint firstAttribute="bottom" secondItem="OUP-m0-kZZ" secondAttribute="bottom" constant="-61" id="fI8-oa-O9c"/>
+                                    <constraint firstAttribute="height" constant="77" id="vUZ-0l-8OI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="ape-gY-8tU" firstAttribute="top" secondItem="orQ-Z3-VxO" secondAttribute="bottom" constant="7" id="2j2-fm-9H7"/>
                             <constraint firstItem="D3N-mz-8Wv" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="25" id="3Jh-qU-ESi"/>
-                            <constraint firstAttribute="bottom" secondItem="OUP-m0-kZZ" secondAttribute="bottom" constant="-62" id="3gT-sR-M2S"/>
                             <constraint firstItem="hIa-fJ-qNJ" firstAttribute="top" secondItem="W0f-rf-QoQ" secondAttribute="bottom" constant="35" id="4wG-3e-tCz"/>
                             <constraint firstItem="F5A-9b-xT2" firstAttribute="trailing" secondItem="fVS-el-H6S" secondAttribute="trailing" constant="32" id="6QQ-KR-gKv"/>
                             <constraint firstItem="W0f-rf-QoQ" firstAttribute="top" secondItem="fVS-el-H6S" secondAttribute="bottom" constant="7" id="73d-cf-IEV"/>
@@ -429,11 +440,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="eg9-7V-zCw" secondAttribute="trailing" constant="8" id="AgD-H5-Lnv"/>
                             <constraint firstItem="F5A-9b-xT2" firstAttribute="trailing" secondItem="orQ-Z3-VxO" secondAttribute="trailing" constant="32" id="Bcf-N8-ETp"/>
                             <constraint firstItem="fP4-kK-IuW" firstAttribute="top" secondItem="F5A-9b-xT2" secondAttribute="top" constant="16" id="Fqt-Ae-Oe9"/>
+                            <constraint firstItem="bph-Zm-YDm" firstAttribute="bottom" secondItem="F5A-9b-xT2" secondAttribute="bottom" id="IKu-Wj-EtP"/>
                             <constraint firstItem="z81-7U-ZT7" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="25" id="Irw-SR-ZK0"/>
+                            <constraint firstItem="bph-Zm-YDm" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" id="Nx0-Ls-o40"/>
                             <constraint firstItem="UBQ-OS-SCg" firstAttribute="top" secondItem="eg9-7V-zCw" secondAttribute="bottom" constant="35" id="Pkf-pz-O1q"/>
                             <constraint firstItem="F5A-9b-xT2" firstAttribute="trailing" secondItem="fP4-kK-IuW" secondAttribute="trailing" constant="24" id="QWY-Kl-aaC"/>
                             <constraint firstItem="eg9-7V-zCw" firstAttribute="leading" secondItem="mIH-ND-JNH" secondAttribute="leadingMargin" constant="9" id="Ukc-MG-wP3"/>
-                            <constraint firstItem="OUP-m0-kZZ" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" id="Wc9-ae-ytt"/>
                             <constraint firstItem="W0f-rf-QoQ" firstAttribute="leading" secondItem="mIH-ND-JNH" secondAttribute="leadingMargin" constant="9" id="ZeX-kv-xsT"/>
                             <constraint firstItem="uM5-aX-87M" firstAttribute="top" secondItem="hIa-fJ-qNJ" secondAttribute="bottom" constant="10" id="a6V-uj-p8q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="W0f-rf-QoQ" secondAttribute="trailing" constant="8" id="b3B-DB-1YA"/>
@@ -442,9 +454,9 @@
                             <constraint firstItem="4A5-Rh-2sc" firstAttribute="top" secondItem="z81-7U-ZT7" secondAttribute="bottom" constant="81" id="fHt-pb-TbK"/>
                             <constraint firstItem="orQ-Z3-VxO" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="33" id="i08-R8-zV9"/>
                             <constraint firstItem="orQ-Z3-VxO" firstAttribute="top" secondItem="UBQ-OS-SCg" secondAttribute="bottom" constant="10" id="iPk-fM-plA"/>
+                            <constraint firstAttribute="trailing" secondItem="bph-Zm-YDm" secondAttribute="trailing" id="oEy-W4-ney"/>
                             <constraint firstItem="ZZu-aC-eio" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="25" id="pms-hB-3kn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ape-gY-8tU" secondAttribute="trailing" constant="8" id="rhO-oP-pI0"/>
-                            <constraint firstItem="OUP-m0-kZZ" firstAttribute="trailing" secondItem="F5A-9b-xT2" secondAttribute="trailing" id="sRW-W9-Lv0"/>
                             <constraint firstItem="hIa-fJ-qNJ" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="25" id="sVT-ua-Lxj"/>
                             <constraint firstItem="uM5-aX-87M" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="33" id="tdO-7g-1sw"/>
                             <constraint firstItem="UBQ-OS-SCg" firstAttribute="leading" secondItem="F5A-9b-xT2" secondAttribute="leading" constant="25" id="v06-J9-vuG"/>

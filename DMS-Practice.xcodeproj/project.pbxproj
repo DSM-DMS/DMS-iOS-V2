@@ -106,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		599AB4B421D0CD79007A23F2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		59CC156921C7703600AF0FC0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +130,7 @@
 		59CC157421C8B07B00AF0FC0 /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				599AB4B421D0CD79007A23F2 /* Cells */,
 				59CC157721CBCC4A00AF0FC0 /* MyPageVC.swift */,
 				59CC157D21CBCCE200AF0FC0 /* MealVC.swift */,
 				59CC157921CBCCA600AF0FC0 /* NoticeVC.swift */,
@@ -129,7 +138,6 @@
 				598C098C21D05E4C00CF881E /* LoginVC.swift */,
 				5968488321D0867A00EFFBC4 /* SignUpVC.swift */,
 				5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */,
-				5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */,
 				599AB4A621D0C33F007A23F2 /* ChangePasswordVC.swift */,
 			);
 			path = VC;
