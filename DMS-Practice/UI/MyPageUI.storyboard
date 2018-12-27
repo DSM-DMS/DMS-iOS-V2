@@ -73,6 +73,9 @@
                                             <constraint firstAttribute="height" constant="20" id="hgc-wP-o6s"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="brokenReport"/>
+                                        <connections>
+                                            <action selector="btnBrokenReport:" destination="maj-9t-3NK" eventType="touchUpInside" id="dq6-Ub-suE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMp-pD-0Lf">
                                         <rect key="frame" x="177.5" y="119" width="20" height="20"/>
@@ -81,6 +84,9 @@
                                             <constraint firstAttribute="height" constant="20" id="lzR-ng-ps8"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="submit"/>
+                                        <connections>
+                                            <action selector="btnSubmit:" destination="maj-9t-3NK" eventType="touchUpInside" id="24q-hy-NkL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPu-DP-hu9">
                                         <rect key="frame" x="262" y="119" width="20" height="20"/>
@@ -89,6 +95,9 @@
                                             <constraint firstAttribute="width" constant="20" id="TZz-ji-GfO"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="bugReport"/>
+                                        <connections>
+                                            <action selector="btnBugReport:" destination="maj-9t-3NK" eventType="touchUpInside" id="wlg-IZ-dhW"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC0-lQ-EIm">
                                         <rect key="frame" x="42" y="192" width="141" height="77"/>
@@ -242,27 +251,27 @@
         <scene sceneID="XI3-kp-cBe">
             <objects>
                 <tableViewController id="GGX-Dl-TBS" customClass="TableViewChoose" customModule="DMS_Practice" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b9g-QA-w4v">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b9g-QA-w4v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="bxF-74-D5g" detailTextLabel="2qd-Mg-NFM" rowHeight="97" style="IBUITableViewCellStyleSubtitle" id="c2T-az-lEu" customClass="TableViewChooseCell" customModule="DMS_Practice" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="97"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="bxF-74-D5g" detailTextLabel="2qd-Mg-NFM" rowHeight="90" style="IBUITableViewCellStyleSubtitle" id="c2T-az-lEu" customClass="TableViewChooseCell" customModule="DMS_Practice" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c2T-az-lEu" id="Mrm-7q-zab">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="97"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bxF-74-D5g">
-                                            <rect key="frame" x="16" y="30.5" width="30" height="18"/>
+                                            <rect key="frame" x="16" y="27.5" width="30" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2qd-Mg-NFM">
-                                            <rect key="frame" x="16" y="51" width="40.5" height="13.5"/>
+                                            <rect key="frame" x="16" y="48" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                             <nil key="textColor"/>
@@ -286,7 +295,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIQ-5Q-w1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1140" y="1521.1394302848578"/>
+            <point key="canvasLocation" x="1132" y="1478"/>
         </scene>
         <!--Change PasswordVC-->
         <scene sceneID="U63-JD-ZOH">
@@ -320,7 +329,7 @@
                                 <color key="textColor" red="0.33427274227142334" green="0.70166808366775513" blue="0.70981007814407349" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DSM 시스템의 비밀번호를 변경합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z81-7U-ZT7">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DMS 시스템의 비밀번호를 변경합니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z81-7U-ZT7">
                                 <rect key="frame" x="25" y="136" width="168" height="13"/>
                                 <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="11"/>
                                 <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -368,7 +377,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 확인" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBQ-OS-SCg">
                                 <rect key="frame" x="25" y="386" width="55" height="12"/>
@@ -390,7 +399,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호가 같지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="weP-Pv-yCw">
                                 <rect key="frame" x="27" y="434" width="105" height="12"/>

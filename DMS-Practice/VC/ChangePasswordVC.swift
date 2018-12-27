@@ -27,7 +27,8 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         txtCheckPassword.delegate = self
         
         for i in 0...2 {
-            changeGray(int: i)
+            showViewAnimation(view: viewsUnderline[i], duration: 0.3, 1, 0.1)
+
         }
         // Do any additional setup after loading the view.
     }
@@ -38,43 +39,27 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if txtOriginPassword.isEditing {
-            changeBlack(int: 0)
+            showViewAnimation(view: viewsUnderline[0], duration: 0.5, 0.1, 1)
         } else if txtNewPassword.isEditing {
-            changeBlack(int: 1)
+            showViewAnimation(view: viewsUnderline[1], duration: 0.5, 0.1, 1)
         } else {
-            changeBlack(int: 2)
+            showViewAnimation(view: viewsUnderline[2], duration: 0.5, 0.1, 1)
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         for i in 0...2 {
-            changeGray(int: i)
+            showViewAnimation(view: viewsUnderline[i], duration: 0.3, Float(viewsUnderline[i].alpha), 0.1)
         }
         
         if isFull() {
             if txtNewPassword.text != txtCheckPassword.text {
-                UIView.animate(withDuration: 0.3) {
-                    self.lblWarning.alpha = 1
-                }
+                    showLabelAnimation(label: lblWarning, duration: 0.3, 0, 1)
             } else {
-                UIView.animate(withDuration: 0.3) {
-                    self.lblWarning.alpha = 0
-                }
+                showLabelAnimation(label: lblWarning, duration: 0.3, 1, 0)
                 viewLogin.backgroundColor = color.mint.getcolor()
             }
             
-        }
-    }
-    
-    func changeBlack(int: Int) {
-        UIView.animate(withDuration: 0.5) {
-            self.viewsUnderline[int].alpha = 1
-        }
-    }
-    
-    func changeGray(int: Int) {
-        UIView.animate(withDuration: 0.3) {
-            self.viewsUnderline[int].alpha = 0.1
         }
     }
     
@@ -85,6 +70,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
             return true
         }
     }
+    
     /*
     // MARK: - Navigation
 

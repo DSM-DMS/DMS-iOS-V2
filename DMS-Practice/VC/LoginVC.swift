@@ -17,6 +17,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var viewUnderlinePassword: UIView!
     @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var btnLoginOutlet: UIButton!
+    @IBOutlet weak var imgLogo: UIImageView!
+    @IBOutlet var lblInfo: [UILabel]!
     
     var currentY = 0
     
@@ -25,6 +27,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         viewUnderlineID.alpha = 0.1
         viewUnderlinePassword.alpha = 0.1
+        imgLogo.alpha = 0
+        for i in 0...2 {
+            lblInfo[i].alpha = 0
+        }
         
         btnLoginOutlet.isEnabled = false
         
@@ -33,6 +39,15 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         
         viewBackground.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 2) {
+            self.imgLogo.alpha = 1
+        }
+        for i in 0...2 {
+            showLabelAnimation(label: lblInfo[i], duration: 2, Float(lblInfo[i].alpha), 1)
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

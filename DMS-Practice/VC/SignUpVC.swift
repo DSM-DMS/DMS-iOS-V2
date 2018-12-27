@@ -19,16 +19,22 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var btnSignUpOutlet: UIButton!
+    @IBOutlet weak var btnGoback: UIButton!
+    @IBOutlet weak var imgLogo: UIImageView!
+    @IBOutlet var lblInfo: [UILabel]!
     
     var originY: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        btnGoback.alpha = 0
+        imgLogo.alpha = 0
         for i in 0...3 {
-            UIView.animate(withDuration: 1.0) {
-                self.viewsUnderline[i].alpha = 0.1
-            }
+            viewsUnderline[i].alpha = 0.1
+        }
+        for i in 0...2 {
+            lblInfo[i].alpha = 0
         }
         
         txtCheckCode.delegate = self
@@ -43,6 +49,16 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 2) {
+            self.imgLogo.alpha = 1
+        }
+        showGoBack(button: btnGoback)
+        for i in 0...2 {
+            showLabelAnimation(label: lblInfo[i], duration: 2, Float(lblInfo[i].alpha), 1.5)
+        }
+    }
+    
     @IBAction func goBack(_ sender: Any) {
         goBack()
     }
@@ -54,18 +70,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         for i in 0...3 {
-            changeGray(int: i)
+            showViewAnimation(view: viewsUnderline[i], duration: 0.3, Float(viewsUnderline[i].alpha), 0.1)
         }
         
         if isFull() {
             if txtPassword.text != txtCheckPassword.text {
-                UIView.animate(withDuration: 0.2) {
-                    self.lblWarning.alpha = 1
-                }
+                showLabelAnimation(label: lblWarning, duration: 0.2, 0, 1)
             } else {
-                UIView.animate(withDuration: 0.2) {
-                    self.lblWarning.alpha = 0
-                }
+                showLabelAnimation(label: lblWarning, duration: 0.2, 1, 0)
                 viewLogin.backgroundColor = color.mint.getcolor()
                 btnSignUpOutlet.isEnabled = true
             }
@@ -86,25 +98,13 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
 
     func editStart() {
         if txtCheckCode.isEditing {
-            changeBlack(int: 0)
+            showViewAnimation(view: viewsUnderline[0], duration: 0.5, 0.1, 1)
         } else if txtID.isEditing {
-            changeBlack(int: 1)
+            showViewAnimation(view: viewsUnderline[1], duration: 0.5, 0.1, 1)
         } else if txtPassword.isEditing {
-            changeBlack(int: 2)
+            showViewAnimation(view: viewsUnderline[2], duration: 0.5, 0.1, 1)
         } else {
-            changeBlack(int: 3)
-        }
-    }
-    
-    func changeBlack(int: Int) {
-        UIView.animate(withDuration: 0.5) {
-            self.viewsUnderline[int].alpha = 1
-        }
-    }
-    
-    func changeGray(int: Int) {
-        UIView.animate(withDuration: 0.3) {
-            self.viewsUnderline[int].alpha = 0.1
+            showViewAnimation(view: viewsUnderline[3], duration: 0.5, 0.1, 1)
         }
     }
     

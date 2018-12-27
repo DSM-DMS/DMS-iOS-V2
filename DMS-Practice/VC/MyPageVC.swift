@@ -22,10 +22,46 @@ class MyPageVC: UIViewController{
         viewPrise.layer.cornerRadius = 10
         viewPenalty.layer.cornerRadius = 10
         
+        dropShadow(view: viewPrise, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
+        dropShadow(view: viewPenalty, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
+        
         viewCondition.layer.cornerRadius = 17
     }
     
+    @IBAction func btnSubmit(_ sender: Any) {
+        
+    }
     
+    @IBAction func btnBrokenReport(_ sender: Any) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        
+        let attributedString = NSAttributedString(string: "설문조사", attributes: [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17),
+            NSAttributedString.Key.foregroundColor : color.mint.getcolor()
+            ])
+        
+        alert.view.tintColor = color.mint.getcolor()
+        alert.setValue(attributedString, forKey: "attributedTitle")
+        
+        alert.addTextField { (myTextField) in
+            myTextField.placeholder = "제목을 입력하세요"
+        }
+        alert.addTextField { (myTextField) in
+            myTextField.placeholder = "방 번호를 입력하세요"
+        }
+        
+        
+        let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnBugReport(_ sender: Any) {
+        
+    }
     
     
     

@@ -50,15 +50,48 @@ extension UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func showLabelAnimation(label: UILabel, duration: Float, _ to: Float, _ go: Float) {
+        label.alpha = CGFloat(to)
+        UIView.animate(withDuration: TimeInterval(duration)) {
+            label.alpha = CGFloat(go)
+        }
+    }
+    
+    func showViewAnimation(view: UIView, duration: Float, _ to: Float, _ go: Float) {
+        view.alpha = CGFloat(to)
+        UIView.animate(withDuration: TimeInterval(duration)) {
+            view.alpha = CGFloat(go)
+        }
+    }
+    
+    func showGoBack(button: UIButton) {
+        UIView.animate(withDuration: 1) {
+            button.alpha = 1
+            button.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+    }
+    
+    func dropShadow(view: UIView, color: UIColor, opacity: Float = 0.5, offSet: CGSize, scale: Bool = true) {
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = color.cgColor
+        view.layer.shadowOpacity = opacity
+        view.layer.shadowOffset = offSet
+        view.layer.shadowRadius = 5
+        
+        view.layer.shouldRasterize = true
+        view.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
     private func showUpdateAlert(){
         let alert = UIAlertController(title: "업데이트가 필요합니다.", message: "DMS의 새로운 업데이트가 준비되었습니다.\n지금 업데이트 하세요.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
+    
 }
 
 enum color {
-    case mint, lightGray
+    case mint, lightGray, M1, M2, M3, M4, M5, M6, M7, M8, B1, B2, B3, B4, B5, B6, B7, B8, B9
     
     func getcolor() -> UIColor {
         switch self {
@@ -66,6 +99,40 @@ enum color {
             return UIColor(red: 84/255, green: 179/255, blue: 181/255, alpha: 1)
         case .lightGray:
             return UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1)
+        case .M1:
+            return UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        case .M2:
+            return UIColor(red: 230/255, green: 245/255, blue: 246/255, alpha: 1)
+        case .M3:
+            return UIColor(red: 205/255, green: 236/255, blue: 236/255, alpha: 1)
+        case .M4:
+            return UIColor(red: 181/255, green: 226/255, blue: 227/255, alpha: 1)
+        case .M5:
+            return UIColor(red: 157/255, green: 217/255, blue: 218/255, alpha: 1)
+        case .M6:
+            return UIColor(red: 135/255, green: 207/255, blue: 208/255, alpha: 1)
+        case .M7:
+            return UIColor(red: 115/255, green: 198/255, blue: 199/255, alpha: 1)
+        case .M8:
+            return UIColor(red: 97/255, green: 188/255, blue: 190/255, alpha: 1)
+        case .B1:
+            return UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        case .B2:
+            return UIColor(red: 223/255, green: 223/255, blue: 223/255, alpha: 1)
+        case .B3:
+            return UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1)
+        case .B4:
+            return UIColor(red: 159/255, green: 159/255, blue: 159/255, alpha: 1)
+        case .B5:
+            return UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 1)
+        case .B6:
+            return UIColor(red: 96/255, green: 96/255, blue: 96/255, alpha: 1)
+        case .B7:
+            return UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1)
+        case .B8:
+            return UIColor(red: 32/255, green: 32/255, blue: 32/255, alpha: 1)
+        case .B9:
+            return UIColor(red: 0, green: 0, blue: 0, alpha: 1)
         }
     }
 }

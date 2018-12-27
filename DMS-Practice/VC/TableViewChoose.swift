@@ -49,17 +49,23 @@ class TableViewChoose: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch (indexPath as NSIndexPath).row {
         case 0:
-            let alertController = UIAlertController(title: "로그아웃", message: "정말 로그아웃하시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "", message: "DMS 계정에서 로그아웃 하시겠습니까?", preferredStyle: .alert)
             
-            let cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.default)
-            let okAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
-                self.goNextVCwithUIid(UIid: "AccountUI", VCid: "LoginVC")
+            let attributedString = NSAttributedString(string: "로그아웃", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17, weight: UIFont.Weight(rawValue: 10)),
+                NSAttributedString.Key.foregroundColor : color.mint.getcolor()
+                ])
+            
+            alert.view.tintColor = color.mint.getcolor()
+            alert.setValue(attributedString, forKey: "attributedTitle")
+            
+            let ok = UIAlertAction(title: "로그아웃", style: .default) { (ok) in
+                self.goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC")
             }
-            
-            alertController.addAction(cancelAction)
-            alertController.addAction(okAction)
-            
-            self.present(alertController, animated: true, completion: nil)
+            let cancel = UIAlertAction(title: "취소", style: .default)
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
         case 1:
             goNextVC("ChangePasswordVC")
         default:
