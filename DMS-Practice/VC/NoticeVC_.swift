@@ -8,6 +8,8 @@
 
 import UIKit
 
+public var paramInt = 0
+
 class NoticeVC_: UIViewController {
     @IBOutlet var lblBases: [UILabel]!
     @IBOutlet var lblTitles: [UILabel]!
@@ -17,6 +19,8 @@ class NoticeVC_: UIViewController {
     
     var curInt = 0
     var condition = true
+    var tempY: CGFloat = 0
+    var isGoNext = false
     
     override func viewDidLoad() {
         for i in 0...8 {
@@ -33,26 +37,44 @@ class NoticeVC_: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        for i in 0...8 {
-            showViewAnimation(view: viewsNotice[i], duration: 1.0, 0, 1)
+        if isDismissed {
+            print("이거니")
+            changeBack()
+            isDismissed = false
+            isGoNext = false
+        } else {
+            for i in 0...8 {
+                showViewAnimation(view: viewsNotice[i], duration: 1.0, 0, 1)
+            }
+            for i in 0...1 {
+                showLabelAnimation(label: lblBases[i], duration: 1.0, 0, 1)
+            }
         }
-        for i in 0...1 {
-            showLabelAnimation(label: lblBases[i], duration: 1.0, 0, 1)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if isGoNext {
+            print("유지")
+        } else {
+            changeBack()
         }
     }
 
     @objc func noticeAction() {
         curInt = 0
+        paramInt = 0
         check()
     }
     
     @objc func policyAction() {
         curInt = 1
+        paramInt = 1
         check()
     }
     
     @objc func questionAction() {
         curInt = 2
+        paramInt = 2
         check()
     }
     
@@ -66,18 +88,46 @@ class NoticeVC_: UIViewController {
     
     func changeColor() {
         condition = false
-        lblTitles[curInt].textColor = UIColor.white
-        lblDetails[curInt].textColor = UIColor.white
-        viewsNotice[curInt].backgroundColor = color.mint.getcolor()
+        UIView.animate(withDuration: 0.5) {
+            self.lblTitles[self.curInt].textColor = UIColor.white
+            self.lblDetails[self.curInt].textColor = UIColor.white
+            self.viewsNotice[self.curInt].backgroundColor = color.mint.getcolor()
+            self.imgsArrow[self.curInt].transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
         calculate(viewAlpha: 0)
+        goUp()
     }
     
     func changeBack() {
         condition = true
-        lblTitles[curInt].textColor = color.mint.getcolor()
-        lblDetails[curInt].textColor = color.B6.getcolor()
-        viewsNotice[curInt].backgroundColor = UIColor.white
+        UIView.animate(withDuration: 0.5) {
+            self.lblTitles[self.curInt].textColor = color.mint.getcolor()
+            self.lblDetails[self.curInt].textColor = color.B6.getcolor()
+            self.viewsNotice[self.curInt].backgroundColor = UIColor.white
+            self.imgsArrow[self.curInt].transform = CGAffineTransform(rotationAngle: 0)
+        }
+        
         calculate(viewAlpha: 1)
+        goDown()
+    }
+    
+    func goUp() {
+        tempY = viewsNotice[curInt].center.y
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.curveLinear, animations: {
+            // put here the code you would like to animate
+            self.viewsNotice[self.curInt].center = CGPoint(x: (self.view.frame.size.width) / 2, y: 100)
+        }, completion: {(finished:Bool) in
+            // the code you put here will be compiled once the animation finishes
+            self.isGoNext = true
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "scrollViewVC")
+            self.present(vc!, animated: false, completion: nil)
+        })
+    }
+    
+    func goDown() {
+        UIView.animate(withDuration: 0.5) {
+            self.viewsNotice[self.curInt].center = CGPoint(x: (self.view.frame.size.width) / 2, y: self.tempY)
+        }
     }
     
     func calculate(viewAlpha: Float) {

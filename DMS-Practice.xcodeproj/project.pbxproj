@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5941EAB121D46AA00042E930 /* NoticeVC_.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941EAB021D46AA00042E930 /* NoticeVC_.swift */; };
+		5941EAB321D49FBF0042E930 /* TableViewNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941EAB221D49FBF0042E930 /* TableViewNoticeVC.swift */; };
 		5968488421D0867A00EFFBC4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488321D0867A00EFFBC4 /* SignUpVC.swift */; };
 		5968488621D0AF9200EFFBC4 /* TableViewChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */; };
 		5968488821D0B06200EFFBC4 /* TableViewChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */; };
@@ -24,7 +25,6 @@
 		599AB4B621D31A1A007A23F2 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599AB4B521D31A1A007A23F2 /* Empty.swift */; };
 		59CC156821C7702C00AF0FC0 /* MyPageUI.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59CC156721C7702C00AF0FC0 /* MyPageUI.storyboard */; };
 		59CC157821CBCC4A00AF0FC0 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC157721CBCC4A00AF0FC0 /* MyPageVC.swift */; };
-		59CC157A21CBCCA600AF0FC0 /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC157921CBCCA600AF0FC0 /* NoticeVC.swift */; };
 		59CC157C21CBCCD200AF0FC0 /* PutInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC157B21CBCCD200AF0FC0 /* PutInVC.swift */; };
 		59CC157E21CBCCE200AF0FC0 /* MealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC157D21CBCCE200AF0FC0 /* MealVC.swift */; };
 		59D517CA21C768C700192176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D517C921C768C700192176 /* AppDelegate.swift */; };
@@ -53,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		5941EAB021D46AA00042E930 /* NoticeVC_.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC_.swift; sourceTree = "<group>"; };
+		5941EAB221D49FBF0042E930 /* TableViewNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNoticeVC.swift; sourceTree = "<group>"; };
 		5968488321D0867A00EFFBC4 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewChoose.swift; sourceTree = "<group>"; };
 		5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewChooseCell.swift; sourceTree = "<group>"; };
@@ -69,7 +70,6 @@
 		599AB4B521D31A1A007A23F2 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		59CC156721C7702C00AF0FC0 /* MyPageUI.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPageUI.storyboard; sourceTree = "<group>"; };
 		59CC157721CBCC4A00AF0FC0 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
-		59CC157921CBCCA600AF0FC0 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		59CC157B21CBCCD200AF0FC0 /* PutInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutInVC.swift; sourceTree = "<group>"; };
 		59CC157D21CBCCE200AF0FC0 /* MealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealVC.swift; sourceTree = "<group>"; };
 		59D517C621C768C700192176 /* DMS-Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DMS-Practice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +137,6 @@
 				599AB4B421D0CD79007A23F2 /* Cells */,
 				59CC157721CBCC4A00AF0FC0 /* MyPageVC.swift */,
 				59CC157D21CBCCE200AF0FC0 /* MealVC.swift */,
-				59CC157921CBCCA600AF0FC0 /* NoticeVC.swift */,
 				59CC157B21CBCCD200AF0FC0 /* PutInVC.swift */,
 				598C098C21D05E4C00CF881E /* LoginVC.swift */,
 				5968488321D0867A00EFFBC4 /* SignUpVC.swift */,
@@ -145,6 +144,7 @@
 				599AB4A621D0C33F007A23F2 /* ChangePasswordVC.swift */,
 				599AB4B521D31A1A007A23F2 /* Empty.swift */,
 				5941EAB021D46AA00042E930 /* NoticeVC_.swift */,
+				5941EAB221D49FBF0042E930 /* TableViewNoticeVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -351,13 +351,13 @@
 			files = (
 				5968488421D0867A00EFFBC4 /* SignUpVC.swift in Sources */,
 				5968488621D0AF9200EFFBC4 /* TableViewChoose.swift in Sources */,
-				59CC157A21CBCCA600AF0FC0 /* NoticeVC.swift in Sources */,
 				599AB4A721D0C33F007A23F2 /* ChangePasswordVC.swift in Sources */,
 				5941EAB121D46AA00042E930 /* NoticeVC_.swift in Sources */,
 				59CC157C21CBCCD200AF0FC0 /* PutInVC.swift in Sources */,
 				599AB4B621D31A1A007A23F2 /* Empty.swift in Sources */,
 				598C098D21D05E4C00CF881E /* LoginVC.swift in Sources */,
 				59D517CA21C768C700192176 /* AppDelegate.swift in Sources */,
+				5941EAB321D49FBF0042E930 /* TableViewNoticeVC.swift in Sources */,
 				5968488821D0B06200EFFBC4 /* TableViewChooseCell.swift in Sources */,
 				59CC157821CBCC4A00AF0FC0 /* MyPageVC.swift in Sources */,
 				598C098F21D06D2100CF881E /* Base.swift in Sources */,
