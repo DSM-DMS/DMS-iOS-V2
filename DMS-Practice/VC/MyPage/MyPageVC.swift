@@ -29,13 +29,13 @@ class MyPageVC: UIViewController{
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        
+        goNextVC("SubmitVC")
     }
     
     @IBAction func btnBrokenReport(_ sender: Any) {
         let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         
-        let attributedString = NSAttributedString(string: "설문조사", attributes: [
+        let attributedString = NSAttributedString(string: "시설 고장 신고", attributes: [
             NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17),
             NSAttributedString.Key.foregroundColor : color.mint.getcolor()
             ])
@@ -50,7 +50,6 @@ class MyPageVC: UIViewController{
             myTextField.placeholder = "방 번호를 입력하세요"
         }
         
-        
         let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -60,7 +59,30 @@ class MyPageVC: UIViewController{
     }
     
     @IBAction func btnBugReport(_ sender: Any) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
         
+        let attributedString = NSAttributedString(string: "버그 신고", attributes: [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17),
+            NSAttributedString.Key.foregroundColor : color.mint.getcolor()
+            ])
+        
+        alert.view.tintColor = color.mint.getcolor()
+        alert.setValue(attributedString, forKey: "attributedTitle")
+        
+        alert.addTextField { (myTextField) in
+            myTextField.placeholder = "제목을 입력하세요"
+        }
+        alert.addTextField { (myTextField) in
+            myTextField.placeholder = "내용을 입력하세요"
+        }
+        
+        
+        let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
     
     

@@ -8,7 +8,10 @@
 
 import UIKit
 
+public let ud = UserDefaults.standard
+
 extension UIViewController {
+    
     func goNextVC(_ id: String){
         let vc = storyboard?.instantiateViewController(withIdentifier: id)
         present(vc!, animated: true, completion: nil)
@@ -22,24 +25,6 @@ extension UIViewController {
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-    
-    func showToast(msg: String, fun: (() -> Void)? = nil){
-        let toast = UILabel(frame: CGRect(x: 32, y: 140, width: view.frame.size.width - 64, height: 30))
-        toast.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        toast.textColor = UIColor.white
-        toast.text = msg
-        toast.textAlignment = .center
-        toast.layer.cornerRadius = 10
-        toast.clipsToBounds = true
-        toast.autoresizingMask = [.flexibleTopMargin, .flexibleHeight, .flexibleWidth]
-        view.addSubview(toast)
-        UIView.animate(withDuration: 0.2, delay: 0.8, options: .curveEaseOut, animations: {
-            toast.alpha = 0.5
-        }, completion: { _ in
-            toast.removeFromSuperview()
-            fun?()
-        })
     }
     
     func showError(_ code: Int){
@@ -82,12 +67,61 @@ extension UIViewController {
         view.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
     
+    func dropShadowButton(button: UIButton, color: UIColor, opacity: Float = 0.5, offSet: CGSize, scale: Bool = true) {
+        button.layer.masksToBounds = false
+        button.layer.shadowColor = color.cgColor
+        button.layer.shadowOpacity = opacity
+        button.layer.shadowOffset = offSet
+        button.layer.shadowRadius = 5
+        
+        button.layer.shouldRasterize = true
+        button.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
+    
     private func showUpdateAlert(){
         let alert = UIAlertController(title: "업데이트가 필요합니다.", message: "DMS의 새로운 업데이트가 준비되었습니다.\n지금 업데이트 하세요.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
+    func showToast(msg: String, fun: (() -> Void)? = nil){
+        let toast = UILabel(frame: CGRect(x: 32, y: 140, width: view.frame.size.width - 64, height: 30))
+        toast.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        toast.textColor = UIColor.white
+        toast.text = msg
+        toast.textAlignment = .center
+        toast.layer.cornerRadius = 10
+        toast.clipsToBounds = true
+        toast.autoresizingMask = [.flexibleTopMargin, .flexibleHeight, .flexibleWidth]
+        view.addSubview(toast)
+        UIView.animate(withDuration: 0.2, delay: 0.8, options: .curveEaseOut, animations: {
+            toast.alpha = 0.5
+        }, completion: { _ in
+            toast.removeFromSuperview()
+            fun?()
+        })
+    }
+    
+    func setUserDefault(toSet: String, key: String) {
+        ud.set("\(toSet)", forKey: "\(key)")
+    }
+    
+    func show허경영() {
+        let imageName = "dybala.jpg"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        view.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
+    }
+    
+    func showAlert() {
+        let alert = UIView(frame: CGRect(x: 32, y: 140, width: view.frame.size.width - 64, height: 30))
+        alert.backgroundColor = UIColor.white
+        alert.alpha = 0
+        
+    }
 }
 
 enum color {

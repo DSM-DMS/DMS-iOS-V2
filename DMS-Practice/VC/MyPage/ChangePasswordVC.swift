@@ -16,12 +16,13 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtCheckPassword: UITextField!
     @IBOutlet var viewsUnderline: [UIView]!
     @IBOutlet weak var viewLogin: UIView!
+    @IBOutlet weak var btnBackOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lblWarning.alpha = 0
-
+        
         txtOriginPassword.delegate = self
         txtNewPassword.delegate = self
         txtCheckPassword.delegate = self
@@ -31,6 +32,10 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
 
         }
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        showGoBack(button: btnBackOutlet)
     }
     
     @IBAction func btnUnwind(_ sender: Any) {
@@ -51,7 +56,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         for i in 0...2 {
             showViewAnimation(view: viewsUnderline[i], duration: 0.3, Float(viewsUnderline[i].alpha), 0.1)
         }
-        
+
         if isFull() {
             if txtNewPassword.text != txtCheckPassword.text {
                     showLabelAnimation(label: lblWarning, duration: 0.3, 0, 1)

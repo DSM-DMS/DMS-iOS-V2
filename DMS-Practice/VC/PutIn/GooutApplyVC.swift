@@ -1,14 +1,14 @@
 //
-//  MealVC.swift
+//  GooutApplyVC.swift
 //  DMS-Practice
 //
-//  Created by leedonggi on 20/12/2018.
-//  Copyright © 2018 leedonggi. All rights reserved.
+//  Created by leedonggi on 03/01/2019.
+//  Copyright © 2019 leedonggi. All rights reserved.
 //
 
 import UIKit
 
-class MealVC: UIViewController {
+class GooutApplyVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,9 @@ class MealVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func btnGoback(_ sender: Any) {
+        goBack()
+    }
 
     /*
     // MARK: - Navigation

@@ -10,7 +10,7 @@ import UIKit
 
 public var paramInt = 0
 
-class NoticeVC_: UIViewController {
+class NoticeVC: UIViewController {
     @IBOutlet var lblBases: [UILabel]!
     @IBOutlet var lblTitles: [UILabel]!
     @IBOutlet var lblDetails: [UILabel]!
@@ -20,7 +20,7 @@ class NoticeVC_: UIViewController {
     var curInt = 0
     var condition = true
     var tempY: CGFloat = 0
-    var isGoNext = false
+    var isGoNext = true
     
     override func viewDidLoad() {
         for i in 0...8 {
@@ -38,16 +38,15 @@ class NoticeVC_: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if isDismissed {
-            print("이거니")
             changeBack()
             isDismissed = false
             isGoNext = false
         } else {
             for i in 0...8 {
-                showViewAnimation(view: viewsNotice[i], duration: 1.0, 0, 1)
+                showViewAnimation(view: viewsNotice[i], duration: 0.5, 0, 1)
             }
             for i in 0...1 {
-                showLabelAnimation(label: lblBases[i], duration: 1.0, 0, 1)
+                showLabelAnimation(label: lblBases[i], duration: 0.5, 0, 1)
             }
         }
     }
@@ -145,3 +144,4 @@ class NoticeVC_: UIViewController {
         }
     }
 }
+

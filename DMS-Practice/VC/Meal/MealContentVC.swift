@@ -1,21 +1,24 @@
 //
-//  PutInVC.swift
+//  MealContentVC.swift
 //  DMS-Practice
 //
-//  Created by leedonggi on 20/12/2018.
+//  Created by leedonggi on 28/12/2018.
 //  Copyright © 2018 leedonggi. All rights reserved.
 //
 
 import UIKit
 
-class PutInVC: UIViewController {
+public typealias MealTuple = (breakfast: String, lunch: String, dinner: String)
 
+class MealContentVC: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
+
     /*
     // MARK: - Navigation
 

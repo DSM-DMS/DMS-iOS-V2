@@ -31,7 +31,7 @@ class TableViewChoose: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return tableList.count
@@ -68,6 +68,8 @@ class TableViewChoose: UITableViewController {
             self.present(alert, animated: true, completion: nil)
         case 1:
             goNextVC("ChangePasswordVC")
+        case 2:
+            goNextVC("ScoreTableVC")
         default:
             print("추가예정")
         }
