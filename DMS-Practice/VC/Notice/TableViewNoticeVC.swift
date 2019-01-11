@@ -134,7 +134,7 @@ class NoticeListCell: UITableViewCell {
     override func awakeFromNib() {
         viewTable.layer.cornerRadius = 17
         viewTable.layer.masksToBounds = false
-        viewTable.layer.shadowColor = UIColor.gray.cgColor
+        viewTable.layer.shadowColor = UIColor.lightGray.cgColor
         viewTable.layer.shadowOpacity = 0.5
         viewTable.layer.shadowOffset = CGSize(width: 3, height: 3)
         viewTable.layer.shadowRadius = 5

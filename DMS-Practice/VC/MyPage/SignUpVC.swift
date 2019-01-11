@@ -16,7 +16,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtCheckPassword: UITextField!
     @IBOutlet weak var lblWarning: UILabel!
     @IBOutlet var viewsUnderline: [UIView]!
-    @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var btnSignUpOutlet: UIButton!
     @IBOutlet weak var btnGoback: UIButton!
@@ -46,6 +45,8 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         
         btnSignUpOutlet.isEnabled = false
         viewBackground.layer.cornerRadius = 10
+        btnSignUpOutlet.layer.cornerRadius = 13
+        dropShadowButton(button: btnSignUpOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         // Do any additional setup after loading the view.
     }
     
@@ -63,6 +64,14 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         goBack()
     }
     
+    @IBAction func btnSignUp(_ sender: Any) {
+        if isFull() {
+            
+        } else {
+            showToast(msg: "값을 모두 확인하세요")
+        }
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         editStart()
     }
@@ -72,19 +81,12 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         for i in 0...3 {
             showViewAnimation(view: viewsUnderline[i], duration: 0.3, Float(viewsUnderline[i].alpha), 0.1)
         }
-        
-        if isFull() {
-            if txtPassword.text != txtCheckPassword.text {
-                showLabelAnimation(label: lblWarning, duration: 0.2, 0, 1)
-            } else {
-                showLabelAnimation(label: lblWarning, duration: 0.2, 1, 0)
-                viewLogin.backgroundColor = color.mint.getcolor()
-                btnSignUpOutlet.isEnabled = true
-            }
-            
+
+        if txtPassword.text != txtCheckPassword.text {
+            showLabelAnimation(label: lblWarning, duration: 0.2, 0, 1)
         } else {
-            viewLogin.backgroundColor = color.lightGray.getcolor()
-            btnSignUpOutlet.isEnabled = false
+            showLabelAnimation(label: lblWarning, duration: 0.2, Float(lblWarning!.alpha), 0)
+            btnSignUpOutlet.isEnabled = true
         }
     }
     

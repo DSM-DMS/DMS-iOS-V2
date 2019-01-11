@@ -28,12 +28,11 @@ class NoticeVC: UIViewController {
             dropShadow(view: viewsNotice[i], color: UIColor.gray, offSet: CGSize(width: 0, height: 10))
         }
         
-        let notice = UITapGestureRecognizer(target: self, action:  #selector(self.noticeAction))
-        let policy = UITapGestureRecognizer(target: self, action:  #selector(self.policyAction))
-        let question = UITapGestureRecognizer(target: self, action:  #selector(self.questionAction))
-        self.viewsNotice[0].addGestureRecognizer(notice)
-        self.viewsNotice[1].addGestureRecognizer(policy)
-        self.viewsNotice[2].addGestureRecognizer(question)
+        for i in 0...2 {
+            let viewAction = UITapGestureRecognizer(target: self, action: #selector(self.viewAction))
+            viewsNotice[i].tag = i
+            self.viewsNotice[i].addGestureRecognizer(viewAction)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,13 +40,6 @@ class NoticeVC: UIViewController {
             changeBack()
             isDismissed = false
             isGoNext = false
-        } else {
-            for i in 0...8 {
-                showViewAnimation(view: viewsNotice[i], duration: 0.5, 0, 1)
-            }
-            for i in 0...1 {
-                showLabelAnimation(label: lblBases[i], duration: 0.5, 0, 1)
-            }
         }
     }
     
@@ -59,21 +51,9 @@ class NoticeVC: UIViewController {
         }
     }
 
-    @objc func noticeAction() {
-        curInt = 0
-        paramInt = 0
-        check()
-    }
-    
-    @objc func policyAction() {
-        curInt = 1
-        paramInt = 1
-        check()
-    }
-    
-    @objc func questionAction() {
-        curInt = 2
-        paramInt = 2
+    @objc func viewAction(_ sender: UITapGestureRecognizer) {
+        curInt = (sender.view?.tag)!
+        paramInt = (sender.view?.tag)!
         check()
     }
     

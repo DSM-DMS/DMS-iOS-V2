@@ -16,6 +16,7 @@ class DetailNoticeVC: UIViewController {
         super.viewDidLoad()
 
         viewBackground.layer.cornerRadius = 25
+        dropShadow(view: viewBackground, color: UIColor.gray, offSet: CGSize(width: 0, height: 5))
         // Do any additional setup after loading the view.
     }
     

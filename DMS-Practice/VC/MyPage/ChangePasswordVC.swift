@@ -15,13 +15,15 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtNewPassword: UITextField!
     @IBOutlet weak var txtCheckPassword: UITextField!
     @IBOutlet var viewsUnderline: [UIView]!
-    @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var btnBackOutlet: UIButton!
+    @IBOutlet weak var btnChangeOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         lblWarning.alpha = 0
+        btnChangeOutlet.layer.cornerRadius = 13
+        dropShadowButton(button: btnChangeOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         
         txtOriginPassword.delegate = self
         txtNewPassword.delegate = self
@@ -42,6 +44,14 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         goBack()
     }
     
+    @IBAction func btnChange(_ sender: Any) {
+        if isFull() {
+            
+        } else {
+            showToast(msg: "모든 값을 확인해주세요")
+        }
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if txtOriginPassword.isEditing {
             showViewAnimation(view: viewsUnderline[0], duration: 0.5, 0.1, 1)
@@ -56,15 +66,10 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         for i in 0...2 {
             showViewAnimation(view: viewsUnderline[i], duration: 0.3, Float(viewsUnderline[i].alpha), 0.1)
         }
-
-        if isFull() {
-            if txtNewPassword.text != txtCheckPassword.text {
-                    showLabelAnimation(label: lblWarning, duration: 0.3, 0, 1)
-            } else {
-                showLabelAnimation(label: lblWarning, duration: 0.3, 1, 0)
-                viewLogin.backgroundColor = color.mint.getcolor()
-            }
-            
+        if txtNewPassword.text != txtCheckPassword.text {
+                showLabelAnimation(label: lblWarning, duration: 0.3, 0, 1)
+        } else {
+            showLabelAnimation(label: lblWarning, duration: 0.3, Float(lblWarning.alpha), 0)
         }
     }
     

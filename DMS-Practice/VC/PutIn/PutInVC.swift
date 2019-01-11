@@ -11,6 +11,7 @@ import UIKit
 class PutInVC: UIViewController {
     
     @IBOutlet var viewsBack: [UIView]!
+    @IBOutlet var lblsDetail: [UILabel]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,7 @@ class PutInVC: UIViewController {
         for i in 0...3 {
             viewsBack[i].layer.cornerRadius = 17
             dropShadow(view: viewsBack[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
+            lblsDetail[i].fitTextToBounds()
         }
         
         let selfstudy = UITapGestureRecognizer(target: self, action:  #selector(self.selfstudyApply))

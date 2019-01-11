@@ -9,7 +9,7 @@
 import UIKit
 
 class MealVC: UIViewController {
-
+    
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblDayofWeek: UILabel!
@@ -20,6 +20,8 @@ class MealVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UITabBar.appearance().unselectedItemTintColor = UIColor(red: 151/255, green: 214/255, blue: 215/255, alpha: 1)
         
         let date = Date()
         let calendar = Calendar(identifier: .gregorian)
@@ -39,13 +41,11 @@ class MealVC: UIViewController {
     }
     
     @IBAction func btnLeft(_ sender: Any) {
-        self.tabBarController?.tabBar.isHidden = true
-        show허경영()
+        
     }
     
     @IBAction func btnRight(_ sender: Any) {
-        self.tabBarController?.tabBar.isHidden = true
-        show허경영()
+        
     }
     
     func getDay(wd: String) -> String {
@@ -68,15 +68,4 @@ class MealVC: UIViewController {
             return "맛없는"
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

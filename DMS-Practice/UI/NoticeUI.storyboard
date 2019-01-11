@@ -52,7 +52,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="사감부에서 게시한 공지사항을 열람합니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajs-ZY-C15">
-                                        <rect key="frame" x="17" y="42" width="198" height="17"/>
+                                        <rect key="frame" x="17" y="42" width="207" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.54510188100000001" green="0.54509121179999998" blue="0.54509842399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -221,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSb-Tm-7Bp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1093" y="597"/>
+            <point key="canvasLocation" x="1092.753623188406" y="596.65178571428567"/>
         </scene>
         <!--Table View NoticeVC-->
         <scene sceneID="1qX-ov-SS3">

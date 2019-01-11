@@ -116,11 +116,83 @@ extension UIViewController {
         imageView.contentMode = .scaleAspectFill
     }
     
+    func textFieldAnimate(txt: UITextField, titleMsg: String, isEditting: Bool) {
+        let title = UILabel(frame: CGRect(x: txt.frame.origin.x + 10, y: txt.frame.origin.y + 5, width: 30, height: 50))
+        title.backgroundColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 0)
+        title.textColor = color.mint.getcolor()
+        title.text = titleMsg
+        if isEditting {
+            view.addSubview(title)
+            UIView.animate(withDuration: 0.3) {
+                title.alpha = 1
+                txt.borderStyle = .roundedRect
+                txt.layer.cornerRadius = 6
+                txt.layer.borderColor = color.mint.getcolor().cgColor
+                txt.layer.borderWidth = 1
+            }
+        } else {
+            title.removeFromSuperview()
+        }
+    }
+    
     func showAlert() {
         let alert = UIView(frame: CGRect(x: 32, y: 140, width: view.frame.size.width - 64, height: 30))
         alert.backgroundColor = UIColor.white
         alert.alpha = 0
         
+    }
+}
+
+extension UIFont {
+    
+    static func bestFittingFontSize(for text: String, in bounds: CGRect, fontDescriptor: UIFontDescriptor, additionalAttributes: [NSAttributedString.Key: Any]? = nil) -> CGFloat {
+        let constrainingDimension = min(bounds.width, bounds.height)
+        let properBounds = CGRect(origin: .zero, size: bounds.size)
+        var attributes = additionalAttributes ?? [:]
+        
+        let infiniteBounds = CGSize(width: CGFloat.infinity, height: CGFloat.infinity)
+        var bestFontSize: CGFloat = constrainingDimension
+        
+        for fontSize in stride(from: bestFontSize, through: 0, by: -1) {
+            let newFont = UIFont(descriptor: fontDescriptor, size: fontSize)
+            attributes[.font] = newFont
+            
+            let currentFrame = text.boundingRect(with: infiniteBounds, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attributes, context: nil)
+            
+            if properBounds.contains(currentFrame) {
+                bestFontSize = fontSize
+                break
+            }
+        }
+        return bestFontSize
+    }
+    
+    static func bestFittingFont(for text: String, in bounds: CGRect, fontDescriptor: UIFontDescriptor, additionalAttributes: [NSAttributedString.Key: Any]? = nil) -> UIFont {
+        let bestSize = bestFittingFontSize(for: text, in: bounds, fontDescriptor: fontDescriptor, additionalAttributes: additionalAttributes)
+        return UIFont(descriptor: fontDescriptor, size: bestSize)
+    }
+}
+
+extension UILabel {
+    
+    /// Will auto resize the contained text to a font size which fits the frames bounds.
+    /// Uses the pre-set font to dynamically determine the proper sizing
+    func fitTextToBounds() {
+        guard let text = text, let currentFont = font else { return }
+        
+        let bestFittingFont = UIFont.bestFittingFont(for: text, in: bounds, fontDescriptor: currentFont.fontDescriptor, additionalAttributes: basicStringAttributes)
+        font = bestFittingFont
+    }
+    
+    private var basicStringAttributes: [NSAttributedString.Key: Any] {
+        var attribs = [NSAttributedString.Key: Any]()
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = self.textAlignment
+        paragraphStyle.lineBreakMode = self.lineBreakMode
+        attribs[.paragraphStyle] = paragraphStyle
+        
+        return attribs
     }
 }
 

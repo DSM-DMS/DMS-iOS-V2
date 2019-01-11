@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590E594121E42B6B00829FBF /* MusicSendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590E594021E42B6B00829FBF /* MusicSendVC.swift */; };
 		590FC41B21DC61F900C7E8C9 /* DetailNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590FC41A21DC61F900C7E8C9 /* DetailNoticeVC.swift */; };
 		590FC42121DDB79F00C7E8C9 /* RemainApplyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590FC42021DDB79F00C7E8C9 /* RemainApplyVC.swift */; };
 		590FC42321DDB7B300C7E8C9 /* MusicApplyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590FC42221DDB7B300C7E8C9 /* MusicApplyVC.swift */; };
@@ -41,6 +42,7 @@
 		59D517DF21C768C800192176 /* DMS_PracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D517DE21C768C800192176 /* DMS_PracticeTests.swift */; };
 		59D517EA21C768C800192176 /* DMS_PracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D517E921C768C800192176 /* DMS_PracticeUITests.swift */; };
 		59DC9CBF21DF3DBF00CCDA74 /* SubmitProcessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DC9CBE21DF3DBF00CCDA74 /* SubmitProcessVC.swift */; };
+		59DE82E221E369D400E5EFA7 /* GooutFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DE82E121E369D400E5EFA7 /* GooutFormVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		590E594021E42B6B00829FBF /* MusicSendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSendVC.swift; sourceTree = "<group>"; };
 		590FC41A21DC61F900C7E8C9 /* DetailNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNoticeVC.swift; sourceTree = "<group>"; };
 		590FC42021DDB79F00C7E8C9 /* RemainApplyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemainApplyVC.swift; sourceTree = "<group>"; };
 		590FC42221DDB7B300C7E8C9 /* MusicApplyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicApplyVC.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		59D517E921C768C800192176 /* DMS_PracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMS_PracticeUITests.swift; sourceTree = "<group>"; };
 		59D517EB21C768C800192176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59DC9CBE21DF3DBF00CCDA74 /* SubmitProcessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitProcessVC.swift; sourceTree = "<group>"; };
+		59DE82E121E369D400E5EFA7 /* GooutFormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooutFormVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +140,8 @@
 				590FC42021DDB79F00C7E8C9 /* RemainApplyVC.swift */,
 				590FC42221DDB7B300C7E8C9 /* MusicApplyVC.swift */,
 				590FC42421DDB7CA00C7E8C9 /* GooutApplyVC.swift */,
+				59DE82E121E369D400E5EFA7 /* GooutFormVC.swift */,
+				590E594021E42B6B00829FBF /* MusicSendVC.swift */,
 			);
 			path = PutIn;
 			sourceTree = "<group>";
@@ -419,10 +425,12 @@
 				590FC42721DDB7DE00C7E8C9 /* SelftudyApplyVC.swift in Sources */,
 				590FC42521DDB7CA00C7E8C9 /* GooutApplyVC.swift in Sources */,
 				590FC42321DDB7B300C7E8C9 /* MusicApplyVC.swift in Sources */,
+				59DE82E221E369D400E5EFA7 /* GooutFormVC.swift in Sources */,
 				599AB4B621D31A1A007A23F2 /* Empty.swift in Sources */,
 				598C098D21D05E4C00CF881E /* LoginVC.swift in Sources */,
 				590FC42121DDB79F00C7E8C9 /* RemainApplyVC.swift in Sources */,
 				59DC9CBF21DF3DBF00CCDA74 /* SubmitProcessVC.swift in Sources */,
+				590E594121E42B6B00829FBF /* MusicSendVC.swift in Sources */,
 				59D517CA21C768C700192176 /* AppDelegate.swift in Sources */,
 				5941EAB321D49FBF0042E930 /* TableViewNoticeVC.swift in Sources */,
 				5968488821D0B06200EFFBC4 /* TableViewChooseCell.swift in Sources */,

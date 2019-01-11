@@ -15,7 +15,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var viewUnderlineID: UIView!
     @IBOutlet weak var viewUnderlinePassword: UIView!
-    @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var btnLoginOutlet: UIButton!
     @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet var lblInfo: [UILabel]!
@@ -32,12 +31,12 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             lblInfo[i].alpha = 0
         }
         
-        btnLoginOutlet.isEnabled = false
-        
         txtID.delegate = self
         txtPassword.delegate = self
         
         viewBackground.layer.cornerRadius = 10
+        btnLoginOutlet.layer.cornerRadius = 13
+        dropShadowButton(button: btnLoginOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         // Do any additional setup after loading the view.
     }
     
@@ -50,22 +49,23 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func btnLogin(_ sender: Any) {
+        if isFull() {
+            
+        } else {
+            showToast(msg: "값을 모두 확인해주세요")
+        }
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         editStart()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField, reason:
+        UITextField.DidEndEditingReason) {
         UIView.animate(withDuration: 0.3) {
             self.viewUnderlineID.alpha = 0.1
             self.viewUnderlinePassword.alpha = 0.1
-        }
-        
-        if isFull() {
-            btnLoginOutlet.isEnabled = true
-            viewLogin.backgroundColor = color.mint.getcolor()
-        } else {
-            btnLoginOutlet.isEnabled = false
-            viewLogin.backgroundColor = color.lightGray.getcolor()
         }
     }
 
