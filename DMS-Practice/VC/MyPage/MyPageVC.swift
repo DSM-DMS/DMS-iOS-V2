@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MyPageVC: UIViewController{
     
@@ -26,6 +27,8 @@ class MyPageVC: UIViewController{
         dropShadow(view: viewPenalty, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
         
         viewCondition.layer.cornerRadius = 17
+        
+        
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
@@ -86,7 +89,6 @@ class MyPageVC: UIViewController{
     }
     
     
-    
     /*
      // MARK: - Navigation
      
@@ -98,3 +100,4 @@ class MyPageVC: UIViewController{
      */
     
 }
+

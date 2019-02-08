@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginVC: UIViewController, UITextFieldDelegate {
     
@@ -51,7 +52,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func btnLogin(_ sender: Any) {
         if isFull() {
-            
+            getData()
         } else {
             showToast(msg: "값을 모두 확인해주세요")
         }
@@ -87,6 +88,47 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         } else {
             return true
         }
+    }
+//    http://ec2.istruly.sexy:5000/account/auth
+    
+    func getData() {
+        let parameters = ["id": txtID.text!, "password": txtPassword.text!]
+
+        let url = URL(string: "http://ec2.istruly.sexy:5000/account/auth")!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+
+            if let httpStatus = response as? HTTPURLResponse {
+                switch httpStatus.statusCode {
+                case 201:
+                    print("로그인 성공")
+                case 400:
+                    print("로그인 실패")
+                default:
+                    print("statusCode i \(httpStatus.statusCode)")
+                    print("response = \(String(describing: response))")
+                }
+            }
+
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString!))")
+        }
+        task.resume()
     }
     
     /*

@@ -66,7 +66,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func btnSignUp(_ sender: Any) {
         if isFull() {
-            
+            getData()
         } else {
             showToast(msg: "값을 모두 확인하세요")
         }
@@ -108,6 +108,53 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         } else {
             showViewAnimation(view: viewsUnderline[3], duration: 0.5, 0.1, 1)
         }
+    }
+    
+    func getData() {
+        let parameters = ["uuid":txtCheckCode.text!, "id": txtID.text!, "password": txtPassword.text!]
+        
+        //create the url with URL
+        let url = URL(string: "http://ec2.istruly.sexy:5000/account/signup")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {           // check for http errors
+                switch httpStatus.statusCode {
+                case 201:
+                    print("회원가입 성공")
+                case 204:
+                    print("유효하지 않은 확인코드")
+                case 205:
+                    print("중복된 아이디")
+                default:
+                    print("statusCode i \(httpStatus.statusCode)")
+                    print("response = \(String(describing: response))")
+                }
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString!))")
+        }
+        task.resume()
+    }
+    
+    func showCondition() {
+        
     }
     
     /*

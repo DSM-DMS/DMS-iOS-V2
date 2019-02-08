@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 public var isDismissed = false
 
@@ -17,7 +18,8 @@ class TableViewNoticeVC: UIViewController {
     @IBOutlet weak var lblDetail: UILabel!
     @IBOutlet weak var tblView: UITableView!
     
-    var data = [CellNotice]()
+    var cellData = [CellNotice]()
+    var url = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +31,6 @@ class TableViewNoticeVC: UIViewController {
         tblView.alpha = 0
         tblView.delegate = self
         tblView.dataSource = self
-        
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
-        data.append(CellNotice(title: "추가 예정", date: "2200-10-23"))
         
         isDismissed = true
         imgArrow.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
@@ -58,15 +47,20 @@ class TableViewNoticeVC: UIViewController {
         case 0:
             lblTitle.text = "공지사항"
             lblDetail.text = "사감부에서 게시한 공지사항을 열람합니다"
+            url = "notice"
         case 1:
             lblTitle.text = "기숙사 규정"
             lblDetail.text = "사감부에서 게시한 규정을 열람합니다"
+            url = "rule"
         case 2:
             lblTitle.text = "자주하는 질문"
             lblDetail.text = "자주하는 질문을 열람합니다"
+            url = "qna"
         default:
             showError(0)
         }
+        
+        getData()
         // Do any additional setup after loading the view.
     }
     
@@ -84,6 +78,22 @@ class TableViewNoticeVC: UIViewController {
         dismiss(animated: false, completion: nil)
     }
     
+    func getData() {
+        URLSession.shared.dataTask(with: URL(string: "http://ec2.istruly.sexy:5000/"+url)!){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+            default: self!.cellData = [CellNotice(title: "네트워크 상태를 확인하세요", date: "2019-10-02", code: "so sad")]
+            }
+            }.resume()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -98,11 +108,11 @@ class TableViewNoticeVC: UIViewController {
 
 extension TableViewNoticeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return cellData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = data[indexPath.row]
+        let tableCell = cellData[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeListCell") as! NoticeListCell
         
@@ -147,9 +157,11 @@ class NoticeListCell: UITableViewCell {
 class CellNotice {
     var title: String
     var date: String
+    var code: String
     
-    init(title: String, date: String) {
+    init(title: String, date: String, code: String) {
         self.title = title
         self.date = date
+        self.code = code
     }
 }

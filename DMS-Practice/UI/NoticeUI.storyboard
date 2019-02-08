@@ -197,7 +197,6 @@
                     <tabBarItem key="tabBarItem" title="공지" image="notice" id="c7f-3e-sU2"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outletCollection property="lblBases" destination="eZC-Oj-Sqc" collectionClass="NSMutableArray" id="r4p-SZ-F4a"/>
                         <outletCollection property="lblBases" destination="Av6-YU-HFT" collectionClass="NSMutableArray" id="BrH-XV-8bQ"/>
                         <outletCollection property="lblTitles" destination="KGH-5L-gNc" collectionClass="NSMutableArray" id="CZ5-J9-mbk"/>
                         <outletCollection property="lblTitles" destination="Q75-nF-N2d" collectionClass="NSMutableArray" id="C8n-g8-G1w"/>
@@ -217,6 +216,7 @@
                         <outletCollection property="viewsNotice" destination="0lr-y6-lG2" collectionClass="NSMutableArray" id="3pZ-Mj-xA0"/>
                         <outletCollection property="viewsNotice" destination="pqW-Xe-NcP" collectionClass="NSMutableArray" id="Wa2-m1-7Sk"/>
                         <outletCollection property="viewsNotice" destination="Top-qM-oLM" collectionClass="NSMutableArray" id="4Bn-y2-YVp"/>
+                        <outletCollection property="lblBases" destination="eZC-Oj-Sqc" collectionClass="NSMutableArray" id="lEp-W8-mON"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qSb-Tm-7Bp" userLabel="First Responder" sceneMemberID="firstResponder"/>

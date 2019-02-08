@@ -1,0 +1,6 @@
+module Pods_DMS_Practice {
+  umbrella header "Pods-DMS-Practice-umbrella.h"
+
+  export *
+  module * { export * }
+}

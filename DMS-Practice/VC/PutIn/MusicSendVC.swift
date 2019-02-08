@@ -22,11 +22,9 @@ class MusicSendVC: UIViewController {
         
         tblView.delegate = self
         tblView.dataSource = self
-
-        data.append(CellMusicSend(title: "모든 날, 모든 순간", singer: "폴킴", name: "1109 이동기"))
-        data.append(CellMusicSend(title: "Holiday", singer: "수지", name: "1109 이동기"))
+        
         if data.count < 5 {
-            data.append(CellMusicSend(title: "신청곡이 없습니다", singer: "신청하시려면 눌러주세요", name: "신청없음"))
+            data.append(CellMusicSend(title: "신청하시려면 눌러주세요", singer: "요일당 5곡씩 신청가능합니다", name: "1인당 한개씩"))
         }
         
         lblTitle.text = "\(day) 기상음악"
@@ -36,6 +34,10 @@ class MusicSendVC: UIViewController {
     
     @IBAction func btnGoBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func getData() {
+        
     }
 
     /*
@@ -90,6 +92,45 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
             }
             
             let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
+                if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
+                    let parameters = ["Authorization": "", "day": 0, "singer": alert.textFields![0].text!, "musicName": alert.textFields![0].text!] as [String : Any]
+                    
+                    let url = URL(string: "http://ec2.istruly.sexy:5000/apply/music")!
+                    
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    
+                    do {
+                        request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                    } catch let error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.addValue("application/json", forHTTPHeaderField: "Accept")
+                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                        guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                            print("error=\(String(describing: error))")
+                            return
+                        }
+                        
+                        if let httpStatus = response as? HTTPURLResponse {
+                            switch httpStatus.statusCode {
+                            case 201:
+                                print("로그인 성공")
+                            case 400:
+                                print("로그인 실패")
+                            default:
+                                print("statusCode i \(httpStatus.statusCode)")
+                                print("response = \(String(describing: response))")
+                            }
+                        }
+                        
+                        let responseString = String(data: data, encoding: .utf8)
+                        print("responseString = \(String(describing: responseString!))")
+                    }
+                    task.resume()
+                }
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(cancel)

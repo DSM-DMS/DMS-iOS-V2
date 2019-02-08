@@ -946,9 +946,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FNx-sG-95t">
-                                                    <rect key="frame" x="30" y="11" width="315" height="86.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNx-sG-95t">
+                                                    <rect key="frame" x="30" y="11" width="315" height="86"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="노래 제목이 들어가요" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0N-fq-qWY">
                                                             <rect key="frame" x="16" y="15" width="284" height="21"/>
@@ -975,6 +974,13 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="FNx-sG-95t" secondAttribute="trailing" constant="30" id="71g-J8-GDZ"/>
+                                                <constraint firstItem="FNx-sG-95t" firstAttribute="top" secondItem="bgz-rk-0gf" secondAttribute="top" constant="11" id="LVc-4p-oGW"/>
+                                                <constraint firstItem="FNx-sG-95t" firstAttribute="leading" secondItem="bgz-rk-0gf" secondAttribute="leading" constant="30" id="Leg-kn-hBZ"/>
+                                                <constraint firstItem="FNx-sG-95t" firstAttribute="centerX" secondItem="bgz-rk-0gf" secondAttribute="centerX" id="QHn-SU-Wjb"/>
+                                                <constraint firstItem="FNx-sG-95t" firstAttribute="centerY" secondItem="bgz-rk-0gf" secondAttribute="centerY" id="wiw-Zk-1VD"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
