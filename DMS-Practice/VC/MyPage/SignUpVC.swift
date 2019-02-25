@@ -125,30 +125,37 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             print(error.localizedDescription)
         }
         
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+            guard let data = data, error == nil else {     
                 print("error=\(String(describing: error))")
                 return
             }
             
-            if let httpStatus = response as? HTTPURLResponse {           // check for http errors
+            if let httpStatus = response as? HTTPURLResponse {
                 switch httpStatus.statusCode {
                 case 201:
-                    print("회원가입 성공")
+                    DispatchQueue.main.async {
+                        self.goBack()
+                    }
                 case 204:
-                    print("유효하지 않은 확인코드")
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "확인코드를 확인해주세요")
+                    }
                 case 205:
-                    print("중복된 아이디")
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "아이디가 중복되었습니다")
+                    }
                 default:
-                    print("statusCode i \(httpStatus.statusCode)")
-                    print("response = \(String(describing: response))")
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("responseString = \(String(describing: responseString!))")
                 }
             }
             
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString!))")
+            
         }
         task.resume()
     }

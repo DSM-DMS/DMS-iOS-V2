@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+import CryptoSwift
 
 class LoginVC: UIViewController, UITextFieldDelegate {
     
@@ -19,8 +19,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var btnLoginOutlet: UIButton!
     @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet var lblInfo: [UILabel]!
-    
-    var currentY = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +52,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         if isFull() {
             getData()
         } else {
-            showToast(msg: "값을 모두 확인해주세요")
+            showToast(msg: "모든 값을 확인하세요")
         }
     }
     
@@ -89,46 +87,46 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             return true
         }
     }
-//    http://ec2.istruly.sexy:5000/account/auth
     
     func getData() {
         let parameters = ["id": txtID.text!, "password": txtPassword.text!]
-
         let url = URL(string: "http://ec2.istruly.sexy:5000/account/auth")!
-
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {
             print(error.localizedDescription)
         }
-
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-                print("error=\(String(describing: error))")
-                return
-            }
-
-            if let httpStatus = response as? HTTPURLResponse {
-                switch httpStatus.statusCode {
-                case 201:
-                    print("로그인 성공")
-                case 400:
-                    print("로그인 실패")
-                default:
-                    print("statusCode i \(httpStatus.statusCode)")
-                    print("response = \(String(describing: response))")
+        URLSession.shared.dataTask(with: request) { [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                print("\(jsonSerialization)")
+                Token.instance.save(AuthModel(accessToken: jsonSerialization["accessToken"] as! String, refreshToken: (jsonSerialization["refreshToken"] as! String)))
+                DispatchQueue.main.async { self!.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {})
+                }
+            case 401:
+                print("로그인 실패")
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "로그인 실패")
+                }
+            default:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+                DispatchQueue.main.async {
+                    self?.showError((res as! HTTPURLResponse).statusCode)
                 }
             }
-
-            let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString!))")
-        }
-        task.resume()
+            }.resume()
     }
     
     /*
@@ -141,4 +139,42 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     }
     */
 
+}
+
+struct AuthModel: Codable{
+    let accessToken: String
+    let refreshToken: String?
+}
+
+
+class Token{
+    
+    static let instance = Token()
+    private let repo = UserDefaults.standard
+    private let accessKey = "access"
+    private let refreshKey = "refresh"
+    
+    private init(){}
+    
+    func save(_ token: AuthModel){
+        repo.set(token.accessToken, forKey: accessKey)
+        repo.set(token.refreshToken!, forKey: refreshKey)
+    }
+    
+    func changeAccessToken(_ token: String){
+        repo.set(token, forKey: accessKey)
+    }
+    
+    func remove(){
+        repo.removeObject(forKey: accessKey)
+        repo.removeObject(forKey: refreshKey)
+    }
+    
+    func get() -> AuthModel?{
+        let accessToken = repo.string(forKey: accessKey)
+        let refreshToken = repo.string(forKey: refreshKey)
+        if let at = accessToken, refreshToken != nil{ return AuthModel(accessToken: "Bearer " + at, refreshToken: "Bearer " + refreshToken!) }
+        else{ return nil }
+    }
+    
 }

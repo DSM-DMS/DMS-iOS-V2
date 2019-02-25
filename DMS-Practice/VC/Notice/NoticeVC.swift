@@ -41,6 +41,7 @@ class NoticeVC: UIViewController {
             isDismissed = false
             isGoNext = false
         }
+        if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
     }
     
     override func viewDidDisappear(_ animated: Bool) {

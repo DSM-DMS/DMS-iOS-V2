@@ -17,7 +17,11 @@ class Empty: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        goNextVC("LoginVC")
+        if loginCheck() {
+            goBack()
+        } else {
+            goNextVC("LoginVC")
+        }
     }
     
 

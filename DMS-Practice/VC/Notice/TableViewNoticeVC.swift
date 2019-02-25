@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 public var isDismissed = false
 

@@ -60,6 +60,7 @@ class TableViewChoose: UITableViewController {
             alert.setValue(attributedString, forKey: "attributedTitle")
             
             let ok = UIAlertAction(title: "로그아웃", style: .default) { (ok) in
+                Token.instance.remove()
                 self.goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC")
             }
             let cancel = UIAlertAction(title: "취소", style: .default)

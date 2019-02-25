@@ -32,6 +32,10 @@ class PutInVC: UIViewController {
         self.viewsBack[3].addGestureRecognizer(goout)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
+    }
 
     @objc func selfstudyApply() {
         goNextVC("selfstudyApplyVC")

@@ -1,4 +1,4 @@
-module Pods_DMS_Practice {
+framework module Pods_DMS_Practice {
   umbrella header "Pods-DMS-Practice-umbrella.h"
 
   export *

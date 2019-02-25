@@ -20,6 +20,8 @@ class MusicSendVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getData()
+        
         tblView.delegate = self
         tblView.dataSource = self
         
@@ -37,7 +39,31 @@ class MusicSendVC: UIViewController {
     }
     
     func getData() {
+        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/music")!
         
+        var request = URLRequest(url: url)
+        
+        request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: URL(string: "http://ec2.istruly.sexy:5000/apply/music")!){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+            case 204:
+                print("nothing")
+            case 403:
+                print("unavailable")
+            default:
+                print("error")
+            }
+            }.resume()
     }
 
     /*
@@ -93,7 +119,7 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
             
             let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
                 if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
-                    let parameters = ["Authorization": "", "day": 0, "singer": alert.textFields![0].text!, "musicName": alert.textFields![0].text!] as [String : Any]
+                    let parameters = ["Authorization": Token.instance.get()?.accessToken ?? "error", "day": 3, "singer": alert.textFields![0].text!, "musicName": alert.textFields![0].text!] as [String : Any]
                     
                     let url = URL(string: "http://ec2.istruly.sexy:5000/apply/music")!
                     
@@ -106,6 +132,9 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
                         print(error.localizedDescription)
                     }
                     
+                    request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
+                    request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
+                    request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
                     request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                     request.addValue("application/json", forHTTPHeaderField: "Accept")
                     let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -117,12 +146,13 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
                         if let httpStatus = response as? HTTPURLResponse {
                             switch httpStatus.statusCode {
                             case 201:
-                                print("로그인 성공")
-                            case 400:
-                                print("로그인 실패")
+                                print("기상음악 신청 성공")
+                            case 205:
+                                print("꽉 찼어요")
+                            case 403:
+                                print("권한이 없음")
                             default:
-                                print("statusCode i \(httpStatus.statusCode)")
-                                print("response = \(String(describing: response))")
+                                print("살려주세요")
                             }
                         }
                         

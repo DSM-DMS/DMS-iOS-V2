@@ -84,8 +84,12 @@ extension TodayViewController{
         var lunchData = ""
         var dinnerData = ""
         
+        let xDate = formatter.string(from: Date())
         formatter.dateFormat = "YYYY-MM-dd"
         let dateStr = formatter.string(from: date)
+        let url = URL(string: String("http://ec2.istruly.sexy:5000/meal/" + dateStr))
+        var request  = URLRequest(url: url!)
+        request.addValue(xDate, forHTTPHeaderField: "X-Date")
         URLSession.shared.dataTask(with: URL(string: "http://ec2.istruly.sexy:5000/meal/" + dateStr)!){
             [weak self] data, res, err in
             guard let strongSelf = self else { return }

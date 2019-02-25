@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class MyPageVC: UIViewController{
     
@@ -16,6 +15,8 @@ class MyPageVC: UIViewController{
     @IBOutlet weak var viewCondition: UIView!
     @IBOutlet weak var lblPrise: UILabel!
     @IBOutlet weak var lblPenalty: UILabel!
+    @IBOutlet weak var lblName: UILabel!
+    @IBOutlet weak var lblNumber: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +28,12 @@ class MyPageVC: UIViewController{
         dropShadow(view: viewPenalty, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
         
         viewCondition.layer.cornerRadius = 17
-        
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+//        if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
+//        else { getData() }
+        getData()
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
@@ -86,6 +91,44 @@ class MyPageVC: UIViewController{
         alert.addAction(cancel)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func getData() {
+        let url = URL(string: "http://ec2.istruly.sexy:5000/info/basic")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        URLSession.shared.dataTask(with: request){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+                
+                self!.lblName.text = (jsonSerialization["name"] as! String)
+                self!.lblNumber.text = String(jsonSerialization["number"] as! Int)
+                self!.lblPrise.text = String(jsonSerialization["badPoint"] as! Int)
+                self!.lblPenalty.text = String(jsonSerialization["goodPoint"] as! Int)
+                
+            case 403:
+                self!.lblName.text = "네트워크 상태를 확인하세요"
+                self!.lblNumber.text = "0 학년 0 반 00 번"
+                self!.lblPrise.text = "0"
+                self!.lblPenalty.text = "0"
+            default:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+                print("error")
+            }
+            }.resume()
     }
     
     

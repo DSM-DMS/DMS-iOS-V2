@@ -241,6 +241,8 @@
                     <tabBarItem key="tabBarItem" title="마이페이지" image="mypage" selectedImage="mypage" id="gyi-Qb-dCt"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="lblName" destination="Wg3-Ml-fBz" id="2fc-JP-VDd"/>
+                        <outlet property="lblNumber" destination="TqV-r5-bEW" id="d0w-T0-Shc"/>
                         <outlet property="lblPenalty" destination="lCg-Ed-C3M" id="XCZ-VW-kiW"/>
                         <outlet property="lblPrise" destination="YZ9-y6-uRP" id="5NI-jd-onk"/>
                         <outlet property="viewCondition" destination="eWY-qq-MDk" id="Bfv-XZ-nK3"/>
