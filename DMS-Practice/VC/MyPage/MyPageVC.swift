@@ -31,8 +31,8 @@ class MyPageVC: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
-//        else { getData() }
+        if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
+        else { getData() }
         getData()
     }
     
@@ -99,8 +99,9 @@ class MyPageVC: UIViewController{
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request){
             [weak self] data, res, err in
             guard self != nil else { return }
@@ -111,17 +112,27 @@ class MyPageVC: UIViewController{
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 
                 print("\(jsonSerialization)")
-                
-                self!.lblName.text = (jsonSerialization["name"] as! String)
-                self!.lblNumber.text = String(jsonSerialization["number"] as! Int)
-                self!.lblPrise.text = String(jsonSerialization["badPoint"] as! Int)
-                self!.lblPenalty.text = String(jsonSerialization["goodPoint"] as! Int)
+                DispatchQueue.main.async {
+                    self!.lblName.text = (jsonSerialization["name"] as! String)
+                    self!.lblNumber.text = String(jsonSerialization["number"] as! Int)
+                    self!.lblPrise.text = String(jsonSerialization["badPoint"] as! Int)
+                    self!.lblPenalty.text = String(jsonSerialization["goodPoint"] as! Int)
+                }
                 
             case 403:
-                self!.lblName.text = "네트워크 상태를 확인하세요"
-                self!.lblNumber.text = "0 학년 0 반 00 번"
-                self!.lblPrise.text = "0"
-                self!.lblPenalty.text = "0"
+                DispatchQueue.main.async {
+                    self!.lblName.text = "네트워크 상태를 확인하세요"
+                    self!.lblNumber.text = "0 학년 0 반 00 번"
+                    self!.lblPrise.text = "0"
+                    self!.lblPenalty.text = "0"
+                }
+            case 500:
+                DispatchQueue.main.sync {
+                    self!.lblName.text = "로그인 기한 만료"
+                    self!.lblNumber.text = "재로그인이 필요합니다"
+                    self!.lblPrise.text = "-999999999"
+                    self!.lblPenalty.text = "999999999"
+                }
             default:
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 

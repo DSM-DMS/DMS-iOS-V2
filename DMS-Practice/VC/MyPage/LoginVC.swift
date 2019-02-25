@@ -119,9 +119,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     self?.showToast(msg: "로그인 실패")
                 }
             default:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
-                print("\(jsonSerialization)")
                 DispatchQueue.main.async {
                     self?.showError((res as! HTTPURLResponse).statusCode)
                 }

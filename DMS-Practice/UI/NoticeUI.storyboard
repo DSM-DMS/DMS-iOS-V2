@@ -279,15 +279,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ruI-Ak-ms3">
                                                     <rect key="frame" x="30" y="8" width="354" height="74"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="내용이 들어가요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1z-LD-yDZ">
-                                                            <rect key="frame" x="17" y="18.666666666666668" width="95" height="18.000000000000004"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내용이 들어가요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1z-LD-yDZ">
+                                                            <rect key="frame" x="17" y="19" width="320" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="날짜가 들어가요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIW-WW-eL2">
-                                                            <rect key="frame" x="17" y="43.333333333333336" width="76.333333333333329" height="14.333333333333336"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="날짜가 들어가요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TIW-WW-eL2">
+                                                            <rect key="frame" x="17" y="43" width="320" height="14"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.54510188100000001" green="0.54509121179999998" blue="0.54509842399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <nil key="highlightedColor"/>
@@ -295,7 +293,13 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="i1z-LD-yDZ" firstAttribute="leading" secondItem="ruI-Ak-ms3" secondAttribute="leading" constant="17" id="IWb-p1-cWg"/>
                                                         <constraint firstAttribute="height" constant="74" id="NAp-9t-IXt"/>
+                                                        <constraint firstAttribute="trailing" secondItem="i1z-LD-yDZ" secondAttribute="trailing" constant="17" id="R5I-Ut-jfe"/>
+                                                        <constraint firstItem="TIW-WW-eL2" firstAttribute="centerY" secondItem="ruI-Ak-ms3" secondAttribute="centerY" constant="13" id="T7O-VH-ja8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="TIW-WW-eL2" secondAttribute="trailing" constant="17" id="X9e-jc-jAo"/>
+                                                        <constraint firstItem="i1z-LD-yDZ" firstAttribute="centerY" secondItem="ruI-Ak-ms3" secondAttribute="centerY" constant="-9" id="bHn-UA-dmp"/>
+                                                        <constraint firstItem="TIW-WW-eL2" firstAttribute="leading" secondItem="ruI-Ak-ms3" secondAttribute="leading" constant="17" id="bQE-Ux-GeR"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

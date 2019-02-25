@@ -78,17 +78,46 @@ class TableViewNoticeVC: UIViewController {
     }
     
     func getData() {
-        URLSession.shared.dataTask(with: URL(string: "http://ec2.istruly.sexy:5000/"+url)!){
+        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/"+url)!)
+        request.httpMethod = "GET"
+        
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        URLSession.shared.dataTask(with: request){
             [weak self] data, res, err in
             guard self != nil else { return }
             if let err = err { print(err.localizedDescription); return }
             print((res as! HTTPURLResponse).statusCode)
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: [[String: Any]]]
                 
                 print("\(jsonSerialization)")
-            default: self!.cellData = [CellNotice(title: "네트워크 상태를 확인하세요", date: "2019-10-02", code: "so sad")]
+                var list = [[String: Any]]()
+                if self!.url == "notice" {
+                    list = jsonSerialization["noticeList"]!
+                } else if self!.url == "rule" {
+                    list = jsonSerialization["ruleList"]!
+                }
+                if list.count == 0 {
+                    
+                } else {
+                    for i in 0...list.count - 1 {
+                        let title: String = String(format: "%@", list[i]["title"] as! CVarArg)
+                        let postDate: String = String(format: "%@", list[i]["postDate"] as! CVarArg)
+                        let id: String = String(format: "%@", list[i]["id"] as! CVarArg)
+                        self!.cellData.append(CellNotice(title: title, date: postDate, code: id))
+                    }
+                    DispatchQueue.main.async { self!.tblView.reloadData() }
+                }
+                
+            case 403:
+                DispatchQueue.main.async {
+                    
+                }
+            default:
+                self!.cellData = [CellNotice(title: "네트워크 상태를 확인하세요", date: "2019-10-02", code: "so sad")]
+                print("error")
             }
             }.resume()
     }

@@ -1423,7 +1423,7 @@
                         <outletCollection property="lblsTextField" destination="zjV-AK-0Oy" collectionClass="NSMutableArray" id="64A-od-3Bl"/>
                         <outletCollection property="lblsTextField" destination="XV5-5I-WbV" collectionClass="NSMutableArray" id="f3l-hI-xIT"/>
                         <outletCollection property="txtsTime" destination="R3f-nI-13R" collectionClass="NSMutableArray" id="KDW-1k-62Z"/>
-                        <outletCollection property="txtsTime" destination="zIt-Sm-faG" collectionClass="NSMutableArray" id="HKm-qY-IVg"/>
+                        <outletCollection property="txtsTime" destination="zIt-Sm-faG" collectionClass="NSMutableArray" id="ENB-6X-TsO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8b-Bz-zdH" userLabel="First Responder" sceneMemberID="firstResponder"/>

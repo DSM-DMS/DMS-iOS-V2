@@ -81,6 +81,58 @@ class RemainApplyVC: UIViewController {
         lblsDescription[curCondition].textColor = UIColor.white
     }
     
+    func getData() {
+        let parameters = ["value": curCondition]
+        
+        //create the url with URL
+        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/stay")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {
+                switch httpStatus.statusCode {
+                case 201:
+                    DispatchQueue.main.async {
+                        self.goBack()
+                    }
+                case 204:
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "확인코드를 확인해주세요")
+                    }
+                case 205:
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "아이디가 중복되었습니다")
+                    }
+                default:
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("responseString = \(String(describing: responseString!))")
+                }
+            }
+            
+            
+        }
+        task.resume()
+    }
+    
+    
     /*
     // MARK: - Navigation
 
