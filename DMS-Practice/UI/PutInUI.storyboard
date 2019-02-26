@@ -440,8 +440,12 @@
                                     <action selector="btnApply:" destination="dPW-6U-p2h" eventType="touchUpInside" id="Njc-Zc-ovb"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiD-NR-LKP">
+                                <rect key="frame" x="18" y="221" width="339" height="369"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brs-l2-kXb">
-                                <rect key="frame" x="16" y="225" width="343" height="369"/>
+                                <rect key="frame" x="43" y="244" width="289" height="322"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -450,20 +454,24 @@
                             <constraint firstItem="0J2-tL-rZV" firstAttribute="top" secondItem="qao-4n-WaV" secondAttribute="topMargin" constant="36" id="2bd-Fb-xYh"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="height" secondItem="nyk-jS-XwF" secondAttribute="height" id="3LJ-Ym-yTA"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="nyk-jS-XwF" secondAttribute="bottom" constant="8" id="52Z-7J-hsB"/>
-                            <constraint firstItem="brs-l2-kXb" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="24" id="BAR-0a-rdp"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="43" id="7Ms-x1-aV2"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="width" secondItem="nyk-jS-XwF" secondAttribute="width" id="BCg-vk-QCi"/>
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="trailing" secondItem="SlS-8d-mtp" secondAttribute="trailing" id="Hah-1R-zpL"/>
-                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="brs-l2-kXb" secondAttribute="bottom" constant="24" id="L0r-Bg-Hzn"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="x87-cs-cLH" secondAttribute="trailing" constant="18" id="LPC-6h-VjC"/>
+                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="brs-l2-kXb" secondAttribute="trailing" constant="43" id="NTo-Sl-rfO"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="leading" secondItem="nyk-jS-XwF" secondAttribute="trailing" constant="11" id="Os5-OX-oWs"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="43" id="Sha-xS-K4Q"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="2Zw-c2-qaF" secondAttribute="trailing" constant="36" id="UET-6x-vwz"/>
                             <constraint firstItem="0J2-tL-rZV" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="27" id="WM2-q7-ZnM"/>
+                            <constraint firstItem="OiD-NR-LKP" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="18" id="Z9c-oB-2zE"/>
                             <constraint firstItem="2Zw-c2-qaF" firstAttribute="top" secondItem="SlS-8d-mtp" secondAttribute="top" constant="53" id="Zjr-TQ-8tq"/>
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="top" secondItem="2Zw-c2-qaF" secondAttribute="bottom" constant="17" id="ad4-Z5-5MT"/>
+                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="brs-l2-kXb" secondAttribute="bottom" constant="52" id="bFg-Rj-g0N"/>
                             <constraint firstItem="nyk-jS-XwF" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="18" id="h01-Rr-WLz"/>
+                            <constraint firstItem="OiD-NR-LKP" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="20" id="ir9-kU-sRb"/>
+                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="OiD-NR-LKP" secondAttribute="trailing" constant="18" id="lFe-au-Rli"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="x87-cs-cLH" secondAttribute="bottom" constant="8" id="sl7-g4-qp9"/>
-                            <constraint firstItem="brs-l2-kXb" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="16" id="tVT-g4-hdO"/>
-                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="brs-l2-kXb" secondAttribute="trailing" constant="16" id="wMt-SL-Gc7"/>
+                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="OiD-NR-LKP" secondAttribute="bottom" constant="28" id="tig-n3-yj4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SlS-8d-mtp"/>
                     </view>
@@ -476,6 +484,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backScrollView" destination="brs-l2-kXb" id="aJh-a9-jFq"/>
+                        <outlet property="backView" destination="OiD-NR-LKP" id="HjR-59-t5g"/>
                         <outlet property="segTime" destination="2Zw-c2-qaF" id="vLC-iU-Fn7"/>
                         <outletCollection property="btnsStudyRoomOutlet" destination="8Ef-72-dqr" collectionClass="NSMutableArray" id="Di7-H8-nL6"/>
                         <outletCollection property="btnsStudyRoomOutlet" destination="Qr3-r2-gJr" collectionClass="NSMutableArray" id="7QZ-Tw-f2n"/>

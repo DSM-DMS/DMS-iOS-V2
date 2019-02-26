@@ -14,6 +14,7 @@ class SelftudyApplyVC: UIViewController {
     @IBOutlet var btnsAction: [UIButton]!
     @IBOutlet weak var backScrollView: UIScrollView!
     @IBOutlet weak var segTime: UISegmentedControl!
+    @IBOutlet weak var backView: UIView!
     
     private var selectedTime = 11
     private var selectedClass = 1
@@ -25,6 +26,7 @@ class SelftudyApplyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        backView.layer.cornerRadius = 15
         for i in 0...1 {
             btnsAction[i].layer.cornerRadius = 10
             dropShadowButton(button: btnsAction[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
@@ -243,7 +245,7 @@ extension SelftudyApplyVC {
     }
     
     @objc func onClick(_ button: UIButton){
-        if let seatNum = Int(button.title(for: .normal)!){
+        if let _ = Int(button.title(for: .normal)!){
             beforeButton?.setShape(state: .empty)
             button.setShape(state: .select)
             selectedSeat = button.tag

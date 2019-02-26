@@ -134,6 +134,9 @@ class MealVC: UIViewController {
                 for i in 0...2 {
                     DispatchQueue.main.async {self!.lblsMeals[i].text = "급식이 없습니다"}
                 }
+            case 418:
+                print("나는 찻잔이야")
+                
             default:
                 for i in 0...2 {
                     DispatchQueue.main.async {self!.lblsMeals[i].text = "살려주세요"}
