@@ -10,15 +10,12 @@ import UIKit
 
 class SubmitVC: UITableViewController {
 
-    var data = [CellSubmit]()
+    var cellData = [CellSubmit]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        data.append(CellSubmit(title: "로이조의 설문조사", date: "2018-10-2", detail: "설문조사에 참여해주신 분들 중 추첨을 통해 10분께 1000000000000만원 상당의 선물을 드립니다~!"))
-        data.append(CellSubmit(title: "뚜샤?", date: "2018-10-2", detail: "가장 좋아하는 포켓몬을 골라주세오"))
-        data.append(CellSubmit(title: "마뫄의 설문조사", date: "2018-10-2", detail: "똥구멍을 사랑하는 사람은 손을 들어주세오"))
-        data.append(CellSubmit(title: "배고프당", date: "2018-10-2", detail: "집에 가고 싶은 사람은 손을 들어주세오"))
+        getData()
     }
     
     // MARK: - Table view data source
@@ -29,30 +26,78 @@ class SubmitVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return cellData.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 154;
+        return 103;
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubmitListCell") as! SubmitListCell
         
-        cell.lblTitle?.text = data[(indexPath as NSIndexPath).row].title
-        cell.lblDate?.text = data[(indexPath as NSIndexPath).row].date
-        cell.lblDetail?.text = data[(indexPath as NSIndexPath).row].detail
+        cell.lblTitle?.text = cellData[(indexPath as NSIndexPath).row].title
+        cell.lblDate?.text = cellData[(indexPath as NSIndexPath).row].startDate + " ~ " + cellData[(indexPath as NSIndexPath).row].endDate
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goNextVC("SubmitProcessVC")
+        guard let rvc = self.storyboard?.instantiateViewController(withIdentifier: "SubmitProcessVC") as? SubmitProcessVC else {
+            return
+        }
+        rvc.paramId = cellData[indexPath.row].id
+        self.present(rvc, animated: true)
     }
     
     @IBAction func btnBack(_ sender: Any) {
         goBack()
+    }
+    
+    func getData() {
+        let url = URL(string: "http://ec2.istruly.sexy:5000/info/point")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
+                let list = jsonSerialization["point_history"]
+                if list?.count == 0 {
+                    return
+                }
+                for i in 0...(list?.count)! - 1 {
+                    let answered: String = String(format: "%@", list![i]["answered"] as! CVarArg)
+                    let endDate: String = String(format: "%@", list![i]["endDate"] as! CVarArg)
+                    let id: String = String(format: "%@", list![i]["id"] as! CVarArg)
+                    let startDate: String = String(format: "%@", list![i]["startDate"] as! CVarArg)
+                    let title: String = String(format: "%@", list![i]["title"] as! CVarArg)
+                    var type: Bool = true
+                    if answered == "true" { type = true }
+                    else { type = false }
+                    self!.cellData.append(CellSubmit(answered: type, endDate: endDate, id: id, startDate: startDate, title: title))
+                }
+            case 403:
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "권한 없음")
+                }
+            default:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+                print("error")
+            }
+            }.resume()
     }
     
 }
@@ -61,7 +106,6 @@ class SubmitListCell: UITableViewCell {
     @IBOutlet weak var viewBackground: UIView!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDate: UILabel!
-    @IBOutlet weak var lblDetail: UILabel!
     
     override func awakeFromNib() {
         viewBackground.layer.cornerRadius = 17
@@ -77,13 +121,17 @@ class SubmitListCell: UITableViewCell {
 }
 
 class CellSubmit {
+    var answered: Bool
+    var endDate: String
+    var id: String
+    var startDate: String
     var title: String
-    var date: String
-    var detail: String
     
-    init(title: String, date: String, detail: String) {
+    init(answered: Bool, endDate: String, id: String, startDate: String, title: String) {
+        self.answered = answered
+        self.endDate = endDate
+        self.id = id
+        self.startDate = startDate
         self.title = title
-        self.date = date
-        self.detail = detail
     }
 }

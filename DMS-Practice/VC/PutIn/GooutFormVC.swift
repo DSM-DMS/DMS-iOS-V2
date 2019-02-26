@@ -61,7 +61,7 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
     }
     
     @IBAction func btnApplyAction(_ sender: Any) {
-        
+        getData()
     }
     
     @objc func datePickerValueChanged(sender:UIDatePicker) {
@@ -69,7 +69,7 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
         if writingText%2 == 0 {
             dateFormatter.dateFormat = "yyyy-MM-dd"
         } else {
-            dateFormatter.dateFormat = "hh : mm"
+            dateFormatter.dateFormat = "hh:mm"
         }
         txtsTime[writingText].text = dateFormatter.string(from: sender.date)
     }
@@ -94,5 +94,54 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
         UIView.animate(withDuration: 0.3) {
             self.lblsTextField[self.writingText].alpha = 0
         }
+    }
+    
+    func getData() {
+        let goOutTime = txtsTime[0].text! + " " + txtsTime[1].text!
+        let returnTime = txtsTime[2].text! + " " + txtsTime[3].text!
+        let parameters = ["goOutDate": goOutTime, "returnDate": returnTime, "reason": txtsTime[4].text!] as [String : Any]
+        
+        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/goingout")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                print("error=\(String(describing: error))")
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {
+                switch httpStatus.statusCode {
+                case 201:
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "신청 성공")
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                case 204:
+                    DispatchQueue.main.async {
+                        self.showToast(msg: "신청 가능한 시간이 아닙니다")
+                    }
+                default:
+                    print("살려주세요")
+                }
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString!))")
+        }
+        task.resume()
     }
 }

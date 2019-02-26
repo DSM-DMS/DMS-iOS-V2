@@ -10,12 +10,17 @@ import UIKit
 
 class GooutListVC: UIViewController {
 
-    var data = [CellGooutList]()
+    @IBOutlet weak var tblView: UITableView!
+    
+    var cellData = [CellGooutList]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         getData()
+        
+        tblView.delegate = self
+        tblView.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -24,14 +29,12 @@ class GooutListVC: UIViewController {
     }
     
     func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/goingout")!
-        
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/apply/goingout")!)
         request.httpMethod = "GET"
         
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue((Token.instance.get()?.accessToken)!, forHTTPHeaderField: "Authorization")
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request){
             [weak self] data, res, err in
             guard self != nil else { return }
@@ -39,17 +42,23 @@ class GooutListVC: UIViewController {
             print((res as! HTTPURLResponse).statusCode)
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
+                var list = [[String:Any]]()
                 print("\(jsonSerialization)")
-            case 203:
-                print("please login")
+                list = jsonSerialization["goingOut"]!
+                for i in 0...list.count - 1 {
+                    let gooutDate: String = String(format: "%@", list[i]["goOutDate"] as! CVarArg)
+                    let returnDate: String = String(format: "%@", list[i]["returnDate"] as! CVarArg)
+                    let reason: String = String(format: "%@", list[i]["reason"] as! CVarArg)
+                    let id: String = String(format: "%@", list[i]["id"] as! CVarArg)
+                    self!.cellData.append(CellGooutList(goOutTime: gooutDate, returnTime: returnDate, reason: reason, id: id))
+                }
+                DispatchQueue.main.async { self!.tblView.reloadData() }
+            case 204:
+                print("nothing")
             case 403:
-                print("no login")
+                print("unavailable")
             default:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
-                print("\(jsonSerialization)")
                 print("error")
             }
             }.resume()
@@ -68,13 +77,93 @@ class GooutListVC: UIViewController {
 
 }
 
+extension GooutListVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cellData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let tableCell = cellData[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GooutListCell") as! GooutListCell
+        
+        cell.setCell(cell: tableCell)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 110
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: "", message: "외출 목록에서 삭제하시겠습니까?", preferredStyle: .alert)
+            
+            let attributedString = NSAttributedString(string: "삭제", attributes: [
+                NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17, weight: UIFont.Weight(rawValue: 10)),
+                NSAttributedString.Key.foregroundColor : color.mint.getcolor()
+                ])
+            
+            alert.view.tintColor = color.mint.getcolor()
+            alert.setValue(attributedString, forKey: "attributedTitle")
+            
+            let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
+                let url = URL(string: "http://ec2.istruly.sexy:5000/apply/goingout/\(self.cellData[indexPath.row].id)")!
+                
+                var request = URLRequest(url: url)
+                request.httpMethod = "DELETE"
+                
+                request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
+                request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
+                request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                    guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                        print("error=\(String(describing: error))")
+                        return
+                    }
+                    
+                    if let httpStatus = response as? HTTPURLResponse {
+                        switch httpStatus.statusCode {
+                        case 200:
+                            DispatchQueue.main.async {
+                                self.showToast(msg: "삭제 성공")
+                                self.cellData.remove(at: indexPath.row)
+                                self.tblView.deleteRows(at: [indexPath], with: .fade)
+                                self.tblView.reloadData()
+                            }
+                        case 204:
+                            DispatchQueue.main.async {
+                                self.showToast(msg: "삭제할것이 없습니다")
+                            }
+                        default:
+                            print("살려주세요")
+                        }
+                    }
+                    
+                    let responseString = String(data: data, encoding: .utf8)
+                    print("responseString = \(String(describing: responseString!))")
+                }
+                task.resume()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .default)
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
 class GooutListCell: UITableViewCell {
     @IBOutlet weak var viewTable: UIView!
     @IBOutlet weak var lblTableTime: UILabel!
     @IBOutlet weak var lblTableReason: UILabel!
     
     func setCell(cell: CellGooutList) {
-        lblTableTime.text = cell.time
+        lblTableTime.text = cell.goOutTime + " ~ " + cell.returnTime
         lblTableReason.text = cell.reason
     }
     
@@ -92,12 +181,16 @@ class GooutListCell: UITableViewCell {
 }
 
 class CellGooutList {
-    var time: String
+    var goOutTime: String
+    var returnTime: String
     var reason: String
+    var id: String
     
-    init(time: String, reason: String) {
-        self.time = time
+    init(goOutTime: String, returnTime: String, reason: String, id: String) {
+        self.goOutTime = goOutTime
+        self.returnTime = returnTime
         self.reason = reason
+        self.id = id
     }
 }
 

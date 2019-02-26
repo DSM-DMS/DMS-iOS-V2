@@ -46,7 +46,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func btnChange(_ sender: Any) {
         if isFull() {
-            
+            getData()
         } else {
             showToast(msg: "모든 값을 확인해주세요")
         }
@@ -79,6 +79,47 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         } else {
             return true
         }
+    }
+    
+    func getData() {
+        let parameters = ["currentPassword": txtOriginPassword.text!, "newPassword": txtNewPassword.text!]
+        let url = URL(string: "http://ec2.istruly.sexy:5000/account/pw")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        URLSession.shared.dataTask(with: request) { [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 201:
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "변경되었습니다")
+                }
+            case 205:
+                print("로그인 실패")
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "다른 비밀번호를 입력하세요")
+                }
+            case 403:
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "기존 비밀번호가 올바르지 않습니다")
+                }
+            default:
+                DispatchQueue.main.async {
+                    self?.showError((res as! HTTPURLResponse).statusCode)
+                }
+            }
+            }.resume()
     }
     
     /*

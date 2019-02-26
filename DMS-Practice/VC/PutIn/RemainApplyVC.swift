@@ -24,7 +24,7 @@ class RemainApplyVC: UIViewController {
 
         btnApplyOutlet.layer.cornerRadius = 17
         dropShadowButton(button: btnApplyOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
-        for i in 0...2 {
+        for i in 0...3 {
             viewsBackground[i].layer.cornerRadius = 17
             dropShadow(view: viewsBackground[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         }
@@ -35,6 +35,8 @@ class RemainApplyVC: UIViewController {
         self.viewsBackground[1].addGestureRecognizer(secAction)
         let thiAction = UITapGestureRecognizer(target: self, action: #selector(self.thirdAction))
         self.viewsBackground[2].addGestureRecognizer(thiAction)
+        let fouAction = UITapGestureRecognizer(target: self, action: #selector(self.fourthAction))
+        self.viewsBackground[3].addGestureRecognizer(fouAction)
         
         if let string = ud.string(forKey: "remainCondition") {
             curCondition = Int(string)!
@@ -65,13 +67,19 @@ class RemainApplyVC: UIViewController {
         changeColor()
     }
     
+    @objc func fourthAction() {
+        preCondition = curCondition
+        curCondition = 3
+        changeColor()
+    }
+    
     @IBAction func btnApply(_ sender: Any) {
-        showToast(msg: "신청되었습니다")
+        getData()
         setUserDefault(toSet: "\(String(curCondition))", key: "remainCondition")
     }
     
     func changeColor() {
-        if preCondition < 3 {
+        if preCondition < 4 {
             viewsBackground[preCondition].backgroundColor = UIColor.white
             lblsTitle[preCondition].textColor = color.mint.getcolor()
             lblsDescription[preCondition].textColor = UIColor.darkGray
@@ -111,15 +119,11 @@ class RemainApplyVC: UIViewController {
                 switch httpStatus.statusCode {
                 case 201:
                     DispatchQueue.main.async {
-                        self.goBack()
+                        self.showToast(msg: "신청되었습니다")
                     }
                 case 204:
                     DispatchQueue.main.async {
-                        self.showToast(msg: "확인코드를 확인해주세요")
-                    }
-                case 205:
-                    DispatchQueue.main.async {
-                        self.showToast(msg: "아이디가 중복되었습니다")
+                        self.showToast(msg: "신청가능시간을 확인해주세요\n(일요일 20:30 ~ 목요일 22:00)")
                     }
                 default:
                     let responseString = String(data: data, encoding: .utf8)

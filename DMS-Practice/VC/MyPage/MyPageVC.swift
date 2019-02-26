@@ -59,6 +59,17 @@ class MyPageVC: UIViewController{
         }
         
         let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
+            if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
+                if let _ = Int(((alert.textFields?[1].text)!)) {
+                    let parameters = ["content": (alert.textFields?[0].text)!, "room": Int((alert.textFields?[1].text)!)!] as [String : Any]
+                    let url = URL(string: "http://ec2.istruly.sexy:5000/report/facility")!
+                    self.postData(parameters: parameters, url: url)
+                } else {
+                    self.showToast(msg: "숫자만 입력하세요")
+                }
+            } else {
+                self.showToast(msg: "모든 값을 입력하세요")
+            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancel)
@@ -86,11 +97,52 @@ class MyPageVC: UIViewController{
         
         
         let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
+            if alert.textFields?[0].text != nil && ((alert.textFields?[1].text) != nil) {
+                let parameters = ["content": (alert.textFields?[0].text)! + (alert.textFields?[1].text)!]
+                let url = URL(string: "http://ec2.istruly.sexy:5000/report/bug/3")!
+                self.postData(parameters: parameters, url: url)
+            } else {
+                self.showToast(msg: "모든 값을 확인하세요")
+            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancel)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func postData(parameters: [String: Any], url: URL) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
+        request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        URLSession.shared.dataTask(with: request) { [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 201:
+                DispatchQueue.main.async {
+                    self!.showToast(msg: "신청되었습니다")
+                }
+            case 403:
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "권한 없음")
+                }
+            default:
+                DispatchQueue.main.async {
+                    self?.showError((res as! HTTPURLResponse).statusCode)
+                }
+            }
+            }.resume()
     }
     
     func getData() {

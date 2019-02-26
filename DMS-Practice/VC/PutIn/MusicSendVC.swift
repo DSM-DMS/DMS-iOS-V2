@@ -10,7 +10,7 @@ import UIKit
 
 class MusicSendVC: UIViewController {
 
-    var data = [CellMusicSend]()
+    var cellData = [CellMusicSend]()
     var day = ""
     
     @IBOutlet weak var lblTitle: UILabel!
@@ -25,10 +25,6 @@ class MusicSendVC: UIViewController {
         tblView.delegate = self
         tblView.dataSource = self
         
-        if data.count < 5 {
-            data.append(CellMusicSend(title: "신청하시려면 눌러주세요", singer: "요일당 5곡씩 신청가능합니다", name: "1인당 한개씩"))
-        }
-        
         lblTitle.text = "\(day) 기상음악"
         lblDescription.text = "\(day) 아침 기상 시에 나올 노래를 신청받습니다. 한 사람당 한 곡만 신청이 가능하며 적절하지 않은 노래나 부적절한 가사가 포함된 노래는 반려될 수 있습니다."
         // Do any additional setup after loading the view.
@@ -37,25 +33,50 @@ class MusicSendVC: UIViewController {
     @IBAction func btnGoBack(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
-    
     func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/music")!
+        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/apply/music")!)
+        request.httpMethod = "GET"
         
-        var request = URLRequest(url: url)
-        
-        request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
-        request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
-        request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: URL(string: "http://ec2.istruly.sexy:5000/apply/music")!){
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request){
             [weak self] data, res, err in
             guard self != nil else { return }
             if let err = err { print(err.localizedDescription); return }
             print((res as! HTTPURLResponse).statusCode)
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
+                var list = [[String:Any]]()
                 print("\(jsonSerialization)")
+                switch self!.day {
+                case "월요일":
+                    list = jsonSerialization["mon"]!
+                case "화요일":
+                    list = jsonSerialization["tue"]!
+                case "수요일":
+                    list = jsonSerialization["wed"]!
+                case "목요일":
+                    list = jsonSerialization["thu"]!
+                case "금요일":
+                    list = jsonSerialization["fri"]!
+                default:
+                    list = jsonSerialization["mon"]!
+                }
+                for i in 0...list.count - 1 {
+                    let title: String = String(format: "%@", list[i]["musicName"] as! CVarArg)
+                    let applyDate: String = String(format: "%@", list[i]["applyDate"] as! CVarArg)
+                    let singer: String = String(format: "%@", list[i]["singer"] as! CVarArg)
+                    let name: String = String(format: "%@", list[i]["studentName"] as! CVarArg)
+                    let number: String = String(format: "%@", list[i]["studentId"] as! CVarArg)
+                    let id: String = String(format: "%@", list[i]["id"] as! CVarArg)
+                    self!.cellData.append(CellMusicSend(title: title, singer: singer, name: name, stdId: number, applyDate: applyDate, id: id))
+                }
+                if self!.cellData.count < 5 {
+                    self!.cellData.append(CellMusicSend(title: "신청하시려면 눌러주세요", singer: "요일당 5곡씩 신청가능합니다", name: "1인당 한개씩", stdId: "1109", applyDate: "2019-10-23", id: "0"))
+                }
+                DispatchQueue.main.async { self!.tblView.reloadData() }
             case 204:
                 print("nothing")
             case 403:
@@ -80,11 +101,11 @@ class MusicSendVC: UIViewController {
 
 extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return cellData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableCell = data[indexPath.row]
+        let tableCell = cellData[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicSendCell") as! MusicSendCell
         
@@ -99,7 +120,7 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath as NSIndexPath).row + 1 == data.count {
+        if (indexPath as NSIndexPath).row + 1 == cellData.count {
             let alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
             
             let attributedString = NSAttributedString(string: "\(day) 음악 신청", attributes: [
@@ -119,7 +140,7 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
             
             let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
                 if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
-                    let parameters = ["Authorization": Token.instance.get()?.accessToken ?? "error", "day": 3, "singer": alert.textFields![0].text!, "musicName": alert.textFields![0].text!] as [String : Any]
+                    let parameters = ["day": 3, "singer": alert.textFields![0].text!, "musicName": alert.textFields![1].text!] as [String : Any]
                     
                     let url = URL(string: "http://ec2.istruly.sexy:5000/apply/music")!
                     
@@ -199,11 +220,17 @@ class CellMusicSend {
     var title: String
     var name: String
     var singer: String
+    var stdId: String
+    var applyDate: String
+    var id: String
     
-    init(title: String,singer: String, name: String) {
+    init(title: String,singer: String, name: String, stdId: String, applyDate: String, id: String) {
         self.title = title
         self.name = name
         self.singer = singer
+        self.stdId = stdId
+        self.applyDate = applyDate
+        self.id = id
     }
 }
 

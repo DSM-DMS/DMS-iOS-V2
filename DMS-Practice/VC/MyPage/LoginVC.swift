@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CryptoSwift
+import Security
 
 class LoginVC: UIViewController, UITextFieldDelegate {
     
@@ -22,6 +22,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if ud.object(forKey: "accountID") != nil {
+            txtID.text = (ud.object(forKey: "accountID") as! String)
+            txtPassword.text = (ud.object(forKey: "accountPW") as! String)
+        }
         
         viewUnderlineID.alpha = 0.1
         viewUnderlinePassword.alpha = 0.1
@@ -108,12 +113,16 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             print((res as! HTTPURLResponse).statusCode)
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
+                DispatchQueue.main.async {
+                    ud.set(self!.txtID.text, forKey: "accountID")
+                    ud.set(self!.txtPassword.text, forKey: "accountPW")
+                }
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 print("\(jsonSerialization)")
                 Token.instance.save(AuthModel(accessToken: jsonSerialization["accessToken"] as! String, refreshToken: (jsonSerialization["refreshToken"] as! String)))
                 DispatchQueue.main.async { self!.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {})
                 }
-            case 401:
+            case 204:
                 print("로그인 실패")
                 DispatchQueue.main.async {
                     self?.showToast(msg: "로그인 실패")

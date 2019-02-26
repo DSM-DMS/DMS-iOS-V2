@@ -47,6 +47,7 @@ class TableViewNoticeVC: UIViewController {
             lblTitle.text = "공지사항"
             lblDetail.text = "사감부에서 게시한 공지사항을 열람합니다"
             url = "notice"
+            cellData.append(CellNotice(title: "iOS 사용자 분들께", date: "2018-10-02 07:15:23.123238", code: "0"))
         case 1:
             lblTitle.text = "기숙사 규정"
             lblDetail.text = "사감부에서 게시한 규정을 열람합니다"
@@ -155,7 +156,12 @@ extension TableViewNoticeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        goNextVC("DetailVC")
+        guard let rvc = self.storyboard?.instantiateViewController(withIdentifier: "DetailVC") as? DetailNoticeVC else {
+            return
+        }
+        rvc.paramId = cellData[indexPath.row].code
+        rvc.paramUrl = url
+        self.present(rvc, animated: true)
     }
 }
 

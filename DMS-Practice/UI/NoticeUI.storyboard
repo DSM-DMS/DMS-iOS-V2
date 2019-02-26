@@ -424,6 +424,9 @@
                     </view>
                     <connections>
                         <outlet property="btnBackOutlet" destination="8gH-gW-yLJ" id="dTQ-0p-8Z5"/>
+                        <outlet property="lblDescription" destination="9vA-FU-BVe" id="WCh-Uh-5cK"/>
+                        <outlet property="lblSubtitle" destination="sy4-D3-Rqq" id="4oi-fX-NkO"/>
+                        <outlet property="lblTitle" destination="en6-Fn-vYX" id="FeS-iS-5Hn"/>
                         <outlet property="viewBackground" destination="xtv-fF-ITE" id="xrH-uh-4u0"/>
                     </connections>
                 </viewController>

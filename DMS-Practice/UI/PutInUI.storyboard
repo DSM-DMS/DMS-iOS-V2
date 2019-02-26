@@ -201,6 +201,9 @@
                                     <segment title="12시"/>
                                 </segments>
                                 <color key="tintColor" red="0.39240619540214539" green="0.73696452379226685" blue="0.74510407447814941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="segTimeChanged:" destination="dPW-6U-p2h" eventType="valueChanged" id="6kC-3T-Z3k"/>
+                                </connections>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Kr-Q0-0d7">
                                 <rect key="frame" x="0.0" y="162" width="375" height="39"/>
@@ -269,14 +272,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeS-el-JaK">
-                                                <rect key="frame" x="281" y="4" width="95" height="30"/>
+                                                <rect key="frame" x="281" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="95" id="9e1-Zp-tXE"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="95" id="uGb-ST-ZXK"/>
+                                                    <constraint firstAttribute="width" constant="103" id="fXo-qq-yK9"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="2층 여자 독서실">
+                                                <state key="normal" title="3층 학교측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -284,14 +286,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oq4-DH-Dss">
-                                                <rect key="frame" x="384" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="392" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="GWy-Aq-KKT"/>
                                                     <constraint firstAttribute="width" constant="103" id="YgZ-8x-g5B"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="3층 학교측 독서실">
+                                                <state key="normal" title="3층 계단측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -299,14 +301,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPO-Gy-Vwr">
-                                                <rect key="frame" x="495" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="503" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="bYJ-k8-hPQ"/>
                                                     <constraint firstAttribute="width" constant="103" id="zB7-Vb-LcE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="3층 계단측 독서실">
+                                                <state key="normal" title="4층 학교측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -314,14 +316,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXN-0p-yNP">
-                                                <rect key="frame" x="606" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="614" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="68P-eZ-z0o"/>
                                                     <constraint firstAttribute="width" constant="103" id="thw-TZ-cGa"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="4층 학교측 독서실">
+                                                <state key="normal" title="4층 계단측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -329,14 +331,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8k9-eQ-Qz9">
-                                                <rect key="frame" x="717" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="725" y="4" width="84" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="103" id="Cbi-ha-Z1w"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="g8e-xr-5Z2"/>
+                                                    <constraint firstAttribute="width" constant="84" id="Zpx-xj-DQG"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="4층 계단측 독서실">
+                                                <state key="normal" title="5층 열린교실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -344,14 +345,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cz7-bs-fmJ">
-                                                <rect key="frame" x="828" y="4" width="84" height="30"/>
+                                                <rect key="frame" x="817" y="4" width="95" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="84" id="H4s-zj-AU0"/>
+                                                    <constraint firstAttribute="width" constant="95" id="A20-Zh-aWb"/>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="Vdg-WG-L1e"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="5층 열린교실">
+                                                <state key="normal" title="2층 여자독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -362,8 +363,9 @@
                                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="Qr3-r2-gJr" firstAttribute="leading" secondItem="8Ef-72-dqr" secondAttribute="trailing" constant="8" id="3Q4-3O-Ogn"/>
-                                            <constraint firstItem="Oq4-DH-Dss" firstAttribute="leading" secondItem="CeS-el-JaK" secondAttribute="trailing" constant="8" id="3oz-Rv-nel"/>
                                             <constraint firstItem="CeS-el-JaK" firstAttribute="top" secondItem="BgN-z4-h6h" secondAttribute="top" constant="4" id="3pW-Ih-HFP"/>
+                                            <constraint firstItem="Oq4-DH-Dss" firstAttribute="leading" secondItem="CeS-el-JaK" secondAttribute="trailing" constant="8" id="4Ep-zO-Y9a"/>
+                                            <constraint firstItem="Oq4-DH-Dss" firstAttribute="leading" secondItem="CeS-el-JaK" secondAttribute="trailing" constant="8" id="52Z-A8-U3q"/>
                                             <constraint firstItem="8k9-eQ-Qz9" firstAttribute="leading" secondItem="qXN-0p-yNP" secondAttribute="trailing" constant="8" id="7Ed-lc-HWy"/>
                                             <constraint firstAttribute="width" constant="927" id="9si-ZJ-q3a"/>
                                             <constraint firstItem="7I7-1W-QRa" firstAttribute="leading" secondItem="Qr3-r2-gJr" secondAttribute="trailing" constant="8" id="AR0-Nz-W4t"/>
@@ -397,7 +399,6 @@
                                             <constraint firstItem="cPO-Gy-Vwr" firstAttribute="leading" secondItem="Oq4-DH-Dss" secondAttribute="trailing" constant="8" id="tCL-l0-TBp"/>
                                             <constraint firstAttribute="bottom" secondItem="8k9-eQ-Qz9" secondAttribute="bottom" constant="5" id="tub-kI-nv4"/>
                                             <constraint firstAttribute="bottom" secondItem="qXN-0p-yNP" secondAttribute="bottom" constant="5" id="v9e-xf-Oai"/>
-                                            <constraint firstItem="Oq4-DH-Dss" firstAttribute="leading" secondItem="CeS-el-JaK" secondAttribute="trailing" constant="8" id="wZu-EN-MAQ"/>
                                             <constraint firstItem="2LX-xf-xfv" firstAttribute="leading" secondItem="7I7-1W-QRa" secondAttribute="trailing" constant="8" id="zMk-I8-5K5"/>
                                             <constraint firstItem="8k9-eQ-Qz9" firstAttribute="top" secondItem="BgN-z4-h6h" secondAttribute="top" constant="4" id="ze0-fH-cP8"/>
                                             <constraint firstItem="Oq4-DH-Dss" firstAttribute="top" secondItem="BgN-z4-h6h" secondAttribute="top" constant="4" id="zoG-Tv-lll"/>
@@ -422,6 +423,9 @@
                                 <state key="normal" title="취소">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnCancel:" destination="dPW-6U-p2h" eventType="touchUpInside" id="gTf-OZ-M5n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x87-cs-cLH">
                                 <rect key="frame" x="193" y="618" width="164" height="41"/>
@@ -432,7 +436,13 @@
                                 <state key="normal" title="신청">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnApply:" destination="dPW-6U-p2h" eventType="touchUpInside" id="Njc-Zc-ovb"/>
+                                </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brs-l2-kXb">
+                                <rect key="frame" x="16" y="225" width="343" height="369"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -440,8 +450,10 @@
                             <constraint firstItem="0J2-tL-rZV" firstAttribute="top" secondItem="qao-4n-WaV" secondAttribute="topMargin" constant="36" id="2bd-Fb-xYh"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="height" secondItem="nyk-jS-XwF" secondAttribute="height" id="3LJ-Ym-yTA"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="nyk-jS-XwF" secondAttribute="bottom" constant="8" id="52Z-7J-hsB"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="24" id="BAR-0a-rdp"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="width" secondItem="nyk-jS-XwF" secondAttribute="width" id="BCg-vk-QCi"/>
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="trailing" secondItem="SlS-8d-mtp" secondAttribute="trailing" id="Hah-1R-zpL"/>
+                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="brs-l2-kXb" secondAttribute="bottom" constant="24" id="L0r-Bg-Hzn"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="x87-cs-cLH" secondAttribute="trailing" constant="18" id="LPC-6h-VjC"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="leading" secondItem="nyk-jS-XwF" secondAttribute="trailing" constant="11" id="Os5-OX-oWs"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="2Zw-c2-qaF" secondAttribute="trailing" constant="36" id="UET-6x-vwz"/>
@@ -450,6 +462,8 @@
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="top" secondItem="2Zw-c2-qaF" secondAttribute="bottom" constant="17" id="ad4-Z5-5MT"/>
                             <constraint firstItem="nyk-jS-XwF" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="18" id="h01-Rr-WLz"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="x87-cs-cLH" secondAttribute="bottom" constant="8" id="sl7-g4-qp9"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="16" id="tVT-g4-hdO"/>
+                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="brs-l2-kXb" secondAttribute="trailing" constant="16" id="wMt-SL-Gc7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SlS-8d-mtp"/>
                     </view>
@@ -461,6 +475,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backScrollView" destination="brs-l2-kXb" id="aJh-a9-jFq"/>
+                        <outlet property="segTime" destination="2Zw-c2-qaF" id="vLC-iU-Fn7"/>
                         <outletCollection property="btnsStudyRoomOutlet" destination="8Ef-72-dqr" collectionClass="NSMutableArray" id="Di7-H8-nL6"/>
                         <outletCollection property="btnsStudyRoomOutlet" destination="Qr3-r2-gJr" collectionClass="NSMutableArray" id="7QZ-Tw-f2n"/>
                         <outletCollection property="btnsStudyRoomOutlet" destination="7I7-1W-QRa" collectionClass="NSMutableArray" id="SY3-Kd-Tus"/>
@@ -477,7 +493,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMO-eN-kyu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2214.4000000000001" y="-134.48275862068968"/>
+            <point key="canvasLocation" x="2213.5999999999999" y="-134.48275862068968"/>
         </scene>
         <!--잔류신청-->
         <scene sceneID="xHQ-eQ-8bc">
@@ -491,7 +507,7 @@
                                 <rect key="frame" x="0.0" y="236" width="375" height="278"/>
                                 <subviews>
                                     <view contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="1Jc-tx-vWO">
-                                        <rect key="frame" x="0.0" y="0.0" width="950" height="278"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1200" height="278"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mbt-3P-vOi">
                                                 <rect key="frame" x="57" y="8" width="258" height="262"/>
@@ -571,28 +587,58 @@
                                                     <constraint firstItem="8MR-uZ-dU9" firstAttribute="leading" secondItem="6Qp-OQ-Iba" secondAttribute="leading" constant="25" id="q4b-Dd-doB"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hga-Xd-HY1">
+                                                <rect key="frame" x="921" y="8" width="258" height="262"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잔류" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qbq-oC-dgh">
+                                                        <rect key="frame" x="25" y="29" width="29.5" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                                        <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잔류를 신청하신 경우 외출은 가능하지만 집에는 가실 수 없습니다.... 잔류를 신청하시겠습니까? 정말로 잔류를 신청하시겠습니까..? 다시 한번 생각하세요. 불가피한 경우가 아니라면 추천드리지 않습니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JF-9j-0PA">
+                                                        <rect key="frame" x="25" y="84" width="208" height="109"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Qbq-oC-dgh" firstAttribute="leading" secondItem="hga-Xd-HY1" secondAttribute="leading" constant="25" id="Fz7-fi-e5M"/>
+                                                    <constraint firstItem="Qbq-oC-dgh" firstAttribute="top" secondItem="hga-Xd-HY1" secondAttribute="top" constant="29" id="Ie6-5w-dOb"/>
+                                                    <constraint firstItem="7JF-9j-0PA" firstAttribute="leading" secondItem="hga-Xd-HY1" secondAttribute="leading" constant="25" id="OH3-Wi-8yK"/>
+                                                    <constraint firstItem="7JF-9j-0PA" firstAttribute="top" secondItem="Qbq-oC-dgh" secondAttribute="bottom" constant="34" id="V9Z-wy-vJ6"/>
+                                                    <constraint firstAttribute="width" constant="258" id="oaH-mb-YIB"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7JF-9j-0PA" secondAttribute="trailing" constant="25" id="wWX-6e-6Ny"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
-                                            <constraint firstItem="Mbt-3P-vOi" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="1V7-Mv-YCK"/>
+                                            <constraint firstItem="hga-Xd-HY1" firstAttribute="leading" secondItem="6Qp-OQ-Iba" secondAttribute="trailing" constant="30" id="6if-qU-jd4"/>
                                             <constraint firstItem="6Qp-OQ-Iba" firstAttribute="leading" secondItem="Zak-Qo-Sd6" secondAttribute="trailing" constant="30" id="6mY-OX-Zsp"/>
-                                            <constraint firstItem="Mbt-3P-vOi" firstAttribute="leading" secondItem="1Jc-tx-vWO" secondAttribute="leading" constant="57" id="7vw-UH-QvL"/>
-                                            <constraint firstItem="6Qp-OQ-Iba" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="9Gm-Fb-J95"/>
-                                            <constraint firstAttribute="bottom" secondItem="Zak-Qo-Sd6" secondAttribute="bottom" constant="8" id="ANr-QI-XOp"/>
-                                            <constraint firstAttribute="bottom" secondItem="6Qp-OQ-Iba" secondAttribute="bottom" constant="8" id="Rs0-Co-PRk"/>
-                                            <constraint firstAttribute="width" constant="950" id="SJt-28-elc"/>
-                                            <constraint firstAttribute="bottom" secondItem="Mbt-3P-vOi" secondAttribute="bottom" constant="8" id="WvD-No-vH0"/>
+                                            <constraint firstItem="hga-Xd-HY1" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="Cvd-2B-wZE"/>
+                                            <constraint firstAttribute="bottom" secondItem="6Qp-OQ-Iba" secondAttribute="bottom" constant="8" id="DHT-m8-qjU"/>
+                                            <constraint firstAttribute="bottom" secondItem="Zak-Qo-Sd6" secondAttribute="bottom" constant="8" id="LlW-Os-hg9"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="1200" id="QPm-3f-hLy"/>
+                                            <constraint firstItem="Mbt-3P-vOi" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="VOc-Fw-cpw"/>
                                             <constraint firstItem="Zak-Qo-Sd6" firstAttribute="leading" secondItem="Mbt-3P-vOi" secondAttribute="trailing" constant="30" id="Y6c-8F-46a"/>
-                                            <constraint firstItem="Zak-Qo-Sd6" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="oLN-98-vXQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Mbt-3P-vOi" secondAttribute="bottom" constant="8" id="Yzb-lb-6uP"/>
+                                            <constraint firstItem="6Qp-OQ-Iba" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="bfZ-cl-tx5"/>
+                                            <constraint firstItem="Mbt-3P-vOi" firstAttribute="leading" secondItem="1Jc-tx-vWO" secondAttribute="leading" constant="57" id="lro-dr-M6b"/>
+                                            <constraint firstAttribute="bottom" secondItem="hga-Xd-HY1" secondAttribute="bottom" constant="8" id="qnV-U2-AVH"/>
+                                            <constraint firstAttribute="width" constant="1200" id="sac-NO-edR"/>
+                                            <constraint firstItem="Zak-Qo-Sd6" firstAttribute="top" secondItem="1Jc-tx-vWO" secondAttribute="top" constant="8" id="xaV-nB-jtk"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="1Jc-tx-vWO" secondAttribute="bottom" id="0Kx-su-ple"/>
-                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="height" secondItem="PJ1-Be-Zce" secondAttribute="height" id="STD-hT-uIc"/>
-                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="top" secondItem="PJ1-Be-Zce" secondAttribute="top" id="VRE-I7-4bC"/>
-                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="leading" secondItem="PJ1-Be-Zce" secondAttribute="leading" id="bGF-Uy-ZsK"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Jc-tx-vWO" secondAttribute="trailing" id="hQO-cx-9VE"/>
+                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="leading" secondItem="PJ1-Be-Zce" secondAttribute="leading" id="HU6-vB-IiI"/>
+                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="height" secondItem="PJ1-Be-Zce" secondAttribute="height" id="Ny1-Vo-tmh"/>
+                                    <constraint firstAttribute="bottom" secondItem="1Jc-tx-vWO" secondAttribute="bottom" id="QWb-fo-1m6"/>
+                                    <constraint firstItem="1Jc-tx-vWO" firstAttribute="top" secondItem="PJ1-Be-Zce" secondAttribute="top" id="YPI-0F-amR"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Jc-tx-vWO" secondAttribute="trailing" id="qGP-gd-iWJ"/>
                                 </constraints>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="잔류신청을 해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ax-Zl-nrH">
@@ -624,6 +670,7 @@
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="5ax-Zl-nrH" firstAttribute="leading" secondItem="fKe-WT-gL7" secondAttribute="leading" constant="35" id="3gl-c4-AH6"/>
+                            <constraint firstItem="PJ1-Be-Zce" firstAttribute="width" secondItem="8H4-BZ-bZ3" secondAttribute="width" id="KMq-oV-UIK"/>
                             <constraint firstItem="PJ1-Be-Zce" firstAttribute="top" secondItem="PsT-zR-IlY" secondAttribute="bottom" constant="57.5" id="NzA-xz-cvv"/>
                             <constraint firstItem="PJ1-Be-Zce" firstAttribute="leading" secondItem="fKe-WT-gL7" secondAttribute="leading" id="d3h-7R-OpB"/>
                             <constraint firstItem="fKe-WT-gL7" firstAttribute="bottom" secondItem="3KB-cx-Hbv" secondAttribute="bottom" constant="12" id="fnO-us-8fK"/>
@@ -655,6 +702,9 @@
                         <outletCollection property="lblsDescription" destination="oiC-aS-2Ge" collectionClass="NSMutableArray" id="xgb-GI-js1"/>
                         <outletCollection property="lblsDescription" destination="k0Z-2K-zvx" collectionClass="NSMutableArray" id="UQh-Zd-6Uo"/>
                         <outletCollection property="lblsDescription" destination="rPd-RS-OqO" collectionClass="NSMutableArray" id="OVL-zQ-I7M"/>
+                        <outletCollection property="viewsBackground" destination="hga-Xd-HY1" collectionClass="NSMutableArray" id="5Pp-FU-zDL"/>
+                        <outletCollection property="lblsTitle" destination="Qbq-oC-dgh" collectionClass="NSMutableArray" id="ZPZ-Jz-bkG"/>
+                        <outletCollection property="lblsDescription" destination="7JF-9j-0PA" collectionClass="NSMutableArray" id="tm7-wk-YzN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDP-HR-qWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1543,6 +1593,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tblView" destination="VsI-si-wTB" id="l73-qR-onv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Vj-ck-b7E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

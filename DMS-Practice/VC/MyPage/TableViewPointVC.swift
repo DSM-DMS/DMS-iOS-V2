@@ -11,16 +11,12 @@ import UIKit
 class TableViewPointVC: UITableViewController {
     @IBOutlet weak var btnBackOutlet: UIBarButtonItem!
     
-    var data = [CellPoint]()
+    var cellData = [CellPoint]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        data.append(CellPoint(title: "소등 시간 위반", date: "2018-10-2", point: -3))
-        data.append(CellPoint(title: "호실 내 음식물 반입", date: "2018-10-2", point: -3))
-        data.append(CellPoint(title: "우수 학생 선정", date: "2018-10-2", point: 3))
-        data.append(CellPoint(title: "얼굴 못생김", date: "2018-10-2", point: -100
-        ))
+        getData()
     }
 
     // MARK: - Table view data source
@@ -31,7 +27,7 @@ class TableViewPointVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return cellData.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
@@ -42,15 +38,15 @@ class TableViewPointVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PointListCell") as! PointListCell
         
-        cell.lblTitle?.text = data[(indexPath as NSIndexPath).row].title
-        cell.lblDate?.text = data[(indexPath as NSIndexPath).row].date
+        cell.lblTitle?.text = cellData[(indexPath as NSIndexPath).row].title
+        cell.lblDate?.text = cellData[(indexPath as NSIndexPath).row].date
         
-        if data[(indexPath as NSIndexPath).row].point >= 0 {
+        if cellData[indexPath.row].type {
             cell.lblPoint?.textColor = color.mint.getcolor()
-            cell.lblPoint?.text = "+" + String(data[(indexPath as NSIndexPath).row].point)
+            cell.lblPoint?.text = "+" + String(cellData[(indexPath as NSIndexPath).row].point)
         } else {
             cell.lblPoint?.textColor = UIColor(red: 237/255, green: 96/255, blue: 91/255, alpha: 1)
-            cell.lblPoint?.text = String(data[(indexPath as NSIndexPath).row].point)
+            cell.lblPoint?.text = "-" + String(cellData[(indexPath as NSIndexPath).row].point)
         }
         
         return cell
@@ -60,6 +56,49 @@ class TableViewPointVC: UITableViewController {
         goBack()
     }
 
+    func getData() {
+        let url = URL(string: "http://ec2.istruly.sexy:5000/info/point")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
+                let list = jsonSerialization["point_history"]
+                if list?.count == 0 {
+                    return
+                }
+                for i in 0...(list?.count)! - 1 {
+                    let date: String = String(format: "%@", list![i]["date"] as! CVarArg)
+                    let point: String = String(format: "%@", list![i]["point"] as! CVarArg)
+                    let pointType: String = String(format: "%@", list![i]["pointType"] as! CVarArg)
+                    let reason: String = String(format: "%@", list![i]["reason"] as! CVarArg)
+                    var type: Bool = true
+                    if pointType == "true" { type = true }
+                    else { type = false }
+                    self!.cellData.append(CellPoint(title: reason, date: date, point: point, type: type))
+                }
+            case 403:
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "권한 없음")
+                }
+            default:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                
+                print("\(jsonSerialization)")
+                print("error")
+            }
+            }.resume()
+    }
 }
 
 class PointListCell: UITableViewCell {
@@ -84,11 +123,13 @@ class PointListCell: UITableViewCell {
 class CellPoint {
     var title: String
     var date: String
-    var point: Int
+    var point: String
+    var type: Bool
     
-    init(title: String, date: String, point: Int) {
+    init(title: String, date: String, point: String, type: Bool) {
         self.title = title
         self.date = date
         self.point = point
+        self.type = type
     }
 }

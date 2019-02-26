@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 public let ud = UserDefaults.standard
 
