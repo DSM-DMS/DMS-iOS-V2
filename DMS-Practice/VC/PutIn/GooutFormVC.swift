@@ -23,7 +23,7 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
         dropShadowButton(button: btnApplyOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         btnApplyOutlet.layer.cornerRadius = 17
         
-        for i in 0...5 {
+        for i in 0...4 {
             lblsTextField[i].alpha = 0
             txtsTime[i].delegate = self
             txtsTime[i].layer.borderWidth = 0
@@ -52,16 +52,21 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
         setDatepick(senderTag: (sender as AnyObject).tag, mode: 0)
     }
     
-    @IBAction func txtMember(_ sender: Any) {
-        setDatepick(senderTag: (sender as AnyObject).tag, mode: 0)
-    }
-    
     @IBAction func btnGoback(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func btnApplyAction(_ sender: Any) {
-        getData()
+        for i in 0...4 {
+            if txtsTime[i].text != "" {
+                
+            } else {
+                return
+            }
+            if i == 4 {
+                getData()
+            }
+        }
     }
     
     @objc func datePickerValueChanged(sender:UIDatePicker) {

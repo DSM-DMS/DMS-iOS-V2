@@ -761,19 +761,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A05D19F1B30C5D6CC6DDD2E0 /* Pods-MealExtentsion.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K6AYHZNZZ2;
+				DEVELOPMENT_TEAM = L596QAH22D;
 				INFOPLIST_FILE = MealExtentsion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtentsion";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -781,19 +783,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8110E44365F80B95AAD1E5C4 /* Pods-MealExtentsion.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K6AYHZNZZ2;
+				DEVELOPMENT_TEAM = L596QAH22D;
 				INFOPLIST_FILE = MealExtentsion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtentsion";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -919,8 +923,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K6AYHZNZZ2;
+				DEVELOPMENT_TEAM = L596QAH22D;
 				INFOPLIST_FILE = "DMS-Practice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -928,8 +933,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -939,8 +945,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K6AYHZNZZ2;
+				DEVELOPMENT_TEAM = L596QAH22D;
 				INFOPLIST_FILE = "DMS-Practice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -948,8 +955,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

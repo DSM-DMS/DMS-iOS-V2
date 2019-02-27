@@ -167,11 +167,17 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
                         if let httpStatus = response as? HTTPURLResponse {
                             switch httpStatus.statusCode {
                             case 201:
-                                print("기상음악 신청 성공")
+                                DispatchQueue.main.async {
+                                    self.showToast(msg: "신청되었습니다")
+                                }
                             case 205:
-                                print("꽉 찼어요")
+                                DispatchQueue.main.async {
+                                    self.showToast(msg: "더 이상 신청할 수 없어요")
+                                }
                             case 403:
-                                print("권한이 없음")
+                                DispatchQueue.main.async {
+                                    self.showToast(msg: "권한 없음")
+                                }
                             default:
                                 print("살려주세요")
                             }

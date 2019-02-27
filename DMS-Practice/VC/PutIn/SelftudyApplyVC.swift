@@ -4,7 +4,7 @@
 //
 //  Created by leedonggi on 03/01/2019.
 //  Copyright © 2019 leedonggi. All rights reserved.
-//
+
 
 import UIKit
 
@@ -98,8 +98,10 @@ class SelftudyApplyVC: UIViewController {
                 switch httpStatus.statusCode {
                 case 201:
                     print("신청성공")
+                    self.selectedSeat = 0
                     DispatchQueue.main.async {
                         self.showToast(msg: "신청 성공")
+                        self.getMap()
                     }
                 case 205:
                     DispatchQueue.main.async {
@@ -174,6 +176,7 @@ class SelftudyApplyVC: UIViewController {
 extension SelftudyApplyVC {
     
     private func getMap(){
+        print("getMap")
         selectedSeat = 0
         var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/apply/extension/map/\(selectedTime)/\(selectedClass)")!)
         request.httpMethod = "GET"
@@ -201,7 +204,6 @@ extension SelftudyApplyVC {
     }
     
     private func bindData(_ dataArr: [[Any]]){
-        var seatNum = 1
         let width = dataArr[0].count * 65
         let height = dataArr.count * 65
         contentView?.removeFromSuperview()
@@ -214,14 +216,8 @@ extension SelftudyApplyVC {
         for seatArr in dataArr{
             for seat in seatArr{
                 if let titleInt = seat as? Int{
-                    if titleInt != 1{
-                        getButton(x: x, y: y, title: "\(titleInt)", seatN: seatNum).setShape(state: .empty)
-                        seatNum += 1
-                    }
-                }else{
-                    getButton(x: x, y: y, title: seat as! String, seatN: seatNum).setShape(state: .exist)
-                    seatNum += 1
-                }
+                    if titleInt > 0{ getButton(x: x, y: y, title: "\(titleInt)").setShape(state: .empty) }
+                }else{ getButton(x: x, y: y, title: seat as! String).setShape(state: .exist) }
                 x += 65
             }
             x = 0
@@ -231,24 +227,21 @@ extension SelftudyApplyVC {
         backScrollView.addSubview(contentView!)
     }
     
-    private func getButton(x: Int, y: Int, title: String, seatN: Int) -> UIButton{
+    private func getButton(x: Int, y: Int, title: String) -> UIButton{
         let button = UIButton.init(frame: CGRect.init(x: x, y: y, width: 45, height: 45))
-        button.tag = seatN
         button.setTitle(title, for: .normal)
         button.addTarget(self, action: #selector(onClick(_:)), for: .touchUpInside)
         button.layer.cornerRadius = 45 / 2
-        button.titleLabel?.font = UIFont(name: (btnsAction[0].titleLabel?.font.fontName)!, size: 14)
-        if (button.titleLabel?.text)! == "0" { button.titleLabel?.alpha = 0 }
         beforeButton?.layer.borderWidth = 2
         contentView?.addSubview(button)
         return button
     }
     
     @objc func onClick(_ button: UIButton){
-        if let _ = Int(button.title(for: .normal)!){
+        if let seatNum = Int(button.title(for: .normal)!){
             beforeButton?.setShape(state: .empty)
             button.setShape(state: .select)
-            selectedSeat = button.tag
+            selectedSeat = seatNum
             beforeButton = button
         }else{
             showToast(msg: "자리가 있습니다")
@@ -266,8 +259,7 @@ extension UIButton{
             layer.borderWidth = 0
         case .select:
             layer.borderWidth = 4
-            layer.borderColor = color.mint.getcolor().cgColor
-            alpha = 0.7
+            layer.borderColor = UIColor.yellow.cgColor
             backgroundColor = UIColor.lightGray
         case .exist:
             backgroundColor = color.mint.getcolor()

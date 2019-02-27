@@ -272,13 +272,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeS-el-JaK">
-                                                <rect key="frame" x="281" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="281" y="4" width="95" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="103" id="fXo-qq-yK9"/>
+                                                    <constraint firstAttribute="width" constant="95" id="All-fA-GuB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="3층 학교측 독서실">
+                                                <state key="normal" title="2층 여자 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -286,14 +286,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oq4-DH-Dss">
-                                                <rect key="frame" x="392" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="384" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="GWy-Aq-KKT"/>
                                                     <constraint firstAttribute="width" constant="103" id="YgZ-8x-g5B"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="3층 계단측 독서실">
+                                                <state key="normal" title="3층 학교측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -301,14 +301,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPO-Gy-Vwr">
-                                                <rect key="frame" x="503" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="495" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="bYJ-k8-hPQ"/>
                                                     <constraint firstAttribute="width" constant="103" id="zB7-Vb-LcE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="4층 학교측 독서실">
+                                                <state key="normal" title="3층 계단측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -316,14 +316,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXN-0p-yNP">
-                                                <rect key="frame" x="614" y="4" width="103" height="30"/>
+                                                <rect key="frame" x="606" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="103" id="68P-eZ-z0o"/>
                                                     <constraint firstAttribute="width" constant="103" id="thw-TZ-cGa"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="4층 계단측 독서실">
+                                                <state key="normal" title="4층 학교측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -331,13 +331,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8k9-eQ-Qz9">
-                                                <rect key="frame" x="725" y="4" width="84" height="30"/>
+                                                <rect key="frame" x="717" y="4" width="103" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="84" id="Zpx-xj-DQG"/>
+                                                    <constraint firstAttribute="width" constant="103" id="0Mj-tj-pXB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="5층 열린교실">
+                                                <state key="normal" title="4층 계단측 독서실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -345,14 +345,13 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cz7-bs-fmJ">
-                                                <rect key="frame" x="817" y="4" width="95" height="30"/>
+                                                <rect key="frame" x="828" y="4" width="84" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="95" id="A20-Zh-aWb"/>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="Vdg-WG-L1e"/>
+                                                    <constraint firstAttribute="width" constant="84" id="Jf2-tl-zuD"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                                <state key="normal" title="2층 여자독서실">
+                                                <state key="normal" title="5층 열린교실">
                                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                 </state>
                                                 <connections>
@@ -445,7 +444,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brs-l2-kXb">
-                                <rect key="frame" x="43" y="244" width="289" height="322"/>
+                                <rect key="frame" x="25" y="228" width="325" height="355"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -454,24 +453,24 @@
                             <constraint firstItem="0J2-tL-rZV" firstAttribute="top" secondItem="qao-4n-WaV" secondAttribute="topMargin" constant="36" id="2bd-Fb-xYh"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="height" secondItem="nyk-jS-XwF" secondAttribute="height" id="3LJ-Ym-yTA"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="nyk-jS-XwF" secondAttribute="bottom" constant="8" id="52Z-7J-hsB"/>
-                            <constraint firstItem="brs-l2-kXb" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="43" id="7Ms-x1-aV2"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="width" secondItem="nyk-jS-XwF" secondAttribute="width" id="BCg-vk-QCi"/>
+                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="brs-l2-kXb" secondAttribute="bottom" constant="35" id="CwC-WX-BdK"/>
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="trailing" secondItem="SlS-8d-mtp" secondAttribute="trailing" id="Hah-1R-zpL"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="x87-cs-cLH" secondAttribute="trailing" constant="18" id="LPC-6h-VjC"/>
-                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="brs-l2-kXb" secondAttribute="trailing" constant="43" id="NTo-Sl-rfO"/>
                             <constraint firstItem="x87-cs-cLH" firstAttribute="leading" secondItem="nyk-jS-XwF" secondAttribute="trailing" constant="11" id="Os5-OX-oWs"/>
-                            <constraint firstItem="brs-l2-kXb" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="43" id="Sha-xS-K4Q"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="25" id="Pag-vb-i53"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="2Zw-c2-qaF" secondAttribute="trailing" constant="36" id="UET-6x-vwz"/>
                             <constraint firstItem="0J2-tL-rZV" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="27" id="WM2-q7-ZnM"/>
                             <constraint firstItem="OiD-NR-LKP" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="18" id="Z9c-oB-2zE"/>
                             <constraint firstItem="2Zw-c2-qaF" firstAttribute="top" secondItem="SlS-8d-mtp" secondAttribute="top" constant="53" id="Zjr-TQ-8tq"/>
                             <constraint firstItem="1Kr-Q0-0d7" firstAttribute="top" secondItem="2Zw-c2-qaF" secondAttribute="bottom" constant="17" id="ad4-Z5-5MT"/>
-                            <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="brs-l2-kXb" secondAttribute="bottom" constant="52" id="bFg-Rj-g0N"/>
+                            <constraint firstItem="brs-l2-kXb" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="27" id="bch-QL-hnG"/>
                             <constraint firstItem="nyk-jS-XwF" firstAttribute="leading" secondItem="SlS-8d-mtp" secondAttribute="leading" constant="18" id="h01-Rr-WLz"/>
                             <constraint firstItem="OiD-NR-LKP" firstAttribute="top" secondItem="1Kr-Q0-0d7" secondAttribute="bottom" constant="20" id="ir9-kU-sRb"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="OiD-NR-LKP" secondAttribute="trailing" constant="18" id="lFe-au-Rli"/>
                             <constraint firstItem="SlS-8d-mtp" firstAttribute="bottom" secondItem="x87-cs-cLH" secondAttribute="bottom" constant="8" id="sl7-g4-qp9"/>
                             <constraint firstItem="nyk-jS-XwF" firstAttribute="top" secondItem="OiD-NR-LKP" secondAttribute="bottom" constant="28" id="tig-n3-yj4"/>
+                            <constraint firstItem="SlS-8d-mtp" firstAttribute="trailing" secondItem="brs-l2-kXb" secondAttribute="trailing" constant="25" id="txJ-mv-eXW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SlS-8d-mtp"/>
                     </view>
@@ -1385,40 +1384,11 @@
                                 <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동행인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sR0-qf-R1y">
-                                <rect key="frame" x="20" y="414" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="같이 갈 사람을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zIt-Sm-faG">
-                                <rect key="frame" x="16" y="450" width="343" height="30"/>
-                                <color key="backgroundColor" red="0.97647720579999997" green="0.9764588475" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="txtMember:" destination="OEO-Lb-uwc" eventType="editingDidEnd" id="ePr-i8-N32"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="동행인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XV5-5I-WbV">
-                                <rect key="frame" x="29" y="443" width="36" height="14"/>
-                                <color key="backgroundColor" red="0.97647720579999997" green="0.9764588475" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="14" id="mBp-6k-Kpo"/>
-                                    <constraint firstAttribute="width" constant="36" id="wtk-Ee-AM9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" red="0.33427274229999998" green="0.7016680837" blue="0.70981007809999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647720575332642" green="0.9764588475227356" blue="0.97647124528884888" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="zjV-AK-0Oy" firstAttribute="top" secondItem="S7Q-ud-Sao" secondAttribute="bottom" constant="8" id="0be-Ac-82F"/>
-                            <constraint firstItem="XV5-5I-WbV" firstAttribute="top" secondItem="sR0-qf-R1y" secondAttribute="bottom" constant="8" id="3Kk-3y-KHd"/>
                             <constraint firstItem="hBj-7m-6YQ" firstAttribute="trailing" secondItem="KYM-0b-MDu" secondAttribute="trailing" constant="16" id="5IN-h6-LOh"/>
-                            <constraint firstItem="sR0-qf-R1y" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="20" id="7Mt-4T-FLh"/>
                             <constraint firstItem="R3f-nI-13R" firstAttribute="top" secondItem="S7Q-ud-Sao" secondAttribute="bottom" constant="15" id="8MZ-W2-VzS"/>
                             <constraint firstItem="rXJ-ze-T1u" firstAttribute="leading" secondItem="wq4-ei-nEF" secondAttribute="trailing" constant="16" id="Aux-LT-CXf"/>
                             <constraint firstItem="YJs-AD-pht" firstAttribute="top" secondItem="hBj-7m-6YQ" secondAttribute="top" constant="67" id="DC7-tp-LQk"/>
@@ -1428,9 +1398,6 @@
                             <constraint firstItem="YJs-AD-pht" firstAttribute="leading" secondItem="bLG-cr-u28" secondAttribute="trailing" constant="16.5" id="S2N-Pj-JeF"/>
                             <constraint firstItem="hBj-7m-6YQ" firstAttribute="bottom" secondItem="MAC-5h-fRT" secondAttribute="bottom" constant="8" id="Sga-eg-ajh"/>
                             <constraint firstItem="KYM-0b-MDu" firstAttribute="leading" secondItem="wq4-ei-nEF" secondAttribute="trailing" constant="7.5" id="Ugh-Nn-VO8"/>
-                            <constraint firstItem="zIt-Sm-faG" firstAttribute="top" secondItem="sR0-qf-R1y" secondAttribute="bottom" constant="15" id="Upv-gK-HxR"/>
-                            <constraint firstItem="zIt-Sm-faG" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="16" id="VAc-JN-EXJ"/>
-                            <constraint firstItem="XV5-5I-WbV" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="29" id="ZMd-UX-rOP"/>
                             <constraint firstItem="syY-Ra-GJ7" firstAttribute="top" secondItem="ElB-dY-voY" secondAttribute="bottom" constant="6" id="ZSN-rS-V4Q"/>
                             <constraint firstItem="R3f-nI-13R" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="16" id="Zvs-zz-xi1"/>
                             <constraint firstItem="bLG-cr-u28" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="16" id="bfu-4Y-kHR"/>
@@ -1446,10 +1413,8 @@
                             <constraint firstItem="0R3-dU-poj" firstAttribute="top" secondItem="S9G-CL-Tz9" secondAttribute="bottom" constant="6" id="ggY-6P-yjd"/>
                             <constraint firstItem="rXJ-ze-T1u" firstAttribute="top" secondItem="h1Y-oj-fgO" secondAttribute="bottom" constant="61" id="jpa-VR-0pj"/>
                             <constraint firstItem="wq4-ei-nEF" firstAttribute="top" secondItem="ElB-dY-voY" secondAttribute="bottom" constant="13" id="kIY-Z7-7V2"/>
-                            <constraint firstItem="hBj-7m-6YQ" firstAttribute="trailing" secondItem="zIt-Sm-faG" secondAttribute="trailing" constant="16" id="lAq-2b-sGp"/>
                             <constraint firstItem="h1Y-oj-fgO" firstAttribute="leading" secondItem="bLG-cr-u28" secondAttribute="trailing" constant="8" id="lzx-hu-OpR"/>
                             <constraint firstItem="S9G-CL-Tz9" firstAttribute="top" secondItem="hBj-7m-6YQ" secondAttribute="top" constant="40" id="msJ-JM-HNZ"/>
-                            <constraint firstItem="sR0-qf-R1y" firstAttribute="top" secondItem="R3f-nI-13R" secondAttribute="bottom" constant="35" id="nQ5-se-fjt"/>
                             <constraint firstItem="ElB-dY-voY" firstAttribute="leading" secondItem="hBj-7m-6YQ" secondAttribute="leading" constant="20" id="rJW-1z-RBs"/>
                             <constraint firstItem="hBj-7m-6YQ" firstAttribute="trailing" secondItem="R3f-nI-13R" secondAttribute="trailing" constant="16" id="rY6-r0-ECM"/>
                             <constraint firstItem="S7Q-ud-Sao" firstAttribute="top" secondItem="wq4-ei-nEF" secondAttribute="bottom" constant="47" id="t4R-zj-TH0"/>
@@ -1480,9 +1445,7 @@
                         <outletCollection property="txtsTime" destination="wq4-ei-nEF" collectionClass="NSMutableArray" id="bpP-9z-0rX"/>
                         <outletCollection property="txtsTime" destination="KYM-0b-MDu" collectionClass="NSMutableArray" id="46c-6j-FMe"/>
                         <outletCollection property="lblsTextField" destination="zjV-AK-0Oy" collectionClass="NSMutableArray" id="64A-od-3Bl"/>
-                        <outletCollection property="lblsTextField" destination="XV5-5I-WbV" collectionClass="NSMutableArray" id="f3l-hI-xIT"/>
                         <outletCollection property="txtsTime" destination="R3f-nI-13R" collectionClass="NSMutableArray" id="KDW-1k-62Z"/>
-                        <outletCollection property="txtsTime" destination="zIt-Sm-faG" collectionClass="NSMutableArray" id="ENB-6X-TsO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K8b-Bz-zdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
