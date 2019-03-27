@@ -87,10 +87,10 @@ extension TodayViewController{
         
         formatter.dateFormat = "YYYY-MM-dd"
         let dateStr = formatter.string(from: date)
-        let url = "http://ec2.istruly.sexy:5000/meal/" + dateStr
+        let url = "https://dms-api.istruly.sexy/meal/" + dateStr
         var request  = URLRequest(url: URL(string: url)!)
-        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue("MealExtensioniOS", forHTTPHeaderField: "User-Agent")
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         URLSession.shared.dataTask(with: request){
             [weak self] data, res, err in

@@ -24,8 +24,8 @@ class NoticeVC: UIViewController {
     
     override func viewDidLoad() {
         for i in 0...8 {
-            viewsNotice[i].layer.cornerRadius = 17
-            dropShadow(view: viewsNotice[i], color: UIColor.gray, offSet: CGSize(width: 0, height: 10))
+            viewsNotice[i].layer.cornerRadius = 24
+            dropShadow(view: viewsNotice[i], color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 0, height: 10))
         }
         
         for i in 0...2 {
@@ -94,10 +94,8 @@ class NoticeVC: UIViewController {
     func goUp() {
         tempY = viewsNotice[curInt].center.y
         UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.curveLinear, animations: {
-            // put here the code you would like to animate
-            self.viewsNotice[self.curInt].center = CGPoint(x: (self.view.frame.size.width) / 2, y: 100)
+            self.viewsNotice[self.curInt].center = CGPoint(x: (self.view.frame.size.width) / 2, y: 120)
         }, completion: {(finished:Bool) in
-            // the code you put here will be compiled once the animation finishes
             self.isGoNext = true
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "scrollViewVC")
             self.present(vc!, animated: false, completion: nil)

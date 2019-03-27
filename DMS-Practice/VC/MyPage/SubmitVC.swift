@@ -15,7 +15,7 @@ class SubmitVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
+        goNextVC("SubmitProcessVC")
     }
     
     // MARK: - Table view data source
@@ -55,50 +55,39 @@ class SubmitVC: UITableViewController {
         goBack()
     }
     
-    func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/info/point")!
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
-        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
-        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request){
-            [weak self] data, res, err in
-            guard self != nil else { return }
-            if let err = err { print(err.localizedDescription); return }
-            print((res as! HTTPURLResponse).statusCode)
-            switch (res as! HTTPURLResponse).statusCode{
-            case 200:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
-                let list = jsonSerialization["point_history"]
-                if list?.count == 0 {
-                    return
-                }
-                for i in 0...(list?.count)! - 1 {
-                    let answered: String = String(format: "%@", list![i]["answered"] as! CVarArg)
-                    let endDate: String = String(format: "%@", list![i]["endDate"] as! CVarArg)
-                    let id: String = String(format: "%@", list![i]["id"] as! CVarArg)
-                    let startDate: String = String(format: "%@", list![i]["startDate"] as! CVarArg)
-                    let title: String = String(format: "%@", list![i]["title"] as! CVarArg)
-                    var type: Bool = true
-                    if answered == "true" { type = true }
-                    else { type = false }
-                    self!.cellData.append(CellSubmit(answered: type, endDate: endDate, id: id, startDate: startDate, title: title))
-                }
-            case 403:
-                DispatchQueue.main.async {
-                    self?.showToast(msg: "권한 없음")
-                }
-            default:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
-                print("\(jsonSerialization)")
-                print("error")
-            }
-            }.resume()
-    }
+//    func getData() {
+//        let url = URL(string: "https://dms-api.istruly.sexy/survey")!
+//
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "GET"
+//        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
+//        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+//        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+//        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+//        URLSession.shared.dataTask(with: request){
+//            [weak self] data, res, err in
+//            guard self != nil else { return }
+//            if let err = err { print(err.localizedDescription); return }
+//            print((res as! HTTPURLResponse).statusCode)
+//            switch (res as! HTTPURLResponse).statusCode{
+//            case 200:
+//                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [[String:Any]]
+//                print(jsonSerialization)
+//                DispatchQueue.main.async {
+//                    self!.tableView.reloadData()
+//                }
+//            case 403:
+//                if self!.isRelogin() {
+//                    self!.getData()
+//                }
+//            default:
+//                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+//
+//                print("\(jsonSerialization)")
+//                print("error")
+//            }
+//            }.resume()
+//    }
     
 }
 
@@ -110,7 +99,7 @@ class SubmitListCell: UITableViewCell {
     override func awakeFromNib() {
         viewBackground.layer.cornerRadius = 17
         viewBackground.layer.masksToBounds = false
-        viewBackground.layer.shadowColor = UIColor.gray.cgColor
+        viewBackground.layer.shadowColor = UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16).cgColor
         viewBackground.layer.shadowOpacity = 0.5
         viewBackground.layer.shadowOffset = CGSize(width: 3, height: 3)
         viewBackground.layer.shadowRadius = 5

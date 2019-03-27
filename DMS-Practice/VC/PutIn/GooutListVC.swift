@@ -12,6 +12,7 @@ class GooutListVC: UIViewController {
 
     @IBOutlet weak var tblView: UITableView!
     
+    var keyValueInt = 4
     var cellData = [CellGooutList]()
     
     override func viewDidLoad() {
@@ -29,9 +30,9 @@ class GooutListVC: UIViewController {
     }
     
     func getData() {
-        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/apply/goingout")!)
+        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/goingout")!)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -44,20 +45,27 @@ class GooutListVC: UIViewController {
             case 200:
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
                 var list = [[String:Any]]()
-                print("\(jsonSerialization)")
-                list = jsonSerialization["goingOut"]!
+                let keyValue = ["saturday", "sunday", "workday"]
+                list = jsonSerialization[keyValue[self!.keyValueInt]]!
+                print(list)
+                if list.count == 0 {
+                    print("nothing")
+                    return
+                }
                 for i in 0...list.count - 1 {
-                    let gooutDate: String = String(format: "%@", list[i]["goOutDate"] as! CVarArg)
-                    let returnDate: String = String(format: "%@", list[i]["returnDate"] as! CVarArg)
+                    let gooutDate: String = String(format: "%@", list[i]["date"] as! CVarArg)
+                    let goingoutStatus: String = String(format: "%@", list                    [i]["goingoutStatus"] as! CVarArg)
                     let reason: String = String(format: "%@", list[i]["reason"] as! CVarArg)
                     let id: String = String(format: "%@", list[i]["id"] as! CVarArg)
-                    self!.cellData.append(CellGooutList(goOutTime: gooutDate, returnTime: returnDate, reason: reason, id: id))
+                    self!.cellData.append(CellGooutList(goOutTime: gooutDate, goingout_status: goingoutStatus, reason: reason, id: id))
                 }
                 DispatchQueue.main.async { self!.tblView.reloadData() }
             case 204:
                 print("nothing")
             case 403:
-                print("unavailable")
+                if self!.isRelogin() {
+                    self!.getData()
+                }
             default:
                 print("error")
             }
@@ -110,11 +118,19 @@ extension GooutListVC: UITableViewDelegate, UITableViewDataSource {
             alert.setValue(attributedString, forKey: "attributedTitle")
             
             let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
-                let url = URL(string: "http://ec2.istruly.sexy:5000/apply/goingout/\(self.cellData[indexPath.row].id)")!
+                let parameters = ["applyId": Int(self.cellData[indexPath.row].id) as Any] as [String : Any]
+                
+                let url = URL(string: "https://dms-api.istruly.sexy/apply/goingout")!
                 
                 var request = URLRequest(url: url)
                 request.httpMethod = "DELETE"
                 
+                do {
+                    request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+                request.addValue("iOS", forHTTPHeaderField: "User-Agent")
                 request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
                 request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
                 request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
@@ -138,6 +154,10 @@ extension GooutListVC: UITableViewDelegate, UITableViewDataSource {
                         case 204:
                             DispatchQueue.main.async {
                                 self.showToast(msg: "삭제할것이 없습니다")
+                            }
+                        case 403:
+                            if self.isRelogin() {
+                                self.showToast(msg: "다시 시도하세요")
                             }
                         default:
                             print("살려주세요")
@@ -163,7 +183,7 @@ class GooutListCell: UITableViewCell {
     @IBOutlet weak var lblTableReason: UILabel!
     
     func setCell(cell: CellGooutList) {
-        lblTableTime.text = cell.goOutTime + " ~ " + cell.returnTime
+        lblTableTime.text = cell.goOutTime
         lblTableReason.text = cell.reason
     }
     
@@ -182,13 +202,13 @@ class GooutListCell: UITableViewCell {
 
 class CellGooutList {
     var goOutTime: String
-    var returnTime: String
     var reason: String
+    var goingout_status: String
     var id: String
     
-    init(goOutTime: String, returnTime: String, reason: String, id: String) {
+    init(goOutTime: String, goingout_status: String,reason: String, id: String) {
         self.goOutTime = goOutTime
-        self.returnTime = returnTime
+        self.goingout_status = goingout_status
         self.reason = reason
         self.id = id
     }

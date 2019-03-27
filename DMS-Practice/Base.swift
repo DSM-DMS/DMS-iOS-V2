@@ -157,10 +157,10 @@ extension UIViewController {
         let returnValue = getMonthEng(monthEng.string(from: now)) + " " + getWeekday(weekDay.string(from: now)) + " " + kr
         return returnValue
     }
-    
+    //DMS-Practice/1 CFNetwork/975.0.3 Darwin/18.2.0
     func getCrypto() -> String {
         let date = getDate()
-        let base64 = "DMS-Practice/1 CFNetwork/975.0.3 Darwin/18.2.0" + date
+        let base64 = "iOS" + date
         let data = Data(base64.utf8).base64EncodedString()
         let crypto = data.sha3(.sha512)
         
@@ -226,6 +226,52 @@ extension UIViewController {
             
         }
     }
+    
+    func isRelogin() -> Bool {
+        var returnValue = false
+        if ud.object(forKey: "accountID") == nil || ud.object(forKey: "accountPW") == nil {
+            DispatchQueue.main.async {
+                print("로그인 해주세요")
+            }
+        }
+        Token.instance.remove()
+        let parameters = ["id": (ud.object(forKey: "accountID") as! String), "password": (ud.object(forKey: "accountPW") as! String)]
+        let url = URL(string: "https://dms-api.istruly.sexy/account/auth")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        URLSession.shared.dataTask(with: request) { [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 200:
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                print("\(jsonSerialization)")
+                Token.instance.save(AuthModel(accessToken: jsonSerialization["accessToken"] as! String, refreshToken: (jsonSerialization["refreshToken"] as! String)))
+                returnValue = true
+            case 204:
+                print("로그인 실패")
+                DispatchQueue.main.async {
+                    self?.showToast(msg: "로그인 실패")
+                }
+            default:
+                DispatchQueue.main.async {
+                    self?.showError((res as! HTTPURLResponse).statusCode)
+                }
+            }
+            }.resume()
+        return returnValue
+    }
 }
 
 extension UIFont {
@@ -287,7 +333,7 @@ enum color {
     func getcolor() -> UIColor {
         switch self {
         case .mint:
-            return UIColor(red: 84/255, green: 179/255, blue: 181/255, alpha: 1)
+            return UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 1)
         case .lightGray:
             return UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 1)
         case .M1:

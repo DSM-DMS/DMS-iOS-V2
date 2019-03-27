@@ -21,12 +21,14 @@ class RemainApplyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
         btnApplyOutlet.layer.cornerRadius = 17
         dropShadowButton(button: btnApplyOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         for i in 0...3 {
             viewsBackground[i].layer.cornerRadius = 17
-            dropShadow(view: viewsBackground[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
+            dropShadow(view: viewsBackground[i], color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 3, height: 3))
         }
         // Do any additional setup after loading the view.
         let firAction = UITapGestureRecognizer(target: self, action: #selector(self.firstAction))
@@ -43,6 +45,10 @@ class RemainApplyVC: UIViewController {
         }
         
         changeColor()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
     }
     
     @IBAction func btnGoback(_ sender: Any) {
@@ -90,10 +96,10 @@ class RemainApplyVC: UIViewController {
     }
     
     func getData() {
-        let parameters = ["value": curCondition]
+        let parameters = ["value": curCondition + 1]
         
         //create the url with URL
-        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/stay")!
+        let url = URL(string: "https://dms-api.istruly.sexy/apply/stay")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST" //set http method as POST
@@ -103,7 +109,7 @@ class RemainApplyVC: UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -121,9 +127,13 @@ class RemainApplyVC: UIViewController {
                     DispatchQueue.main.async {
                         self.showToast(msg: "신청되었습니다")
                     }
-                case 204:
+                case 409:
                     DispatchQueue.main.async {
-                        self.showToast(msg: "신청가능시간을 확인해주세요\n(일요일 20:30 ~ 목요일 22:00)")
+                        self.showToast(msg: "신청가능시간을 확인해주세요")
+                    }
+                case 403:
+                    if self.isRelogin() {
+                        self.getData()
                     }
                 default:
                     let responseString = String(data: data, encoding: .utf8)
@@ -136,6 +146,11 @@ class RemainApplyVC: UIViewController {
         task.resume()
     }
     
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            goBack()
+        }
+    }
     
     /*
     // MARK: - Navigation

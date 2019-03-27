@@ -15,10 +15,10 @@ class PutInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         for i in 0...3 {
             viewsBack[i].layer.cornerRadius = 17
-            dropShadow(view: viewsBack[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
+            dropShadow(view: viewsBack[i], color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 3, height: 3))
             lblsDetail[i].fitTextToBounds()
         }
         
@@ -30,7 +30,6 @@ class PutInVC: UIViewController {
         self.viewsBack[1].addGestureRecognizer(remain)
         self.viewsBack[2].addGestureRecognizer(music)
         self.viewsBack[3].addGestureRecognizer(goout)
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

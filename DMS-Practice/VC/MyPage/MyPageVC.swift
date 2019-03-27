@@ -17,15 +17,16 @@ class MyPageVC: UIViewController{
     @IBOutlet weak var lblPenalty: UILabel!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblNumber: UILabel!
+    @IBOutlet weak var lblStatus: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewPrise.layer.cornerRadius = 10
-        viewPenalty.layer.cornerRadius = 10
+        viewPrise.layer.cornerRadius = 16
+        viewPenalty.layer.cornerRadius = 16
         
-        dropShadow(view: viewPrise, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
-        dropShadow(view: viewPenalty, color: UIColor.black, offSet: CGSize(width: 3, height: 3))
+        dropShadow(view: viewPrise, color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 3, height: 3))
+        dropShadow(view: viewPenalty, color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 3, height: 3))
         
         viewCondition.layer.cornerRadius = 17
     }
@@ -33,11 +34,10 @@ class MyPageVC: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         if !loginCheck() { goNextVCwithUIid(UIid: "AccountUI", VCid: "EmptyVC") }
         else { getData() }
-        getData()
     }
     
     @IBAction func btnSubmit(_ sender: Any) {
-        goNextVC("SubmitVC")
+        goNextVC("SubmitProcessVC")
     }
     
     @IBAction func btnBrokenReport(_ sender: Any) {
@@ -62,7 +62,7 @@ class MyPageVC: UIViewController{
             if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
                 if let _ = Int(((alert.textFields?[1].text)!)) {
                     let parameters = ["content": (alert.textFields?[0].text)!, "room": Int((alert.textFields?[1].text)!)!] as [String : Any]
-                    let url = URL(string: "http://ec2.istruly.sexy:5000/report/facility")!
+                    let url = URL(string: "https://dms-api.istruly.sexy/report/facility")!
                     self.postData(parameters: parameters, url: url)
                 } else {
                     self.showToast(msg: "숫자만 입력하세요")
@@ -98,8 +98,8 @@ class MyPageVC: UIViewController{
         
         let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
             if alert.textFields?[0].text != nil && ((alert.textFields?[1].text) != nil) {
-                let parameters = ["content": (alert.textFields?[0].text)! + (alert.textFields?[1].text)!]
-                let url = URL(string: "http://ec2.istruly.sexy:5000/report/bug/3")!
+                let parameters = ["content": "\((alert.textFields?[0].text)!) / " + (alert.textFields?[1].text)!]
+                let url = URL(string: "https://dms-api.istruly.sexy/report/bug/3")!
                 self.postData(parameters: parameters, url: url)
             } else {
                 self.showToast(msg: "모든 값을 확인하세요")
@@ -117,8 +117,9 @@ class MyPageVC: UIViewController{
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
         } catch let error {
-            print(error.localizedDescription)
+            print(error.localizedDescription) 
         }
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
         request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
@@ -134,8 +135,8 @@ class MyPageVC: UIViewController{
                     self!.showToast(msg: "신청되었습니다")
                 }
             case 403:
-                DispatchQueue.main.async {
-                    self?.showToast(msg: "권한 없음")
+                if self!.isRelogin() {
+                    self!.postData(parameters: parameters, url: url)
                 }
             default:
                 DispatchQueue.main.async {
@@ -146,11 +147,11 @@ class MyPageVC: UIViewController{
     }
     
     func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/info/basic")!
+        let url = URL(string: "https://dms-api.istruly.sexy/info/basic")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -169,26 +170,14 @@ class MyPageVC: UIViewController{
                     self!.lblNumber.text = String(jsonSerialization["number"] as! Int)
                     self!.lblPrise.text = String(jsonSerialization["badPoint"] as! Int)
                     self!.lblPenalty.text = String(jsonSerialization["goodPoint"] as! Int)
+                    self!.lblStatus.text = String(jsonSerialization["advice"] as! String)
                 }
-                
             case 403:
-                DispatchQueue.main.async {
-                    self!.lblName.text = "네트워크 상태를 확인하세요"
-                    self!.lblNumber.text = "0 학년 0 반 00 번"
-                    self!.lblPrise.text = "0"
-                    self!.lblPenalty.text = "0"
-                }
-            case 500:
-                DispatchQueue.main.sync {
-                    self!.lblName.text = "로그인 기한 만료"
-                    self!.lblNumber.text = "재로그인이 필요합니다"
-                    self!.lblPrise.text = "-999999999"
-                    self!.lblPenalty.text = "999999999"
+                if self!.isRelogin() {
+                    print("시작")
+                    self!.getData()
                 }
             default:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
-                print("\(jsonSerialization)")
                 print("error")
             }
             }.resume()

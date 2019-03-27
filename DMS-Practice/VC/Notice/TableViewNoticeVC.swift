@@ -35,7 +35,7 @@ class TableViewNoticeVC: UIViewController {
         imgArrow.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         viewMain.backgroundColor = color.mint.getcolor()
         viewMain.layer.cornerRadius = 17
-        dropShadow(view: viewMain, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
+        dropShadow(view: viewMain, color: UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16), offSet: CGSize(width: 3, height: 3))
         lblTitle.textColor = UIColor.white
         lblDetail.textColor = UIColor.white
         
@@ -79,9 +79,15 @@ class TableViewNoticeVC: UIViewController {
     }
     
     func getData() {
-        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/"+url)!)
+        if lblTitle.text == "자주하는 질문" {
+            self.cellData.append(CellNotice(title: "iOS 왜 오래걸렸어요??", date: "죄송합니당...", code: "100"))
+            self.cellData.append(CellNotice(title: "로그인 기한이 만료되었대요!!", date: "다시 로그인해주세요", code: "101"))
+            self.cellData.append(CellNotice(title: "버그 있어요!!", date: "마이페이지...", code: "102"))
+            return
+        }
+        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/"+url)!)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         URLSession.shared.dataTask(with: request){
@@ -111,10 +117,9 @@ class TableViewNoticeVC: UIViewController {
                     }
                     DispatchQueue.main.async { self!.tblView.reloadData() }
                 }
-                
             case 403:
-                DispatchQueue.main.async {
-                    
+                if self!.isRelogin() {
+                    self!.getData()
                 }
             default:
                 self!.cellData = [CellNotice(title: "네트워크 상태를 확인하세요", date: "2019-10-02", code: "so sad")]
@@ -146,13 +151,14 @@ extension TableViewNoticeVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeListCell") as! NoticeListCell
         
         cell.setCell(cell: tableCell)
+        cell.selectionStyle = .none
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 90;//Choose your custom row height
+        return 105;//Choose your custom row height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -178,7 +184,7 @@ class NoticeListCell: UITableViewCell {
     override func awakeFromNib() {
         viewTable.layer.cornerRadius = 17
         viewTable.layer.masksToBounds = false
-        viewTable.layer.shadowColor = UIColor.lightGray.cgColor
+        viewTable.layer.shadowColor = UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16).cgColor
         viewTable.layer.shadowOpacity = 0.5
         viewTable.layer.shadowOffset = CGSize(width: 3, height: 3)
         viewTable.layer.shadowRadius = 5

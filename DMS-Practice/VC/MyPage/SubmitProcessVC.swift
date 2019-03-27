@@ -17,6 +17,7 @@ class SubmitProcessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(paramId)
+        btnStartOutlet.isHidden = true
         btnGobackOutlet.layer.cornerRadius = 12
         btnStartOutlet.layer.cornerRadius = 17
         dropShadowButton(button: btnStartOutlet, color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
@@ -33,11 +34,11 @@ class SubmitProcessVC: UIViewController {
     }
     
     func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/survey/\(paramId)")!
+        let url = URL(string: "https://dms-api.istruly.sexy/survey/\(paramId)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -52,6 +53,10 @@ class SubmitProcessVC: UIViewController {
                 let list = jsonSerialization["point_history"]
                 DispatchQueue.main.async {
                     self?.showToast(msg: "권한 없음")
+                }
+            case 403:
+                if self!.isRelogin() {
+                    self!.getData()
                 }
             default:
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]

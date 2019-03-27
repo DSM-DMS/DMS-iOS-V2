@@ -95,7 +95,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func getData() {
         let parameters = ["id": txtID.text!, "password": txtPassword.text!]
-        let url = URL(string: "http://ec2.istruly.sexy:5000/account/auth")!
+        let url = URL(string: "https://dms-api.istruly.sexy/account/auth")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         do {
@@ -103,6 +103,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -126,6 +127,10 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 print("로그인 실패")
                 DispatchQueue.main.async {
                     self?.showToast(msg: "로그인 실패")
+                }
+            case 403:
+                if self!.isRelogin() {
+                    self!.getData()
                 }
             default:
                 DispatchQueue.main.async {

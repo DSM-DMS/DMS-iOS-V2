@@ -25,6 +25,8 @@ class SelftudyApplyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
 
         backView.layer.cornerRadius = 15
         for i in 0...1 {
@@ -36,6 +38,17 @@ class SelftudyApplyVC: UIViewController {
             btnsStudyRoomOutlet[i].layer.borderWidth = 1
             btnsStudyRoomOutlet[i].layer.borderColor = UIColor.lightGray.cgColor
         }
+        
+        btnsStudyRoomOutlet[0].backgroundColor = UIColor(red: 240/255, green: 240/256, blue: 240/256, alpha: 1)
+        btnsStudyRoomOutlet[0].layer.borderWidth = 2
+        btnsStudyRoomOutlet[0].layer.borderColor = color.mint.getcolor().cgColor
+        btnsStudyRoomOutlet[0].tintColor = color.mint.getcolor()
+        selectedClass = 1
+        getMap()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
         // Do any additional setup after loading the view.
     }
     
@@ -72,7 +85,7 @@ class SelftudyApplyVC: UIViewController {
         if selectedSeat == 0{ showToast(msg: "자리를 선택하세요"); return }
         let parameters = ["classNum": selectedClass, "seatNum": selectedSeat] as [String : Any]
         
-        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/extension/\(selectedTime)")!
+        let url = URL(string: "https://dms-api.istruly.sexy/apply/extension/\(selectedTime)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -82,7 +95,7 @@ class SelftudyApplyVC: UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
@@ -111,6 +124,12 @@ class SelftudyApplyVC: UIViewController {
                     DispatchQueue.main.async {
                         self.showToast(msg: "신청 가능한 시간이 아닙니다")
                     }
+                case 403:
+                    if self.isRelogin() {
+                        DispatchQueue.main.async {
+                            self.showToast(msg: "다시 시도해주세요")
+                        }
+                    }
                 default:
                     print("살려주세요")
                 }
@@ -123,11 +142,12 @@ class SelftudyApplyVC: UIViewController {
     }
     
     @IBAction func btnCancel(_ sender: Any) {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/apply/extension/\(selectedTime)")!
+        let url = URL(string: "https://dms-api.istruly.sexy/apply/extension/\(selectedTime)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(self.getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(self.getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(self.getToken(), forHTTPHeaderField: "Authorization")
@@ -150,6 +170,12 @@ class SelftudyApplyVC: UIViewController {
                     DispatchQueue.main.async {
                         self.showToast(msg: "취소 가능한 시간이 아닙니다")
                     }
+                case 403:
+                    if self.isRelogin() {
+                        DispatchQueue.main.async {
+                            self.showToast(msg: "다시 시도해주세요")
+                        }
+                    }
                 default:
                     print("살려주세요")
                 }
@@ -159,6 +185,12 @@ class SelftudyApplyVC: UIViewController {
             print("responseString = \(String(describing: responseString!))")
         }
         task.resume()
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            goBack()
+        }
     }
     
     /*
@@ -178,9 +210,9 @@ extension SelftudyApplyVC {
     private func getMap(){
         print("getMap")
         selectedSeat = 0
-        var request = URLRequest(url: URL(string: "http://ec2.istruly.sexy:5000/apply/extension/map/\(selectedTime)/\(selectedClass)")!)
+        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/extension/map/\(selectedTime)/\(selectedClass)")!)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -195,7 +227,11 @@ extension SelftudyApplyVC {
                     strongSelf.bindData(jsonSerialization["map"] as! [[Any]])
                 }
             case 403:
-                print("권한 없음")
+                if self!.isRelogin() {
+                    DispatchQueue.main.async {
+                        self!.showToast(msg: "다시 시도해주세요")
+                    }
+                }
             default:
                 strongSelf.showError(404)
             }
@@ -204,8 +240,8 @@ extension SelftudyApplyVC {
     }
     
     private func bindData(_ dataArr: [[Any]]){
-        let width = dataArr[0].count * 65
-        let height = dataArr.count * 65
+        let width = dataArr[0].count * 60
+        let height = dataArr.count * 60
         contentView?.removeFromSuperview()
         let tempX = backScrollView.frame.width - CGFloat(width)
         let tempY = backScrollView.frame.height - CGFloat(height)
@@ -218,20 +254,20 @@ extension SelftudyApplyVC {
                 if let titleInt = seat as? Int{
                     if titleInt > 0{ getButton(x: x, y: y, title: "\(titleInt)").setShape(state: .empty) }
                 }else{ getButton(x: x, y: y, title: seat as! String).setShape(state: .exist) }
-                x += 65
+                x += 60
             }
             x = 0
-            y += 65
+            y += 60
         }
         backScrollView.contentSize = CGSize.init(width: width + 10, height: height + 10)
         backScrollView.addSubview(contentView!)
     }
     
     private func getButton(x: Int, y: Int, title: String) -> UIButton{
-        let button = UIButton.init(frame: CGRect.init(x: x, y: y, width: 45, height: 45))
+        let button = UIButton.init(frame: CGRect.init(x: x, y: y, width: 50, height: 50))
         button.setTitle(title, for: .normal)
         button.addTarget(self, action: #selector(onClick(_:)), for: .touchUpInside)
-        button.layer.cornerRadius = 45 / 2
+        button.layer.cornerRadius = 50 / 2
         beforeButton?.layer.borderWidth = 2
         contentView?.addSubview(button)
         return button
@@ -258,11 +294,18 @@ extension UIButton{
             backgroundColor = UIColor(displayP3Red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
             layer.borderWidth = 0
         case .select:
-            layer.borderWidth = 4
-            layer.borderColor = UIColor.yellow.cgColor
-            backgroundColor = UIColor.lightGray
+            layer.borderWidth = 3
+            layer.borderColor = UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 1).cgColor
         case .exist:
             backgroundColor = color.mint.getcolor()
+            layer.masksToBounds = false
+            layer.shadowColor = UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.64).cgColor
+            layer.shadowOpacity = 0.5
+            layer.shadowOffset = CGSize(width: 3, height: 3)
+            layer.shadowRadius = 5
+            
+            layer.shouldRasterize = true
+            layer.rasterizationScale = true ? UIScreen.main.scale : 1
         }
     }
     

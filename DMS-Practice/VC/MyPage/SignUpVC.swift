@@ -114,7 +114,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         let parameters = ["uuid":txtCheckCode.text!, "id": txtID.text!, "password": txtPassword.text!]
         
         //create the url with URL
-        let url = URL(string: "http://ec2.istruly.sexy:5000/account/signup")!
+        let url = URL(string: "https://dms-api.istruly.sexy/account/signup")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST" //set http method as POST
@@ -124,7 +124,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -149,6 +149,10 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
                     DispatchQueue.main.async {
                         self.showToast(msg: "아이디가 중복되었습니다")
                     }
+                case 403:
+                    if self.isRelogin() {
+                        self.getData()
+                    }
                 default:
                     let responseString = String(data: data, encoding: .utf8)
                     print("responseString = \(String(describing: responseString!))")
@@ -158,10 +162,6 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
             
         }
         task.resume()
-    }
-    
-    func showCondition() {
-        
     }
     
     /*

@@ -83,7 +83,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     
     func getData() {
         let parameters = ["currentPassword": txtOriginPassword.text!, "newPassword": txtNewPassword.text!]
-        let url = URL(string: "http://ec2.istruly.sexy:5000/account/pw")!
+        let url = URL(string: "https://dms-api.istruly.sexy/account/pw")!
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         do {
@@ -91,6 +91,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
         } catch let error {
             print(error.localizedDescription)
         }
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")

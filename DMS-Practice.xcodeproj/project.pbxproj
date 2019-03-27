@@ -22,6 +22,7 @@
 		592FE1FA21DEF7A6001982C8 /* SubmitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592FE1F921DEF7A6001982C8 /* SubmitVC.swift */; };
 		5941EAB121D46AA00042E930 /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941EAB021D46AA00042E930 /* NoticeVC.swift */; };
 		5941EAB321D49FBF0042E930 /* TableViewNoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5941EAB221D49FBF0042E930 /* TableViewNoticeVC.swift */; };
+		594E5C14222F3BDD0042BB01 /* DeveloperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E5C13222F3BDD0042BB01 /* DeveloperVC.swift */; };
 		5968488421D0867A00EFFBC4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488321D0867A00EFFBC4 /* SignUpVC.swift */; };
 		5968488621D0AF9200EFFBC4 /* TableViewChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */; };
 		5968488821D0B06200EFFBC4 /* TableViewChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */; };
@@ -112,6 +113,7 @@
 		592FE1F921DEF7A6001982C8 /* SubmitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitVC.swift; sourceTree = "<group>"; };
 		5941EAB021D46AA00042E930 /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		5941EAB221D49FBF0042E930 /* TableViewNoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewNoticeVC.swift; sourceTree = "<group>"; };
+		594E5C13222F3BDD0042BB01 /* DeveloperVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperVC.swift; sourceTree = "<group>"; };
 		5968488321D0867A00EFFBC4 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewChoose.swift; sourceTree = "<group>"; };
 		5968488721D0B06200EFFBC4 /* TableViewChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewChooseCell.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				5968488521D0AF9200EFFBC4 /* TableViewChoose.swift */,
 				592FE1F921DEF7A6001982C8 /* SubmitVC.swift */,
 				59DC9CBE21DF3DBF00CCDA74 /* SubmitProcessVC.swift */,
+				594E5C13222F3BDD0042BB01 /* DeveloperVC.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				59DC9CBF21DF3DBF00CCDA74 /* SubmitProcessVC.swift in Sources */,
 				590E594121E42B6B00829FBF /* MusicSendVC.swift in Sources */,
 				59D517CA21C768C700192176 /* AppDelegate.swift in Sources */,
+				594E5C14222F3BDD0042BB01 /* DeveloperVC.swift in Sources */,
 				5941EAB321D49FBF0042E930 /* TableViewNoticeVC.swift in Sources */,
 				5968488821D0B06200EFFBC4 /* TableViewChooseCell.swift in Sources */,
 				59CC157821CBCC4A00AF0FC0 /* MyPageVC.swift in Sources */,
@@ -763,14 +767,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L596QAH22D;
+				DEVELOPMENT_TEAM = Z25H7B85Z8;
 				INFOPLIST_FILE = MealExtentsion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-V3.MealExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -785,14 +789,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L596QAH22D;
+				DEVELOPMENT_TEAM = Z25H7B85Z8;
 				INFOPLIST_FILE = MealExtentsion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice.MealExtension";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-V3.MealExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -925,13 +929,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L596QAH22D;
+				DEVELOPMENT_TEAM = Z25H7B85Z8;
 				INFOPLIST_FILE = "DMS-Practice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-V3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -947,13 +951,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L596QAH22D;
+				DEVELOPMENT_TEAM = Z25H7B85Z8;
 				INFOPLIST_FILE = "DMS-Practice/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-Practice";
+				PRODUCT_BUNDLE_IDENTIFIER = "leedonggi.DMS-V3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

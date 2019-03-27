@@ -9,6 +9,7 @@
 import UIKit
 
 class TableViewPointVC: UITableViewController {
+    
     @IBOutlet weak var btnBackOutlet: UIBarButtonItem!
     
     var cellData = [CellPoint]()
@@ -32,7 +33,7 @@ class TableViewPointVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 80;
+        return 100;
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,11 +58,11 @@ class TableViewPointVC: UITableViewController {
     }
 
     func getData() {
-        let url = URL(string: "http://ec2.istruly.sexy:5000/info/point")!
+        let url = URL(string: "https://dms-api.istruly.sexy/info/point")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
         request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
         request.addValue(getToken(), forHTTPHeaderField: "Authorization")
@@ -73,23 +74,27 @@ class TableViewPointVC: UITableViewController {
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String:[[String: Any]]]
+                print(jsonSerialization)
                 let list = jsonSerialization["point_history"]
-                if list?.count == 0 {
+                if list!.count == 0 {
                     return
                 }
-                for i in 0...(list?.count)! - 1 {
+                for i in 0...(list!.count) - 1 {
                     let date: String = String(format: "%@", list![i]["date"] as! CVarArg)
                     let point: String = String(format: "%@", list![i]["point"] as! CVarArg)
                     let pointType: String = String(format: "%@", list![i]["pointType"] as! CVarArg)
                     let reason: String = String(format: "%@", list![i]["reason"] as! CVarArg)
                     var type: Bool = true
-                    if pointType == "true" { type = true }
+                    if pointType == "0" { type = true }
                     else { type = false }
                     self!.cellData.append(CellPoint(title: reason, date: date, point: point, type: type))
                 }
-            case 403:
                 DispatchQueue.main.async {
-                    self?.showToast(msg: "권한 없음")
+                    self!.tableView.reloadData()
+                }
+            case 403:
+                if self!.isRelogin() {
+                    self!.getData()
                 }
             default:
                 let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
@@ -110,7 +115,7 @@ class PointListCell: UITableViewCell {
     override func awakeFromNib() {
         viewBackground.layer.cornerRadius = 17
         viewBackground.layer.masksToBounds = false
-        viewBackground.layer.shadowColor = UIColor.gray.cgColor
+        viewBackground.layer.shadowColor = UIColor(red: 25/255, green: 182/255, blue: 182/255, alpha: 0.16).cgColor
         viewBackground.layer.shadowOpacity = 0.5
         viewBackground.layer.shadowOffset = CGSize(width: 3, height: 3)
         viewBackground.layer.shadowRadius = 5

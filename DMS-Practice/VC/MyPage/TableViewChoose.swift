@@ -19,11 +19,6 @@ class TableViewChoose: UITableViewController {
         tableList.append(tableListClass(title: "비밀번호 변경", subTitle: "DMS 계정의 비밀번호를 변경합니다"))
         tableList.append(tableListClass(title: "상 / 벌점 내역", subTitle: "우정관 상/ 벌점 내역을 확인합니다"))
         tableList.append(tableListClass(title: "개발자 소개", subTitle: "DMS팀의 개발자를 소개합니다"))
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -72,7 +67,7 @@ class TableViewChoose: UITableViewController {
         case 2:
             goNextVC("ScoreTableVC")
         default:
-            print("추가예정")
+            goNextVC("DeveloperVC")
         }
     }
 
