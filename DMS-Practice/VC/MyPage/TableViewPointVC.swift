@@ -58,7 +58,7 @@ class TableViewPointVC: UITableViewController {
     }
 
     func getData() {
-        let url = URL(string: "https://dms-api.istruly.sexy/info/point")!
+        let url = URL(string: "https://api.dms.istruly.sexy/info/point")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -85,8 +85,8 @@ class TableViewPointVC: UITableViewController {
                     let pointType: String = String(format: "%@", list![i]["pointType"] as! CVarArg)
                     let reason: String = String(format: "%@", list![i]["reason"] as! CVarArg)
                     var type: Bool = true
-                    if pointType == "0" { type = true }
-                    else { type = false }
+                    if pointType == "0" { type = false }
+                    else { type = true }
                     self!.cellData.append(CellPoint(title: reason, date: date, point: point, type: type))
                 }
                 DispatchQueue.main.async {

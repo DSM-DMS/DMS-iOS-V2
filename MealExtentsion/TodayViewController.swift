@@ -20,6 +20,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     private var date: Date!
     private let aDay = TimeInterval(86400)
+    private var breakfastMenu = ""
+    private var lunchMenu = ""
+    private var dinnerMenu = ""
     
     private var data = [String]()
     
@@ -87,7 +90,7 @@ extension TodayViewController{
         
         formatter.dateFormat = "YYYY-MM-dd"
         let dateStr = formatter.string(from: date)
-        let url = "https://dms-api.istruly.sexy/meal/" + dateStr
+        let url = "https://api.dms.istruly.sexy/meal/" + dateStr
         var request  = URLRequest(url: URL(string: url)!)
         request.addValue("MealExtensioniOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
@@ -99,24 +102,79 @@ extension TodayViewController{
             print((res as! HTTPURLResponse).statusCode)
             switch (res as! HTTPURLResponse).statusCode{
             case 200:
-                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
-                
-                if jsonSerialization["breakfast"] != nil {
-                    breakfastData = jsonSerialization["breakfast"] as! String
-                } else {
-                    breakfastData = "급식이 없습니다"
+                let jsonSerialization = try! JSONSerialization.jsonObject(with: data!, options: []) as! [String: [String: [String]]]
+                let list = jsonSerialization["\(dateStr)"]
+                if jsonSerialization["breakfast"]?.count != 0 {
+                    self!.breakfastMenu = ""
+                    var i = 0
+                    while true {
+                        if list == nil {
+                            return
+                        }
+                        if list!["breakfast"] == nil {
+                            breakfastData = "급식이 없습니다"
+                            break
+                        }
+                        if i < (list!["breakfast"]?.count)! {
+                            if self!.breakfastMenu == "" {  }
+                            else { self!.breakfastMenu += ", " }
+                            self!.breakfastMenu += list!["breakfast"]![i]
+                        } else {
+                            break
+                        }
+                        i += 1
+                    }
+                    if self!.breakfastMenu != "" {
+                        breakfastData = self!.breakfastMenu
+                    }
                 }
-                
-                if jsonSerialization["dinner"] != nil {
-                    dinnerData = jsonSerialization["dinner"] as! String
-                } else {
-                    dinnerData = "급식이 없습니다"
+                if jsonSerialization["lunch"]?.count != 0 {
+                    self!.lunchMenu = ""
+                    var i = 0
+                    while true {
+                        if list == nil {
+                            return
+                        }
+                        if list!["lunch"] == nil {
+                            breakfastData = "급식이 없습니다"
+                            break
+                        }
+                        if i < (list!["lunch"]?.count)! {
+                            if self!.lunchMenu == "" {  }
+                            else { self!.lunchMenu += ", " }
+                            self!.lunchMenu += list!["lunch"]![i]
+                        } else {
+                            break
+                        }
+                        i += 1
+                    }
+                    if self!.lunchMenu != "" {
+                        lunchData = self!.lunchMenu
+                    }
                 }
-                
-                if jsonSerialization["lunch"] != nil {
-                    lunchData = jsonSerialization["lunch"] as! String
-                } else {
-                    lunchData = "급식이 없습니다"
+                if jsonSerialization["dinner"]?.count != 0 {
+                    self!.dinnerMenu = ""
+                    var i = 0
+                    while true {
+                        if list == nil {
+                            return
+                        }
+                        if list!["dinner"] == nil {
+                            breakfastData = "급식이 없습니다"
+                            break
+                        }
+                        if i < (list!["dinner"]?.count)! {
+                            if self!.dinnerMenu == "" {  }
+                            else { self!.dinnerMenu += ", " }
+                            self!.dinnerMenu += list!["dinner"]![i]
+                        } else {
+                            break
+                        }
+                        i += 1
+                    }
+                    if self!.breakfastMenu != "" {
+                        dinnerData = self!.dinnerMenu
+                    }
                 }
                 
                 print("\(jsonSerialization)")

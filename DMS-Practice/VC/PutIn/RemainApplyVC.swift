@@ -99,7 +99,7 @@ class RemainApplyVC: UIViewController {
         let parameters = ["value": curCondition + 1]
         
         //create the url with URL
-        let url = URL(string: "https://dms-api.istruly.sexy/apply/stay")!
+        let url = URL(string: "https://api.dms.istruly.sexy/apply/stay")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST" //set http method as POST

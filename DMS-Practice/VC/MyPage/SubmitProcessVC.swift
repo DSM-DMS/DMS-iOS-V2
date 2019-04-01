@@ -34,7 +34,7 @@ class SubmitProcessVC: UIViewController {
     }
     
     func getData() {
-        let url = URL(string: "https://dms-api.istruly.sexy/survey/\(paramId)")!
+        let url = URL(string: "https://api.dms.istruly.sexy/survey/\(paramId)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

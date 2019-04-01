@@ -95,7 +95,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     func getData() {
         let parameters = ["id": txtID.text!, "password": txtPassword.text!]
-        let url = URL(string: "https://dms-api.istruly.sexy/account/auth")!
+        let url = URL(string: "https://api.dms.istruly.sexy/account/auth")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         do {

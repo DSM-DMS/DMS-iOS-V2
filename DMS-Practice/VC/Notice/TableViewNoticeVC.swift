@@ -47,7 +47,6 @@ class TableViewNoticeVC: UIViewController {
             lblTitle.text = "공지사항"
             lblDetail.text = "사감부에서 게시한 공지사항을 열람합니다"
             url = "notice"
-            cellData.append(CellNotice(title: "iOS 사용자 분들께", date: "2018-10-02 07:15:23.123238", code: "0"))
         case 1:
             lblTitle.text = "기숙사 규정"
             lblDetail.text = "사감부에서 게시한 규정을 열람합니다"
@@ -85,7 +84,7 @@ class TableViewNoticeVC: UIViewController {
             self.cellData.append(CellNotice(title: "버그 있어요!!", date: "마이페이지...", code: "102"))
             return
         }
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/"+url)!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/"+url)!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")

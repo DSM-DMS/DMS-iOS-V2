@@ -30,7 +30,7 @@ class GooutListVC: UIViewController {
     }
     
     func getData() {
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/goingout")!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/apply/goingout")!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
@@ -120,7 +120,7 @@ extension GooutListVC: UITableViewDelegate, UITableViewDataSource {
             let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
                 let parameters = ["applyId": Int(self.cellData[indexPath.row].id) as Any] as [String : Any]
                 
-                let url = URL(string: "https://dms-api.istruly.sexy/apply/goingout")!
+                let url = URL(string: "https://api.dms.istruly.sexy/apply/goingout")!
                 
                 var request = URLRequest(url: url)
                 request.httpMethod = "DELETE"

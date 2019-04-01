@@ -89,7 +89,7 @@ class GooutApplyVC: UIViewController {
     }
     
     func getData() {
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/goingout")!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/apply/goingout")!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")

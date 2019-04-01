@@ -56,7 +56,7 @@ class SubmitVC: UITableViewController {
     }
     
 //    func getData() {
-//        let url = URL(string: "https://dms-api.istruly.sexy/survey")!
+//        let url = URL(string: "https://api.dms.istruly.sexy/survey")!
 //
 //        var request = URLRequest(url: url)
 //        request.httpMethod = "GET"

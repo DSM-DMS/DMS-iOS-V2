@@ -62,7 +62,7 @@ class MyPageVC: UIViewController{
             if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
                 if let _ = Int(((alert.textFields?[1].text)!)) {
                     let parameters = ["content": (alert.textFields?[0].text)!, "room": Int((alert.textFields?[1].text)!)!] as [String : Any]
-                    let url = URL(string: "https://dms-api.istruly.sexy/report/facility")!
+                    let url = URL(string: "https://api.dms.istruly.sexy/report/facility")!
                     self.postData(parameters: parameters, url: url)
                 } else {
                     self.showToast(msg: "숫자만 입력하세요")
@@ -99,7 +99,7 @@ class MyPageVC: UIViewController{
         let ok = UIAlertAction(title: "전송", style: .default) { (ok) in
             if alert.textFields?[0].text != nil && ((alert.textFields?[1].text) != nil) {
                 let parameters = ["content": "\((alert.textFields?[0].text)!) / " + (alert.textFields?[1].text)!]
-                let url = URL(string: "https://dms-api.istruly.sexy/report/bug/3")!
+                let url = URL(string: "https://api.dms.istruly.sexy/report/bug/3")!
                 self.postData(parameters: parameters, url: url)
             } else {
                 self.showToast(msg: "모든 값을 확인하세요")
@@ -147,7 +147,7 @@ class MyPageVC: UIViewController{
     }
     
     func getData() {
-        let url = URL(string: "https://dms-api.istruly.sexy/info/basic")!
+        let url = URL(string: "https://api.dms.istruly.sexy/info/basic")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -168,8 +168,8 @@ class MyPageVC: UIViewController{
                 DispatchQueue.main.async {
                     self!.lblName.text = (jsonSerialization["name"] as! String)
                     self!.lblNumber.text = String(jsonSerialization["number"] as! Int)
-                    self!.lblPrise.text = String(jsonSerialization["badPoint"] as! Int)
-                    self!.lblPenalty.text = String(jsonSerialization["goodPoint"] as! Int)
+                    self!.lblPrise.text = String(jsonSerialization["goodPoint"] as! Int)
+                    self!.lblPenalty.text = String(jsonSerialization["badPoint"] as! Int)
                     self!.lblStatus.text = String(jsonSerialization["advice"] as! String)
                 }
             case 403:

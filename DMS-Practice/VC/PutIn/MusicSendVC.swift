@@ -35,7 +35,7 @@ class MusicSendVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     func getData() {
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/music")!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/apply/music")!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
@@ -159,7 +159,7 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
             let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
                 let parameters = ["applyId": Int(self.cellData[indexPath.row].id) as Any] as [String : Any]
                 
-                let url = URL(string: "https://dms-api.istruly.sexy/apply/music")!
+                let url = URL(string: "https://api.dms.istruly.sexy/apply/music")!
                 
                 var request = URLRequest(url: url)
                 request.httpMethod = "DELETE"
@@ -240,7 +240,7 @@ extension MusicSendVC: UITableViewDelegate, UITableViewDataSource {
                 if alert.textFields?[0].text != nil && alert.textFields?[1].text != nil {
                     let parameters = ["day": self.dayInt, "singer": alert.textFields![0].text!, "musicName": alert.textFields![1].text!] as [String : Any]
                     
-                    let url = URL(string: "https://dms-api.istruly.sexy/apply/music")!
+                    let url = URL(string: "https://api.dms.istruly.sexy/apply/music")!
                     
                     var request = URLRequest(url: url)
                     request.httpMethod = "POST"

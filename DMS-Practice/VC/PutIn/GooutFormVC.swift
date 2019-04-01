@@ -135,7 +135,7 @@ class GooutFormVC: UIViewController, UITextFieldDelegate  {
     func getData() {
         let parameters = ["date": txtsTime[0].text! + " " + txtsTime[1].text!, "reason": txtsTime[2].text!] as [String : Any]
         
-        let url = URL(string: "https://dms-api.istruly.sexy/apply/goingout")!
+        let url = URL(string: "https://api.dms.istruly.sexy/apply/goingout")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

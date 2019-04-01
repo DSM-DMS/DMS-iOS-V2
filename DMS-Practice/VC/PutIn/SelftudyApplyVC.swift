@@ -33,7 +33,7 @@ class SelftudyApplyVC: UIViewController {
             btnsAction[i].layer.cornerRadius = 10
             dropShadowButton(button: btnsAction[i], color: UIColor.gray, offSet: CGSize(width: 3, height: 3))
         }
-        for i in 0...9 {
+        for i in 0...10 {
             btnsStudyRoomOutlet[i].layer.cornerRadius = 15
             btnsStudyRoomOutlet[i].layer.borderWidth = 1
             btnsStudyRoomOutlet[i].layer.borderColor = UIColor.lightGray.cgColor
@@ -53,7 +53,7 @@ class SelftudyApplyVC: UIViewController {
     }
     
     @IBAction func btnsStudyRoom(_ sender: UIButton) {
-        for i in 0...9 {
+        for i in 0...10 {
             btnsStudyRoomOutlet[i].backgroundColor = UIColor.white
             btnsStudyRoomOutlet[i].layer.borderColor = UIColor.lightGray.cgColor
             btnsStudyRoomOutlet[i].layer.borderWidth = 1
@@ -85,7 +85,7 @@ class SelftudyApplyVC: UIViewController {
         if selectedSeat == 0{ showToast(msg: "자리를 선택하세요"); return }
         let parameters = ["classNum": selectedClass, "seatNum": selectedSeat] as [String : Any]
         
-        let url = URL(string: "https://dms-api.istruly.sexy/apply/extension/\(selectedTime)")!
+        let url = URL(string: "https://api.dms.istruly.sexy/apply/extension/\(selectedTime)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -142,7 +142,7 @@ class SelftudyApplyVC: UIViewController {
     }
     
     @IBAction func btnCancel(_ sender: Any) {
-        let url = URL(string: "https://dms-api.istruly.sexy/apply/extension/\(selectedTime)")!
+        let url = URL(string: "https://api.dms.istruly.sexy/apply/extension/\(selectedTime)")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
@@ -210,7 +210,7 @@ extension SelftudyApplyVC {
     private func getMap(){
         print("getMap")
         selectedSeat = 0
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/apply/extension/map/\(selectedTime)/\(selectedClass)")!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/apply/extension/map/\(selectedTime)/\(selectedClass)")!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")

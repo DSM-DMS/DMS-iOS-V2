@@ -55,6 +55,7 @@ class MealVC: UIViewController {
         lblDate.text = dateFormatter.string(from: date)
         lblDayofWeek.text = getDay(wd: dateString) + " 식단표"
         getData()
+        checkData()
     }
     
     @IBAction func btnLeft(_ sender: Any) {
@@ -94,7 +95,6 @@ class MealVC: UIViewController {
             UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveLinear, animations: {
                 self.viewsMealBack[i].center.x = CGFloat(before)
             }, completion: {(finished:Bool) in
-                if i == 0 { self.getData() }
                 let dateStr = self.dateFormatter.string(from: self.date)
                 self.lblDate.text = dateStr
                 let wd = self.calendar.dateComponents([.weekday], from: self.date)
@@ -104,12 +104,13 @@ class MealVC: UIViewController {
                 UIView.animate(withDuration: 0.5) {
                     self.viewsMealBack[i].center.x = self.view.center.x
                 }
+                if i == 0 { self.getData() }
             })
         }
     }
     
     func getData() {
-        let url = "https://dms-api.istruly.sexy/meal/" + dateStr
+        let url = "https://api.dms.istruly.sexy/meal/" + dateStr
         var request  = URLRequest(url: URL(string: url)!)
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
@@ -130,6 +131,10 @@ class MealVC: UIViewController {
                     while true {
                         if list == nil {
                             return
+                        }
+                        if list!["breakfast"]?.count == 1 {
+                            DispatchQueue.main.async {self!.lblsMeals[0].text = "급식이 없습니다"}
+                            break
                         }
                         if list!["breakfast"] == nil {
                             DispatchQueue.main.async {self!.lblsMeals[0].text = "급식이 없습니다"}
@@ -157,6 +162,10 @@ class MealVC: UIViewController {
                             DispatchQueue.main.async {self!.lblsMeals[2].text = "급식이 없습니다"}
                             break
                         }
+                        if list!["dinner"]?.count == 1 {
+                            DispatchQueue.main.async {self!.lblsMeals[2].text = "급식이 없습니다"}
+                            break
+                        }
                         if i < (list!["dinner"]?.count)! {
                             if self!.dinnerMenu == "" {  }
                             else { self!.dinnerMenu += ", " }
@@ -176,6 +185,10 @@ class MealVC: UIViewController {
                     var i = 0
                     while true {
                         if list!["lunch"] == nil {
+                            DispatchQueue.main.async {self!.lblsMeals[1].text = "급식이 없습니다"}
+                            break
+                        }
+                        if list!["lunch"]?.count == 1 {
                             DispatchQueue.main.async {self!.lblsMeals[1].text = "급식이 없습니다"}
                             break
                         }
@@ -207,6 +220,30 @@ class MealVC: UIViewController {
                     DispatchQueue.main.async {self!.lblsMeals[i].text = "살려주세요"}
                 }
                 
+            }
+            }.resume()
+    }
+    
+    func checkData() {
+        let url = URL(string: "https://api.dms.istruly.sexy/info/basic")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("iOS", forHTTPHeaderField: "User-Agent")
+        request.addValue(getDate(), forHTTPHeaderField: "X-Date")
+        request.addValue(getCrypto(), forHTTPHeaderField: "User-Data")
+        request.addValue(getToken(), forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request){
+            [weak self] data, res, err in
+            guard self != nil else { return }
+            if let err = err { print(err.localizedDescription); return }
+            print((res as! HTTPURLResponse).statusCode)
+            switch (res as! HTTPURLResponse).statusCode{
+            case 403:
+                if self!.isRelogin() {
+                }
+            default:
+                break
             }
             }.resume()
     }

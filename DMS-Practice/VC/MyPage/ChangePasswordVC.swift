@@ -83,7 +83,7 @@ class ChangePasswordVC: UIViewController, UITextFieldDelegate {
     
     func getData() {
         let parameters = ["currentPassword": txtOriginPassword.text!, "newPassword": txtNewPassword.text!]
-        let url = URL(string: "https://dms-api.istruly.sexy/account/pw")!
+        let url = URL(string: "https://api.dms.istruly.sexy/account/pw")!
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         do {

@@ -21,14 +21,10 @@ class DetailNoticeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         switch paramId {
-        case "0":
-            lblTitle.text = "iOS 사용자 분들께"
-            lblSubtitle.text = "2018-10-02 ~ 2019-10-23"
-            lblDescription.text = "상당히 많은 오류가 발견될 수 있어요.. 많은 양해 부탁드립니다\n오류를 찾으시면 개발자 xxx 욕하기보다는 마이페이지 우측 상단의 버그 신고를 통해 저에게 알려주세요. 빠른 시일내에 버그를 수정해 더 원할한 서비스로 찾아뵙겠습니다."
         case "100":
             lblTitle.text = "iOS 왜 오래걸렸어요??"
             lblSubtitle.text = "2018-10-02 ~ 2019-10-23"
-            lblDescription.text = "제가 부족한 탓입니다... 나름 열심히 했어요..."
+            lblDescription.text = "앱스토어에 앱 등록하는 과정에서 다소 많은 문제가 발생했어요... 불편을 드려 죄송합니다...ㅠㅠ"
         case "101":
             lblTitle.text = "로그인 기한이 만료되었대요!!"
             lblSubtitle.text = "2018-10-02 ~ 2019-10-23"
@@ -55,7 +51,7 @@ class DetailNoticeVC: UIViewController {
     }
     
     func getData() {
-        var request = URLRequest(url: URL(string: "https://dms-api.istruly.sexy/\(paramUrl)/\(paramId)")!)
+        var request = URLRequest(url: URL(string: "https://api.dms.istruly.sexy/\(paramUrl)/\(paramId)")!)
         request.httpMethod = "GET"
         request.addValue("iOS", forHTTPHeaderField: "User-Agent")
         request.addValue(getDate(), forHTTPHeaderField: "X-Date")
