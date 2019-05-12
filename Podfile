@@ -7,6 +7,10 @@ target 'DMS-Practice' do
 
   # Pods for DMS-Practice
   pod 'CryptoSwift'
+  pod 'RxSwift'
+  pod 'RxAlamofire'
+  pod 'Alamofire'
+  pod 'RxCocoa' 
 
   target 'DMS-PracticeTests' do
     inherit! :search_paths

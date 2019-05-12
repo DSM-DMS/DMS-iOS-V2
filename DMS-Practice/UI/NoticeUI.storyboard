@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sQG-n2-Y6H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sQG-n2-Y6H">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -409,9 +409,9 @@
                                 <constraints>
                                     <constraint firstItem="G06-Af-ff2" firstAttribute="top" secondItem="xtv-fF-ITE" secondAttribute="top" constant="20" id="0vs-wu-ufF"/>
                                     <constraint firstItem="8gH-gW-yLJ" firstAttribute="top" secondItem="xtv-fF-ITE" secondAttribute="top" constant="20" id="26y-4V-ZqX"/>
-                                    <constraint firstItem="9vA-FU-BVe" firstAttribute="top" secondItem="sy4-D3-Rqq" secondAttribute="bottom" constant="46.670000000000002" id="6fc-qR-pGa"/>
                                     <constraint firstItem="en6-Fn-vYX" firstAttribute="top" secondItem="G06-Af-ff2" secondAttribute="bottom" constant="23" id="H9l-Gt-jgL"/>
                                     <constraint firstItem="G06-Af-ff2" firstAttribute="leading" secondItem="xtv-fF-ITE" secondAttribute="leading" constant="20" id="JNW-xo-zWU"/>
+                                    <constraint firstItem="9vA-FU-BVe" firstAttribute="top" secondItem="sy4-D3-Rqq" secondAttribute="bottom" constant="46.670000000000002" id="PZM-lG-EV2"/>
                                     <constraint firstAttribute="trailing" secondItem="8gH-gW-yLJ" secondAttribute="trailing" constant="20" id="dOo-bd-2bH"/>
                                     <constraint firstItem="sy4-D3-Rqq" firstAttribute="leading" secondItem="xtv-fF-ITE" secondAttribute="leading" constant="20" id="hbQ-op-UgX"/>
                                     <constraint firstAttribute="trailing" secondItem="9vA-FU-BVe" secondAttribute="trailing" constant="20" id="mFW-ko-H4M"/>
